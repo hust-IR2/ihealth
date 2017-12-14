@@ -5,10 +5,12 @@ namespace DuiLib
 {
 	CTextUI::CTextUI() : m_nLinks(0), m_nHoverLink(-1)
 	{
-		m_uTextStyle = DT_WORDBREAK;
+		m_uTextStyle = DT_WORDBREAK ;
 		m_rcTextPadding.left = 2;
 		m_rcTextPadding.right = 2;
 		::ZeroMemory(m_rcLinks, sizeof(m_rcLinks));
+
+		m_dwShadowColor = 0;
 	}
 
 	CTextUI::~CTextUI()
@@ -17,7 +19,7 @@ namespace DuiLib
 
 	LPCTSTR CTextUI::GetClass() const
 	{
-		return DUI_CTR_TEXT;
+		return _T("TextUI");
 	}
 
 	LPVOID CTextUI::GetInterface(LPCTSTR pstrName)
@@ -30,6 +32,16 @@ namespace DuiLib
 	{
 		if( IsEnabled() && m_nLinks > 0 ) return UIFLAG_SETCURSOR;
 		else return 0;
+	}
+
+	void CTextUI::SetText(LPCTSTR pstrText)
+	{
+		if (m_sText != pstrText)
+		{
+			__super::SetText(pstrText);
+			if (m_pParent != NULL)
+				m_pParent->NeedUpdate();
+		}	
 	}
 
 	CDuiString* CTextUI::GetLinkContent(int iIndex)
@@ -93,21 +105,59 @@ namespace DuiLib
 		if( event.Type == UIEVENT_MOUSELEAVE ) {
 			if( m_nLinks > 0 && IsEnabled() ) {
 				if(m_nHoverLink != -1) {
-                    if( !::PtInRect(&m_rcLinks[m_nHoverLink], event.ptMouse) ) {
-                        m_nHoverLink = -1;
-                        Invalidate();
-                        if (m_pManager) m_pManager->RemoveMouseLeaveNeeded(this);
-                    }
-                    else {
-                        if (m_pManager) m_pManager->AddMouseLeaveNeeded(this);
-                        return;
-                    }
+					m_nHoverLink = -1;
+					Invalidate();
+					return;
 				}
 			}
 		}
 
 		CLabelUI::DoEvent(event);
 	}
+
+	SIZE CTextUI::EstimateSize(SIZE szAvailable)
+	{
+
+		RECT rcText = { 0, 0, m_bAutoCalcWidth ? 9999 : m_cxyFixed.cx, 9999 };
+		rcText.left += m_rcTextPadding.left;
+		rcText.right -= m_rcTextPadding.right;
+
+		if( m_bShowHtml ) {   
+			int nLinks = 0;
+			CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, m_dwTextColor, NULL, NULL, nLinks, DT_CALCRECT | m_uTextStyle);
+		}
+		else {
+			CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, m_dwTextColor, m_iFont, DT_CALCRECT | m_uTextStyle);
+		}
+		SIZE cXY = {rcText.right - rcText.left + m_rcTextPadding.left + m_rcTextPadding.right,
+			rcText.bottom - rcText.top + m_rcTextPadding.top + m_rcTextPadding.bottom};
+		
+		if (m_bAutoCalcWidth)
+		{
+			m_cxyFixed.cx = cXY.cx;
+		}
+
+		return CControlUI::EstimateSize(szAvailable);
+	}
+
+	CDuiRect  CTextUI::GetTextRect(SIZE szAvailable)  
+	{  
+		RECT rcText = { 0, 0, MAX(szAvailable.cx, m_cxyFixed.cx), 9999 };  
+		rcText.left += m_rcTextPadding.left;  
+		rcText.right -= m_rcTextPadding.right;  
+		if( m_bShowHtml ) {     
+			int nLinks = 0;  
+			CRenderEngine::DrawHtmlText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, m_dwTextColor, NULL, NULL, nLinks, DT_CALCRECT | m_uTextStyle);  
+		}  
+		else {  
+			CRenderEngine::DrawText(m_pManager->GetPaintDC(), m_pManager, rcText, m_sText, m_dwTextColor, m_iFont, DT_CALCRECT | m_uTextStyle);  
+		}  
+		SIZE cXY = {rcText.right - rcText.left + m_rcTextPadding.left + m_rcTextPadding.right,  
+			rcText.bottom - rcText.top + m_rcTextPadding.top + m_rcTextPadding.bottom};  
+
+		return rcText;  
+
+	}  
 
 	void CTextUI::PaintText(HDC hDC)
 	{
@@ -127,21 +177,80 @@ namespace DuiLib
 		rc.right -= m_rcTextPadding.right;
 		rc.top += m_rcTextPadding.top;
 		rc.bottom -= m_rcTextPadding.bottom;
-		if( IsEnabled() ) {
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, m_sText, m_dwTextColor, \
-				m_rcLinks, m_sLinks, m_nLinks, m_iFont, m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, m_sText, m_dwTextColor, \
+
+		int iadd = 0;  
+
+		if(true){  
+			SIZE szAvailable = { rc.right - rc.left, rc.bottom - rc.top };  
+			CDuiRect rcText = GetTextRect(szAvailable);  
+			iadd = ((rc.bottom - rc.top) - (rcText.bottom - rcText.top)) / 2;  
+			if(iadd <0) iadd = 0;  
+		}  
+
+		rc.top += iadd;
+
+		DWORD dwTextColor = m_dwTextColor;
+		if (!IsEnabled())
+			dwTextColor = m_dwDisabledTextColor;
+
+		if( m_bShowHtml )
+			CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, m_sText, dwTextColor, \
+			m_rcLinks, m_sLinks, m_nLinks, m_uTextStyle);
+		else
+		{
+			if (m_dwShadowColor != 0)
+			{
+				RECT rcShadow = rc;
+				rcShadow.left += 1;
+				rcShadow.right += 1;
+				rcShadow.top += 1;
+				rcShadow.bottom += 1;
+				CRenderEngine::DrawText(hDC, m_pManager, rcShadow, m_sText, m_dwShadowColor, \
+					m_iFont, m_uTextStyle);
+			}
+
+			CRenderEngine::DrawText(hDC, m_pManager, rc, m_sText, dwTextColor, \
 				m_iFont, m_uTextStyle);
+
+		}		
+
+	}
+
+	void CTextUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
+	{
+		if (_tcscmp(pstrName, _T("shadowcolor")) == 0) {
+			if (*pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
+			LPTSTR pstr = NULL;
+			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
+			SetShadowColor(clrColor);
 		}
-		else {
-			if( m_bShowHtml )
-				CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, m_sText, m_dwDisabledTextColor, \
-				m_rcLinks, m_sLinks, m_nLinks, m_iFont, m_uTextStyle);
-			else
-				CRenderEngine::DrawText(hDC, m_pManager, rc, m_sText, m_dwDisabledTextColor, \
-				m_iFont, m_uTextStyle);
+		else
+			__super::SetAttribute(pstrName, pstrValue);
+
+		if( _tcscmp(pstrName, _T("valign")) == 0 ) {
+			if( _tcsstr(pstrValue, _T("top")) != NULL ) {
+				m_uTextStyle &= ~(DT_BOTTOM | DT_VCENTER | DT_SINGLELINE);
+				m_uTextStyle |= (DT_TOP | DT_WORDBREAK);
+			}
+			if( _tcsstr(pstrValue, _T("center")) != NULL ) {
+				m_uTextStyle &= ~(DT_TOP | DT_BOTTOM | DT_SINGLELINE);            
+				m_uTextStyle |= (DT_VCENTER | DT_WORDBREAK);
+			}
+			if( _tcsstr(pstrValue, _T("bottom")) != NULL ) {
+				m_uTextStyle &= ~(DT_TOP | DT_VCENTER | DT_SINGLELINE);
+				m_uTextStyle |= (DT_BOTTOM | DT_WORDBREAK);
+			}
 		}
 	}
+
+	void CTextUI::SetShadowColor(DWORD dwTextColor)
+	{
+		m_dwShadowColor = dwTextColor;
+	}
+
+	DWORD CTextUI::GetShadowColor() const
+	{
+		return m_dwShadowColor;
+	}
+
 }

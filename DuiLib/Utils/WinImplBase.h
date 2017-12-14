@@ -1,3 +1,5 @@
+#include "StdAfx.h"
+
 #ifndef WIN_IMPL_BASE_HPP
 #define WIN_IMPL_BASE_HPP
 
@@ -6,13 +8,13 @@ namespace DuiLib
 
 	enum UILIB_RESOURCETYPE
 	{
-		UILIB_FILE=1,				// 来自磁盘文件
-		UILIB_ZIP,						// 来自磁盘zip压缩包
-		UILIB_RESOURCE,			// 来自资源
+		UILIB_FILE=1,		// 来自磁盘文件
+		UILIB_ZIP,			// 来自磁盘zip压缩包
+		UILIB_RESOURCE,		// 来自资源
 		UILIB_ZIPRESOURCE,	// 来自资源的zip压缩包
 	};
 
-	class DUILIB_API WindowImplBase
+	class UILIB_API WindowImplBase
 		: public CWindowWnd
 		, public CNotifyPump
 		, public INotifyUI
@@ -30,19 +32,14 @@ namespace DuiLib
 		virtual void OnClick(TNotifyUI& msg);
 
 	protected:
-		virtual CDuiString GetSkinFolder() = 0;
 		virtual CDuiString GetSkinFile() = 0;
 		virtual LPCTSTR GetWindowClassName(void) const = 0 ;
 		virtual LRESULT ResponseDefaultKeyEvent(WPARAM wParam);
 
 		CPaintManagerUI m_PaintManager;
-		static LPBYTE m_lpResourceZIPBuffer;
 
 	public:
 		virtual UINT GetClassStyle() const;
-		virtual UILIB_RESOURCETYPE GetResourceType() const;
-		virtual CDuiString GetZIPFileName() const;
-		virtual LPCTSTR GetResourceID() const;
 		virtual CControlUI* CreateControl(LPCTSTR pstrClass);
 		virtual LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM /*lParam*/, bool& /*bHandled*/);
 		virtual LRESULT OnClose(UINT /*uMsg*/, WPARAM /*wParam*/, LPARAM /*lParam*/, BOOL& bHandled);

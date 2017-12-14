@@ -2,12 +2,14 @@
 #define __UIRICHEDIT_H__
 
 #pragma once
+#include <Imm.h>
+#pragma comment(lib,"imm32.lib")
 
 namespace DuiLib {
 
 class CTxtWinHost;
 
-class DUILIB_API CRichEditUI : public CContainerUI, public IMessageFilterUI
+class UILIB_API CRichEditUI : public CContainerUI, public IMessageFilterUI
 {
 public:
     CRichEditUI();
@@ -23,17 +25,16 @@ public:
     void SetWantReturn(bool bWantReturn = true);
     bool IsWantCtrlReturn();
     void SetWantCtrlReturn(bool bWantCtrlReturn = true);
-    bool IsTransparent();
-    void SetTransparent(bool bTransparent = true);
     bool IsRich();
     void SetRich(bool bRich = true);
     bool IsReadOnly();
     void SetReadOnly(bool bReadOnly = true);
-    bool IsWordWrap();
+    bool GetWordWrap();
     void SetWordWrap(bool bWordWrap = true);
     int GetFont();
     void SetFont(int index);
     void SetFont(LPCTSTR pStrFontName, int nSize, bool bBold, bool bUnderline, bool bItalic);
+	void SetEnabled(bool bEnabled);
     LONG GetWinStyle();
     void SetWinStyle(LONG lStyle);
     DWORD GetTextColor();
@@ -43,7 +44,7 @@ public:
     long GetTextLength(DWORD dwFlags = GTL_DEFAULT) const;
     CDuiString GetText() const;
     void SetText(LPCTSTR pstrText);
-    bool IsModify() const;
+    bool GetModify() const;
     void SetModify(bool bModified = true) const;
     void GetSel(CHARRANGE &cr) const;
     void GetSel(long& nStartChar, long& nEndChar) const;
@@ -85,22 +86,21 @@ public:
     int LineIndex(int nLine = -1) const;
     int LineLength(int nLine = -1) const;
     bool LineScroll(int nLines, int nChars = 0);
-	CDuiPoint GetCharPos(long lChar) const;
+	CPoint GetCharPos(long lChar) const;
     long LineFromChar(long nIndex) const;
-    CDuiPoint PosFromChar(UINT nChar) const;
-    int CharFromPos(CDuiPoint pt) const;
+    CPoint PosFromChar(UINT nChar) const;
+    int CharFromPos(CPoint pt) const;
     void EmptyUndoBuffer();
     UINT SetUndoLimit(UINT nLimit);
     long StreamIn(int nFormat, EDITSTREAM &es);
     long StreamOut(int nFormat, EDITSTREAM &es);
-
-	RECT GetTextPadding() const;
-	void SetTextPadding(RECT rc);
+	void SetAccumulateDBCMode(bool bDBCMode);
+	bool IsAccumulateDBCMode();
 
     void DoInit();
+    // 注意：TxSendMessage和SendMessage是有区别的，TxSendMessage没有multibyte和unicode自动转换的功能，
+    // 而richedit2.0内部是以unicode实现的，在multibyte程序中，必须自己处理unicode到multibyte的转换
 	bool SetDropAcceptFile(bool bAccept);
-	// 注意：TxSendMessage和SendMessage是有区别的，TxSendMessage没有multibyte和unicode自动转换的功能，
-	// 而richedit2.0内部是以unicode实现的，在multibyte程序中，必须自己处理unicode到multibyte的转换
     virtual HRESULT TxSendMessage(UINT msg, WPARAM wparam, LPARAM lparam, LRESULT *plresult) const; 
     IDropTarget* GetTxDropTarget();
     virtual bool OnTxViewChanged();
@@ -121,26 +121,29 @@ public:
     void EndRight();
 
     SIZE EstimateSize(SIZE szAvailable);
-	void SetPos(RECT rc, bool bNeedInvalidate = true);
-	void Move(SIZE szOffset, bool bNeedInvalidate = true);
+    void SetPos(RECT rc);
     void DoEvent(TEventUI& event);
-    bool DoPaint(HDC hDC, const RECT& rcPaint, CControlUI* pStopControl);
+    void DoPaint(HDC hDC, const RECT& rcPaint);
+
+	void PaintStatusImage(HDC hDC);
+	RECT GetTextPadding() const;
+	void SetTextPadding(RECT rc);
+
+	void SetTipValue(LPCTSTR pStrTipValue);
+	LPCTSTR GetTipValue();
+	void SetTipValueColor(LPCTSTR pStrColor);
+	DWORD GetTipValueColor();
 
     void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
     LRESULT MessageHandler(UINT uMsg, WPARAM wParam, LPARAM lParam, bool& bHandled);
 
 protected:
-	enum { 
-		DEFAULT_TIMERID = 20,
-	};
-
     CTxtWinHost* m_pTwh;
     bool m_bVScrollBarFixing;
     bool m_bWantTab;
     bool m_bWantReturn;
     bool m_bWantCtrlReturn;
-    bool m_bTransparent;
     bool m_bRich;
     bool m_bReadOnly;
     bool m_bWordWrap;
@@ -148,9 +151,17 @@ protected:
     int m_iFont;
     int m_iLimitText;
     LONG m_lTwhStyle;
-	bool m_bDrawCaret;
 	bool m_bInited;
-	RECT	m_rcTextPadding;
+	bool  m_fAccumulateDBC ; // TRUE - need to cumulate ytes from 2 WM_CHAR msgs
+	// we are in this mode when we receive VK_PROCESSKEY
+	UINT m_chLeadByte; // use when we are in _fAccumulateDBC mode
+
+	UINT m_uButtonState;
+
+	RECT		m_rcTextPadding;
+	CDuiString	m_sTipValue;
+	DWORD		m_dwTipValueColor;
+
 };
 
 } // namespace DuiLib

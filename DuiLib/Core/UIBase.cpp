@@ -11,16 +11,19 @@ namespace DuiLib {
 //
 //
 
-void DUILIB_API DUI__Trace(LPCTSTR pstrFormat, ...)
+void UILIB_API DUI__Trace(LPCTSTR pstrFormat, ...)
 {
 #ifdef _DEBUG
-    TCHAR szBuffer[300] = { 0 };
-    va_list args;
-    va_start(args, pstrFormat);
-    ::wvnsprintf(szBuffer, lengthof(szBuffer) - 2, pstrFormat, args);
-    _tcscat(szBuffer, _T("\n"));
-    va_end(args);
-    ::OutputDebugString(szBuffer);
+    CDuiString strMsg;
+    va_list Args;
+
+    va_start(Args, pstrFormat);
+    strMsg.Format(pstrFormat, Args);
+    va_end(Args);
+    
+    strMsg += _T("\n");
+    OutputDebugString(strMsg.GetData());
+
 #endif
 }
 
@@ -335,7 +338,7 @@ void CWindowWnd::CenterWindow()
 	::GetMonitorInfo(::MonitorFromWindow(hWnd, MONITOR_DEFAULTTONEAREST), &oMonitor);
 	rcArea = oMonitor.rcWork;
 
-	if( hWndCenter == NULL || IsIconic(hWndCenter))
+    if( hWndCenter == NULL )
 		rcCenter = rcArea;
 	else
 		::GetWindowRect(hWndCenter, &rcCenter);
@@ -355,14 +358,34 @@ void CWindowWnd::CenterWindow()
     ::SetWindowPos(m_hWnd, NULL, xLeft, yTop, -1, -1, SWP_NOSIZE | SWP_NOZORDER | SWP_NOACTIVATE);
 }
 
+void CWindowWnd::SetIcon(LPCWSTR nRes)
+{
+	HICON hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), (nRes), IMAGE_ICON,
+		(::GetSystemMetrics(SM_CXICON) + 15) & ~15, (::GetSystemMetrics(SM_CYICON) + 15) & ~15,	// 防止高DPI下图标模糊
+		LR_DEFAULTCOLOR);
+	ASSERT(hIcon);
+	::SendMessage(m_hWnd, WM_SETICON, (WPARAM) ICON_BIG, (LPARAM) hIcon);
+
+	hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), (nRes), IMAGE_ICON,
+		(::GetSystemMetrics(SM_CXICON) + 15) & ~15, (::GetSystemMetrics(SM_CYICON) + 15) & ~15,	// 防止高DPI下图标模糊
+		LR_DEFAULTCOLOR);
+	ASSERT(hIcon);
+	::SendMessage(m_hWnd, WM_SETICON, (WPARAM) ICON_SMALL, (LPARAM) hIcon);
+}
+
 void CWindowWnd::SetIcon(UINT nRes)
 {
-    HICON hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(nRes), IMAGE_ICON, ::GetSystemMetrics(SM_CXICON), ::GetSystemMetrics(SM_CYICON), LR_DEFAULTCOLOR);
-    ASSERT(hIcon);
-    ::SendMessage(m_hWnd, WM_SETICON, (WPARAM) TRUE, (LPARAM) hIcon);
-    hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(nRes), IMAGE_ICON, ::GetSystemMetrics(SM_CXSMICON), ::GetSystemMetrics(SM_CYSMICON), LR_DEFAULTCOLOR);
-    ASSERT(hIcon);
-    ::SendMessage(m_hWnd, WM_SETICON, (WPARAM) FALSE, (LPARAM) hIcon);
+	HICON hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(nRes), IMAGE_ICON,
+		(::GetSystemMetrics(SM_CXICON) + 15) & ~15, (::GetSystemMetrics(SM_CYICON) + 15) & ~15,	// 防止高DPI下图标模糊
+		LR_DEFAULTCOLOR);
+	ASSERT(hIcon);
+	::SendMessage(m_hWnd, WM_SETICON, (WPARAM) TRUE, (LPARAM) hIcon);
+
+	hIcon = (HICON)::LoadImage(CPaintManagerUI::GetInstance(), MAKEINTRESOURCE(nRes), IMAGE_ICON,
+		(::GetSystemMetrics(SM_CXICON) + 15) & ~15, (::GetSystemMetrics(SM_CYICON) + 15) & ~15,	// 防止高DPI下图标模糊
+		LR_DEFAULTCOLOR);
+	ASSERT(hIcon);
+	::SendMessage(m_hWnd, WM_SETICON, (WPARAM) FALSE, (LPARAM) hIcon);
 }
 
 bool CWindowWnd::RegisterWindowClass()

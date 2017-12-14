@@ -5,18 +5,12 @@ namespace DuiLib
 {
 	LPCTSTR CCheckBoxUI::GetClass() const
 	{
-		return DUI_CTR_CHECKBOX;
+		return _T("CheckBoxUI");
 	}
 
-	LPVOID CCheckBoxUI::GetInterface(LPCTSTR pstrName)
+	void CCheckBoxUI::SetCheck(bool bCheck)
 	{
-		if( _tcscmp(pstrName, DUI_CTR_CHECKBOX) == 0 ) return static_cast<CCheckBoxUI*>(this);
-		return COptionUI::GetInterface(pstrName);
-	}
-
-	void CCheckBoxUI::SetCheck(bool bCheck, bool bTriggerEvent)
-	{
-		Selected(bCheck, bTriggerEvent);
+		Selected(bCheck);
 	}
 
 	bool  CCheckBoxUI::GetCheck() const

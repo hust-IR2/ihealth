@@ -1,0 +1,40 @@
+Initial start time: 11:24:29 ÉÏÎç 
+  Axis ID indexing mode : CONTINUE 
+  Fieldbus axis ID indexing mode : CONTINUE 
+
+  Init DevType 0, Found 0, Status: Good 
+  Init DevType 1, Found 0, Status: Good 
+  Init DevType 2, Found 0, Status: Good 
+  Init DevType 3, Found 0, Status: Good 
+  Init DevType 4, Found 0, Status: Good 
+  Init DevType 5, Found 0, Status: Good 
+  Init DevType 6, Found 0, Status: Good 
+  Init DevType 7, Found 0, Status: Good 
+  Init DevType 8, Found 0, Status: Good 
+  Init DevType 9, Found 1, Status: Good 
+  Init DevType 10, Found 0, Status: Good 
+  Init DevType 11, Found 0, Status: Good 
+  Init DevType 12, Found 0, Status: Good 
+  Init DevType 13, Found 0, Status: Good 
+  Init DevType 14, Found 0, Status: Good 
+  Init DevType 15, Found 0, Status: Good 
+  Init DevType 16, Found 0, Status: Good 
+  Init DevType 17, Found 0, Status: Good 
+  Init DevType 18, Found 0, Status: Good 
+  Init DevType 19, Found 0, Status: Good 
+  Init DevType 20, Found 0, Status: Good 
+  Init DevType 21, Found 0, Status: Good 
+  
+Total 1 device found.
+  
+Devices initial process. 
+   Driver Ver: 1302271 
+   Config Device idx: 0, status: Good 
+  
+Sorted Device
+  
+Sorted Device. status: Good 
+  
+Config Axes process.
+  DeviceId: 0, Axes: 4 
+Initial success. BoardID_InBits: 0x0001

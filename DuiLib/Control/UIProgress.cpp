@@ -3,7 +3,7 @@
 
 namespace DuiLib
 {
-	CProgressUI::CProgressUI() : m_bHorizontal(true), m_nMin(0), m_nMax(100), m_nValue(0)
+	CProgressUI::CProgressUI() : m_bHorizontal(true), m_nMin(0), m_nMax(100), m_nValue(0), m_bStretchForeImage(true)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_CENTER;
 		SetFixedHeight(12);
@@ -11,7 +11,7 @@ namespace DuiLib
 
 	LPCTSTR CProgressUI::GetClass() const
 	{
-		return DUI_CTR_PROGRESS;
+		return _T("ProgressUI");
 	}
 
 	LPVOID CProgressUI::GetInterface(LPCTSTR pstrName)
@@ -62,32 +62,21 @@ namespace DuiLib
 
 	void CProgressUI::SetValue(int nValue)
 	{
+		if(nValue == m_nValue || nValue<m_nMin || nValue > m_nMax)
+		{
+			return;
+		}
 		m_nValue = nValue;
-		if (m_nValue > m_nMax) m_nValue = m_nMax;
-		if (m_nValue < m_nMin) m_nValue = m_nMin;
-		Invalidate();
-	}
-
-	LPCTSTR CProgressUI::GetForeImage() const
-	{
-		return m_diFore.sDrawString;
-	}
-
-	void CProgressUI::SetForeImage(LPCTSTR pStrImage)
-	{
-		if( m_diFore.sDrawString == pStrImage && m_diFore.pImageInfo != NULL ) return;
-		m_diFore.Clear();
-		m_diFore.sDrawString = pStrImage;
 		Invalidate();
 	}
 
 	void CProgressUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("foreimage")) == 0 ) SetForeImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("hor")) == 0 ) SetHorizontal(_tcscmp(pstrValue, _T("true")) == 0);
+		if( _tcscmp(pstrName, _T("hor")) == 0 ) SetHorizontal(_tcscmp(pstrValue, _T("true")) == 0);
 		else if( _tcscmp(pstrName, _T("min")) == 0 ) SetMinValue(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("max")) == 0 ) SetMaxValue(_ttoi(pstrValue));
 		else if( _tcscmp(pstrName, _T("value")) == 0 ) SetValue(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, _T("isstretchfore"))==0) SetStretchForeImage(_tcscmp(pstrValue, _T("true")) == 0? true : false);
 		else CLabelUI::SetAttribute(pstrName, pstrValue);
 	}
 
@@ -107,7 +96,32 @@ namespace DuiLib
 			rc.right = m_rcItem.right - m_rcItem.left;
 			rc.bottom = m_rcItem.bottom - m_rcItem.top;
 		}
-		m_diFore.rcDestOffset = rc;
-		if( DrawImage(hDC, m_diFore) ) return;
+
+		if( m_foreImage.IsLoadSuccess() ) 
+		{
+			m_sForeImageModify.Empty();
+			if (m_bStretchForeImage)
+				m_sForeImageModify.SmallFormat(_T("dest='%d,%d,%d,%d'"), rc.left, rc.top, rc.right, rc.bottom);
+			else
+				m_sForeImageModify.SmallFormat(_T("dest='%d,%d,%d,%d' source='%d,%d,%d,%d'")
+				, rc.left, rc.top, rc.right, rc.bottom
+				, rc.left, rc.top, rc.right, rc.bottom);
+
+			//DrawImage(hDC, m_foreImage);
+			DrawImage(hDC, m_foreImage, m_sForeImageModify);
+		}
 	}
+
+	bool CProgressUI::IsStretchForeImage()
+	{
+		return m_bStretchForeImage;
+	}
+
+	void CProgressUI::SetStretchForeImage( bool bStretchForeImage /*= true*/ )
+	{
+		if (m_bStretchForeImage==bStretchForeImage)		return;
+		m_bStretchForeImage=bStretchForeImage;
+		Invalidate();
+	}
+
 }

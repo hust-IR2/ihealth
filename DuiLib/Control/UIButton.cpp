@@ -8,16 +8,15 @@ namespace DuiLib
 		, m_dwHotTextColor(0)
 		, m_dwPushedTextColor(0)
 		, m_dwFocusedTextColor(0)
-		, m_dwHotBkColor(0)
-		, m_uFadeAlphaDelta(0)
-		, m_uFadeAlpha(255)
+		,m_dwHotBkColor(0)
+		,m_iBindTabIndex(-1)
 	{
 		m_uTextStyle = DT_SINGLELINE | DT_VCENTER | DT_CENTER;
 	}
 
 	LPCTSTR CButtonUI::GetClass() const
 	{
-		return DUI_CTR_BUTTON;
+		return _T("ButtonUI");
 	}
 
 	LPVOID CButtonUI::GetInterface(LPCTSTR pstrName)
@@ -49,21 +48,21 @@ namespace DuiLib
 		}
 		if( event.Type == UIEVENT_KEYDOWN )
 		{
-			if (IsKeyboardEnabled() && IsEnabled()) {
+			if (IsKeyboardEnabled()) {
 				if( event.chKey == VK_SPACE || event.chKey == VK_RETURN ) {
 					Activate();
 					return;
 				}
 			}
-		}
-		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK )
+		}		
+		if( event.Type == UIEVENT_BUTTONDOWN || event.Type == UIEVENT_DBLCLICK)
 		{
 			if( ::PtInRect(&m_rcItem, event.ptMouse) && IsEnabled() ) {
 				m_uButtonState |= UISTATE_PUSHED | UISTATE_CAPTURED;
 				Invalidate();
 			}
 			return;
-		}
+		}	
 		if( event.Type == UIEVENT_MOUSEMOVE )
 		{
 			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
@@ -76,7 +75,7 @@ namespace DuiLib
 		if( event.Type == UIEVENT_BUTTONUP )
 		{
 			if( (m_uButtonState & UISTATE_CAPTURED) != 0 ) {
-				if( ::PtInRect(&m_rcItem, event.ptMouse) && IsEnabled()) Activate();
+				if( ::PtInRect(&m_rcItem, event.ptMouse) ) Activate();				
 				m_uButtonState &= ~(UISTATE_PUSHED | UISTATE_CAPTURED);
 				Invalidate();
 			}
@@ -84,66 +83,29 @@ namespace DuiLib
 		}
 		if( event.Type == UIEVENT_CONTEXTMENU )
 		{
-			if( IsContextMenuUsed() && IsEnabled()) {
+			if( IsContextMenuUsed() ) {
 				m_pManager->SendNotify(this, DUI_MSGTYPE_MENU, event.wParam, event.lParam);
 			}
 			return;
 		}
 		if( event.Type == UIEVENT_MOUSEENTER )
 		{
-            if( ::PtInRect(&m_rcItem, event.ptMouse ) ) {
-                if( IsEnabled() ) {
-                    if( (m_uButtonState & UISTATE_HOT) == 0  ) {
-                        m_uButtonState |= UISTATE_HOT;
-                        Invalidate();
-                    }
-                }
-            }
-			if ( GetFadeAlphaDelta() > 0 ) {
-				m_pManager->SetTimer(this, FADE_TIMERID, FADE_ELLAPSE);
+			if( IsEnabled() ) {
+				m_uButtonState |= UISTATE_HOT;
+				Invalidate();
 			}
+			// return;
 		}
 		if( event.Type == UIEVENT_MOUSELEAVE )
 		{
-            if( !::PtInRect(&m_rcItem, event.ptMouse ) ) {
-                if( IsEnabled() ) {
-                    if( (m_uButtonState & UISTATE_HOT) != 0  ) {
-                        m_uButtonState &= ~UISTATE_HOT;
-                        Invalidate();
-                    }
-                }
-                if (m_pManager) m_pManager->RemoveMouseLeaveNeeded(this);
-                if ( GetFadeAlphaDelta() > 0 ) {
-                    m_pManager->SetTimer(this, FADE_TIMERID, FADE_ELLAPSE);
-                }
-            }
-            else {
-                if (m_pManager) m_pManager->AddMouseLeaveNeeded(this);
-                return;
-            }
+			if( IsEnabled() ) {
+				m_uButtonState &= ~UISTATE_HOT;
+				Invalidate();
+			}
+			// return;
 		}
-		if( event.Type == UIEVENT_SETCURSOR )
-		{
+		if( event.Type == UIEVENT_SETCURSOR ) {
 			::SetCursor(::LoadCursor(NULL, MAKEINTRESOURCE(IDC_HAND)));
-			return;
-		}
-		if( event.Type == UIEVENT_TIMER  && event.wParam == FADE_TIMERID ) 
-		{
-			if( (m_uButtonState & UISTATE_HOT) != 0 ) {
-				if( m_uFadeAlpha > m_uFadeAlphaDelta ) m_uFadeAlpha -= m_uFadeAlphaDelta;
-				else {
-					m_uFadeAlpha = 0;
-					m_pManager->KillTimer(this, FADE_TIMERID);
-				}
-			}
-			else {
-				if( m_uFadeAlpha < 255-m_uFadeAlphaDelta ) m_uFadeAlpha += m_uFadeAlphaDelta;
-				else {
-					m_uFadeAlpha = 255;
-					m_pManager->KillTimer(this, FADE_TIMERID);
-				}
-			}
-			Invalidate();
 			return;
 		}
 		CLabelUI::DoEvent(event);
@@ -152,7 +114,11 @@ namespace DuiLib
 	bool CButtonUI::Activate()
 	{
 		if( !CControlUI::Activate() ) return false;
-		if( m_pManager != NULL ) m_pManager->SendNotify(this, DUI_MSGTYPE_CLICK);
+		if( m_pManager != NULL )
+		{
+			m_pManager->SendNotify(this, DUI_MSGTYPE_CLICK);
+			BindTriggerTabSel();
+		}
 		return true;
 	}
 
@@ -204,178 +170,79 @@ namespace DuiLib
 		return m_dwFocusedTextColor;
 	}
 
-	LPCTSTR CButtonUI::GetNormalImage()
-	{
-		return m_diNormal.sDrawString;
-	}
-
-	void CButtonUI::SetNormalImage(LPCTSTR pStrImage)
-	{
-		if( m_diNormal.sDrawString == pStrImage && m_diNormal.pImageInfo != NULL ) return;
-		m_diNormal.Clear();
-		m_diNormal.sDrawString = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CButtonUI::GetHotImage()
-	{
-		return m_diHot.sDrawString;
-	}
-
-	void CButtonUI::SetHotImage(LPCTSTR pStrImage)
-	{
-		if( m_diHot.sDrawString == pStrImage && m_diHot.pImageInfo != NULL ) return;
-		m_diHot.Clear();
-		m_diHot.sDrawString = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CButtonUI::GetPushedImage()
-	{
-		return m_diPushed.sDrawString;
-	}
-
-	void CButtonUI::SetPushedImage(LPCTSTR pStrImage)
-	{
-		if( m_diPushed.sDrawString == pStrImage && m_diPushed.pImageInfo != NULL ) return;
-		m_diPushed.Clear();
-		m_diPushed.sDrawString = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CButtonUI::GetFocusedImage()
-	{
-		return m_diFocused.sDrawString;
-	}
-
-	void CButtonUI::SetFocusedImage(LPCTSTR pStrImage)
-	{
-		if( m_diFocused.sDrawString == pStrImage && m_diFocused.pImageInfo != NULL ) return;
-		m_diFocused.Clear();
-		m_diFocused.sDrawString = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CButtonUI::GetDisabledImage()
-	{
-		return m_diDisabled.sDrawString;
-	}
-
-	void CButtonUI::SetDisabledImage(LPCTSTR pStrImage)
-	{
-		if( m_diDisabled.sDrawString == pStrImage && m_diDisabled.pImageInfo != NULL ) return;
-		m_diDisabled.Clear();
-		m_diDisabled.sDrawString = pStrImage;
-		Invalidate();
-	}
-
-	LPCTSTR CButtonUI::GetForeImage()
-	{
-		return m_diFore.sDrawString;
-	}
-
-	void CButtonUI::SetForeImage( LPCTSTR pStrImage )
-	{
-		if( m_diFore.sDrawString == pStrImage && m_diFore.pImageInfo != NULL ) return;
-		m_diFore.Clear();
-		m_diFore.sDrawString = pStrImage;
-		Invalidate();
-	}
-
 	LPCTSTR CButtonUI::GetHotForeImage()
 	{
-		return m_diHotFore.sDrawString;
+		return m_hotForeImage.GetAttributeString();
 	}
 
 	void CButtonUI::SetHotForeImage( LPCTSTR pStrImage )
 	{
-		if( m_diHotFore.sDrawString == pStrImage && m_diHotFore.pImageInfo != NULL ) return;
-		m_diHotFore.Clear();
-		m_diHotFore.sDrawString = pStrImage;
+		m_hotForeImage.SetAttributeString(pStrImage);
 		Invalidate();
 	}
 
-	void CButtonUI::SetFiveStatusImage(LPCTSTR pStrImage)
+	LPCTSTR CButtonUI::GetPushedForeImage()
 	{
-		m_diNormal.Clear();
-		m_diNormal.sDrawString = pStrImage;
-		DrawImage(NULL, m_diNormal);
-		if (m_diNormal.pImageInfo) {
-			LONG width = m_diNormal.pImageInfo->nX / 5;
-			LONG height = m_diNormal.pImageInfo->nY;
-			m_diNormal.rcBmpPart = CDuiRect(0, 0, width, height);
-			if( m_bFloat && m_cxyFixed.cx == 0 && m_cxyFixed.cy == 0 ) {
-				m_cxyFixed.cx = width;
-				m_cxyFixed.cy = height;
-			}
-		}
+		return m_pushedForeImage.GetAttributeString();
+	}
 
-		m_diPushed.Clear();
-		m_diPushed.sDrawString = pStrImage;
-		DrawImage(NULL, m_diPushed);
-		if (m_diPushed.pImageInfo) {
-			LONG width = m_diPushed.pImageInfo->nX / 5;
-			LONG height = m_diPushed.pImageInfo->nY;
-			m_diPushed.rcBmpPart = CDuiRect(width, 0, width*2, height);
-		}
-
-		m_diHot.Clear();
-		m_diHot.sDrawString = pStrImage;
-		DrawImage(NULL, m_diHot);
-		if (m_diHot.pImageInfo) {
-			LONG width = m_diHot.pImageInfo->nX / 5;
-			LONG height = m_diHot.pImageInfo->nY;
-			m_diHot.rcBmpPart = CDuiRect(width*2, 0, width*3, height);
-		}
-
-		m_diFocused.Clear();
-		m_diFocused.sDrawString = pStrImage;
-		DrawImage(NULL, m_diFocused);
-		if (m_diFocused.pImageInfo) {
-			LONG width = m_diFocused.pImageInfo->nX / 5;
-			LONG height = m_diFocused.pImageInfo->nY;
-			m_diFocused.rcBmpPart = CDuiRect(width*3, 0, width*4, height);
-		}
-
-		m_diDisabled.Clear();
-		m_diDisabled.sDrawString = pStrImage;
-		DrawImage(NULL, m_diDisabled);
-		if (m_diDisabled.pImageInfo) {
-			LONG width = m_diDisabled.pImageInfo->nX / 5;
-			LONG height = m_diDisabled.pImageInfo->nY;
-			m_diDisabled.rcBmpPart = CDuiRect(width*4, 0, width*5, height);
-		}
-
+	void CButtonUI::SetPushedForeImage(LPCTSTR pStrImage)
+	{
+		m_pushedForeImage.SetAttributeString(pStrImage);
 		Invalidate();
 	}
-
-	void CButtonUI::SetFadeAlphaDelta(BYTE uDelta)
+	void CButtonUI::BindTabIndex(int _BindTabIndex )
 	{
-		m_uFadeAlphaDelta = uDelta;
+		if( _BindTabIndex >= 0)
+			m_iBindTabIndex	= _BindTabIndex;
 	}
 
-	BYTE CButtonUI::GetFadeAlphaDelta()
+	void CButtonUI::BindTabLayoutName( LPCTSTR _TabLayoutName )
 	{
-		return m_uFadeAlphaDelta;
+		if(_TabLayoutName)
+			m_sBindTabLayoutName = _TabLayoutName;
+	}
+
+	void CButtonUI::BindTriggerTabSel( int _SetSelectIndex /*= -1*/ )
+	{
+		if(GetBindTabLayoutName().IsEmpty() || (GetBindTabLayoutIndex() < 0 && _SetSelectIndex < 0))
+			return;
+
+		CTabLayoutUI* pTabLayout = static_cast<CTabLayoutUI*>(GetManager()->FindControl(GetBindTabLayoutName()));
+		if(!pTabLayout)
+			return;
+
+		pTabLayout->SelectItem(_SetSelectIndex >=0?_SetSelectIndex:GetBindTabLayoutIndex());
+	}
+
+	void CButtonUI::RemoveBindTabIndex()
+	{
+		m_iBindTabIndex	= -1;
+		m_sBindTabLayoutName.Empty();
+	}
+
+	int CButtonUI::GetBindTabLayoutIndex()
+	{
+		return m_iBindTabIndex;
+	}
+
+	CDuiString CButtonUI::GetBindTabLayoutName()
+	{
+		return m_sBindTabLayoutName;
 	}
 
 	SIZE CButtonUI::EstimateSize(SIZE szAvailable)
 	{
-		if( m_cxyFixed.cy == 0 ) return CDuiSize(m_cxyFixed.cx, m_pManager->GetFontInfo(GetFont())->tm.tmHeight + 8);
+		if( m_cxyFixed.cy == 0 ) return CSize(m_cxyFixed.cx, m_pManager->GetFontInfo(GetFont())->tm.tmHeight + 8);
 		return CControlUI::EstimateSize(szAvailable);
 	}
 
 	void CButtonUI::SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue)
 	{
-		if( _tcscmp(pstrName, _T("normalimage")) == 0 ) SetNormalImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("hotimage")) == 0 ) SetHotImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("pushedimage")) == 0 ) SetPushedImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("focusedimage")) == 0 ) SetFocusedImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("disabledimage")) == 0 ) SetDisabledImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("foreimage")) == 0 ) SetForeImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("hotforeimage")) == 0 ) SetHotForeImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("fivestatusimage")) == 0 ) SetFiveStatusImage(pstrValue);
-		else if( _tcscmp(pstrName, _T("fadedelta")) == 0 ) SetFadeAlphaDelta((BYTE)_ttoi(pstrValue));
+		if( _tcscmp(pstrName, _T("hotforeimage")) == 0 ) SetHotForeImage(pstrValue);
+		else if (_tcscmp(pstrName, _T("pushedforeimage")) == 0) SetPushedForeImage(pstrValue);
+		else if( _tcscmp(pstrName, _T("bindtabindex")) == 0 ) BindTabIndex(_ttoi(pstrValue));
+		else if( _tcscmp(pstrName, _T("bindtablayoutname")) == 0 ) BindTabLayoutName(pstrValue);
 		else if( _tcscmp(pstrName, _T("hotbkcolor")) == 0 )
 		{
 			if( *pstrValue == _T('#')) pstrValue = ::CharNext(pstrValue);
@@ -403,6 +270,19 @@ namespace DuiLib
 			LPTSTR pstr = NULL;
 			DWORD clrColor = _tcstoul(pstrValue, &pstr, 16);
 			SetFocusedTextColor(clrColor);
+		}
+		else if( _tcscmp(pstrName, _T("multiline")) == 0 )
+		{
+			if( _tcscmp(pstrValue, _T("true")) == 0)
+			{
+				m_uTextStyle = m_uTextStyle & ~DT_SINGLELINE;
+				m_uTextStyle |= DT_WORDBREAK;
+			}
+			else
+			{
+				m_uTextStyle = m_uTextStyle & ~DT_WORDBREAK;
+				m_uTextStyle |= DT_SINGLELINE;
+			}
 		}
 		else CLabelUI::SetAttribute(pstrName, pstrValue);
 	}
@@ -436,7 +316,7 @@ namespace DuiLib
 
 		if( m_bShowHtml )
 			CRenderEngine::DrawHtmlText(hDC, m_pManager, rc, m_sText, clrColor, \
-			NULL, NULL, nLinks, m_iFont, m_uTextStyle);
+			NULL, NULL, nLinks, m_uTextStyle);
 		else
 			CRenderEngine::DrawText(hDC, m_pManager, rc, m_sText, clrColor, \
 			m_iFont, m_uTextStyle);
@@ -449,61 +329,65 @@ namespace DuiLib
 		if( !IsEnabled() ) m_uButtonState |= UISTATE_DISABLED;
 		else m_uButtonState &= ~ UISTATE_DISABLED;
 
-		if( (m_uButtonState & UISTATE_DISABLED) != 0 ) {
-			if (DrawImage(hDC, m_diDisabled)) goto Label_ForeImage;
-		}
-		else if( (m_uButtonState & UISTATE_PUSHED) != 0 ) {
-			if (!DrawImage(hDC, m_diPushed))
-				DrawImage(hDC, m_diNormal);
-			if (DrawImage(hDC, m_diPushedFore)) return;
-			else goto Label_ForeImage;
-		}
-		else if( (m_uButtonState & UISTATE_HOT) != 0 ) {
-			if( GetFadeAlphaDelta() > 0 ) {
-				if( m_uFadeAlpha == 0 ) {
-					m_diHot.uFade = 255;
-					DrawImage(hDC, m_diHot);
-				}
-				else {
-					m_diNormal.uFade = m_uFadeAlpha;
-					DrawImage(hDC, m_diNormal);
-					m_diHot.uFade = 255 - m_uFadeAlpha;
-					DrawImage(hDC, m_diHot);
+		do 
+		{
+			if ((m_uButtonState & UISTATE_DISABLED) != 0)
+			{
+				if (m_disabledImage.IsLoadSuccess())
+				{
+					DrawImage(hDC, m_disabledImage);
+					break;
 				}
 			}
-			else {
-				if (!DrawImage(hDC, m_diHot))
-					DrawImage(hDC, m_diNormal);
+			else if ((m_uButtonState & UISTATE_PUSHED) != 0)
+			{
+				if (m_pushedImage.IsLoadSuccess())
+				{
+					DrawImage(hDC, m_pushedImage);
+					if (m_pushedForeImage.IsLoadSuccess())
+					{
+						DrawImage(hDC, m_pushedForeImage);
+						return;
+					}
+					else
+						break;
+				}
+			}
+			else if ((m_uButtonState & UISTATE_HOT) != 0)
+			{
+				if (m_hotImage.IsLoadSuccess())
+				{
+					DrawImage(hDC, m_hotImage);
+					
+					if (m_hotForeImage.IsLoadSuccess())
+					{
+						DrawImage(hDC, m_hotForeImage);
+						return;
+					}
+					else
+						break;
+				}
+				else if (m_dwHotBkColor != 0)
+				{
+					CRenderEngine::DrawColor(hDC, m_rcPaint, GetAdjustColor(m_dwHotBkColor));
+					return;
+				}
+			}
+			else if ((m_uButtonState & UISTATE_FOCUSED) != 0)
+			{
+				if (m_focusedImage.IsLoadSuccess())
+				{
+					DrawImage(hDC, m_focusedImage);
+					return;
+				}
 			}
 
-			if (DrawImage(hDC, m_diHotFore)) return;
-			else if(m_dwHotBkColor != 0) {
-				CRenderEngine::DrawColor(hDC, m_rcPaint, GetAdjustColor(m_dwHotBkColor));
-				return;
-			}
-			else goto Label_ForeImage;
-		}
-		else if( (m_uButtonState & UISTATE_FOCUSED) != 0 ) {
-			if (DrawImage(hDC, m_diFocused)) goto Label_ForeImage;;
-		}
+			DrawImage(hDC, m_normalImage);
+		} while (0);
 
-		if ( GetFadeAlphaDelta() > 0 ) {
-			if( m_uFadeAlpha == 255 ) {
-				m_diNormal.uFade = 255;
-				DrawImage(hDC, m_diNormal);
-			}
-			else {
-				m_diHot.uFade = 255 - m_uFadeAlpha;
-				DrawImage(hDC, m_diHot);
-				m_diNormal.uFade = m_uFadeAlpha;
-				DrawImage(hDC, m_diNormal);
-			}
-		}
-		else {
-			DrawImage(hDC, m_diNormal);
-		}
 
-Label_ForeImage:
-		DrawImage(hDC, m_diFore);
+		DrawImage(hDC, m_foreImage);
 	}
+
+
 }

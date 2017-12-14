@@ -6,7 +6,7 @@
 #  file for each app is under the related sub-dir
 #
 
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.8)
 
 project(ihealth)
 
@@ -29,3 +29,4 @@ add_definitions(-DUNICODE -D_UNICODE)
 # add each CMake file
 add_subdirectory(duilib)
 add_subdirectory(CommonExt)
+add_subdirectory(ihealth)

@@ -5,7 +5,7 @@
 
 namespace DuiLib
 {
-	class DUILIB_API CHorizontalLayoutUI : public CContainerUI
+	class UILIB_API CHorizontalLayoutUI : public CContainerUI
 	{
 	public:
 		CHorizontalLayoutUI();
@@ -21,7 +21,7 @@ namespace DuiLib
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 		void DoEvent(TEventUI& event);
 
-		void SetPos(RECT rc, bool bNeedInvalidate = true);
+		void SetPos(RECT rc);
 		void DoPostPaint(HDC hDC, const RECT& rcPaint);
 
 		RECT GetThumbRect(bool bUseNew = false) const;
@@ -29,7 +29,7 @@ namespace DuiLib
 	protected:
 		int m_iSepWidth;
 		UINT m_uButtonState;
-		POINT m_ptLastMouse;
+		POINT ptLastMouse;
 		RECT m_rcNewPos;
 		bool m_bImmMode;
 	};

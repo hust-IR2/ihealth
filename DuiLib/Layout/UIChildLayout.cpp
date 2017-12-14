@@ -33,12 +33,12 @@ namespace DuiLib
 			CContainerUI::SetAttribute(pstrName,pstrValue);
 	}
 
-	void CChildLayoutUI::SetChildLayoutXML( CDuiString pXML )
+	void CChildLayoutUI::SetChildLayoutXML( DuiLib::CDuiString pXML )
 	{
 		m_pstrXMLFile=pXML;
 	}
 
-	CDuiString CChildLayoutUI::GetChildLayoutXML()
+	DuiLib::CDuiString CChildLayoutUI::GetChildLayoutXML()
 	{
 		return m_pstrXMLFile;
 	}
@@ -51,6 +51,6 @@ namespace DuiLib
 
 	LPCTSTR CChildLayoutUI::GetClass() const
 	{
-		return DUI_CTR_CHILDLAYOUT;
+		return _T("ChildLayoutUI");
 	}
 } // namespace DuiLib

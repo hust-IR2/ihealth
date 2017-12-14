@@ -12,7 +12,7 @@ public:
 };
 
 
-class DUILIB_API CDialogBuilder
+class UILIB_API CDialogBuilder
 {
 public:
     CDialogBuilder();

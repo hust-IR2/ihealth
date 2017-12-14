@@ -5,7 +5,7 @@
 
 namespace DuiLib
 {
-	class DUILIB_API CTileLayoutUI : public CContainerUI
+	class UILIB_API CTileLayoutUI : public CContainerUI
 	{
 	public:
 		CTileLayoutUI();
@@ -13,27 +13,18 @@ namespace DuiLib
 		LPCTSTR GetClass() const;
 		LPVOID GetInterface(LPCTSTR pstrName);
 
-		void SetPos(RECT rc, bool bNeedInvalidate = true);
-
-		int GetFixedColumns() const;
-		void SetFixedColumns(int iColums);
-		int GetChildVPadding() const;
-		void SetChildVPadding(int iPadding);
+		void SetPos(RECT rc);
 
 		SIZE GetItemSize() const;
-		void SetItemSize(SIZE szSize);
+		void SetItemSize(SIZE szItem);
 		int GetColumns() const;
-		int GetRows() const;
+		void SetColumns(int nCols);
+
 		void SetAttribute(LPCTSTR pstrName, LPCTSTR pstrValue);
 
 	protected:
 		SIZE m_szItem;
 		int m_nColumns;
-		int m_nRows;
-
-		int m_nColumnsFixed;
-		int m_iChildVPadding;
-		bool m_bIgnoreItemPadding;
 	};
 }
 #endif // __UITILELAYOUT_H__
