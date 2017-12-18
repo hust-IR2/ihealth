@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="342,438" bktrans="true">
+    <Font name="微软雅黑" size="26" bold="false" default="true"/>
+    <Font name="微软雅黑" size="14" bold="true"/>
+    <Menu bkimage="popup3_musicbg.png" bkcolor="#00000000" itemalign="center" itemtextcolor="#FFFFFFFF" itemselectedbkcolor="#00FFFFFF">
+        <MenuElement width="342" height="438" inset="4,12,8,25">
+            <List name="musiclist" header="hidden" itemalign="center" vscrollbar="true" hscrollbar="false" itemselectedbkcolor="#00000000" itemhotbkcolor="#00000000" vscrollbarstyle="width=&quot;5&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; linesize=&quot;72&quot;"/>
+        </MenuElement>
+    </Menu>
+</Window>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="passive_train_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="passive_train_page_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="passive_train_page_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="被动模式" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <HorizontalLayout height="201" bkimage="box_bg3.png" inset="38,25,38,25">
+                <Control width="262" bkimage="passive_train_image.png"/>
+                <Control width="41"/>
+                <VerticalLayout width="553">
+                    <Control height="9"/>
+                    <Label text="被动模式" align="left" height="38" textcolor="#FF3C3C3F" font="5"/>
+                    <Control height="30"/>
+                    <Label text="请针对不同患者的不同症状，选择康复训练类型" align="left" height="19" textcolor="#FF515457" font="2"/>
+                    <Control />
+                    <Label name="passive_patient_name" text="患者：徐江" align="left" height="22" textcolor="#FF516e90" font="3"/>
+                </VerticalLayout>
+                <VerticalLayout width="288">
+                    <Control height="96"/>
+                    <Button height="57" name="passive_train_add" normalimage="btn_xj.png" hotimage="btn_xj.png" pushedimage="btn_xj.png"/>
+                </VerticalLayout>
+                <Control />
+            </HorizontalLayout>
+            <Control height="24"/>
+            <VerticalLayout name="passive_train_page_list" height="526" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+                    <Control width="140"/>
+                    <Label text="排序" align="centervcenter" width="121" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="名称" align="centervcenter" width="222" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="类别" align="centervcenter" width="177" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="时长" align="centervcenter" width="243" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="操作" align="centervcenter" width="166" textcolor="#FFFFFFFF" font="3"/>
+                    <Control width="118"/>
+                </HorizontalLayout>
+                <List name="passive_train_content_list" height="347" header="hidden" itemalign="center" vscrollbar="false" hscrollbar="true" itemselectedbkcolor="#00000000" itemhotbkcolor="#00000000" vscrollbarstyle="width=&quot;15&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; linesize=&quot;72&quot;"/>
+                <Control />
+                <HorizontalLayout height="51">
+                    <Label name="passsive_train_cur_action_name" text="摸右肩" align="right" valign="center" width="116" textcolor="#FF6C6C6C" font="2"/>
+                    <Control width="28"/>
+                    <MusicProgress name="passive_train_progress" width="480" ptotal="100" pcurrent="0" pheight="5" pcurretheight="10" pcurretwidth="10" pbkimage="passive_playbg.png" pforeimage="passive_playjindu.png" pcurimage="passive_playmake.png"/>
+                    <Label name="passsive_train_progress_text" text="00:00/01:40" align="centervcenter" width="160" textcolor="#FF6C6C6C" font="2"/>
+                    <CheckBox name="passive_play" width="51" normalimage="passive_play.png" selectedimage="passive_suspend.png" disabledimage="passive_play.png"/>
+                    <Control width="28"/>
+                    <Button width="51" name="passive_recover" normalimage="beidong_btn_zt_h.png" hotimage="beidong_btn_zt_h.png" pushedimage="beidong_btn_zt_h.png"/>
+                    <Control width="28"/>
+                    <Button width="51" name="passive_volume" normalimage="passive_volume.png" hotimage="passive_volume.png" pushedimage="passive_volume.png"/>
+                    <Control width="28"/>
+                    <Option width="51" name="passive_play10" selected="true" group="passive_play_order" normalimage="passive_play10.png" hotimage="passive_play10.png" pushedimage="passive_play10.png"/>
+                    <Control width="28"/>
+                    <Option width="51" name="passive_list" selected="false" group="passive_play_order" normalimage="passive_list.png" hotimage="passive_list.png" pushedimage="passive_list.png"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

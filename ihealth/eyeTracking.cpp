@@ -4,7 +4,7 @@ EyeTracking::EyeTracking() :mPupilCenter(cv::Point2d(0, 0))
 {
 	pEyeImage = NULL;
 
-	cgf.read("params.cgf");
+	cgf.read("../../resource/params/pupil.cfg");
 	params.Radius_Min = cgf.get<int>("Radius_Min");
 	params.Radius_Max = cgf.get<int>("Radius_Max");
 

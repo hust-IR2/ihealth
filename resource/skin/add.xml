@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="manager_patient_add" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="manager_patient_add_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="manager_patient_add_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="管理患者" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout name="manager_patient_add_list" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+                    <Control width="48"/>
+                    <Label text="添加患者" align="left" textcolor="#FFBAD2EA" font="4"/>
+                </HorizontalLayout>
+                <Control height="59"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="编号" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="add_patient_id" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Label width="171" text="创建时间" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="add_patient_createtime" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="姓名" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="add_patient_name" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFFFFFFF" bkcolor="#FFFFFFFF" textcolor="#FF767676" readonly="false"/>
+                    <Label width="171" text="上次治疗时间" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+					<Edit bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="性别" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <HorizontalLayout width="310">
+                        <Option name="add_patient_sex_man" text="男" font="2" align="right" valign="center" width="51" group="add_patient_sex" selected="false" textcolor="#FF767676" normalimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" hotimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" hotforeimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" pushedimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" selectedimage="file=&apos;radio_1.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" selectedforeimage="file=&apos;radio_1.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;"/>
+                        <Control width="41"/>
+                        <Option name="add_patient_sex_man" text="女" font="2" align="right" valign="center" width="51" group="add_patient_sex" selected="true" textcolor="#FF767676" normalimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" hotimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" hotforeimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" pushedimage="file=&apos;radio_0.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" selectedimage="file=&apos;radio_1.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;" selectedforeimage="file=&apos;radio_1.png&apos;  source=&apos;0,0,21,21&apos; dest=&apos;0,6,14,20&apos;"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Label width="171" text="累计康复时间" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="add_patient_totaltime" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="2016-11-21" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="年龄" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="add_patient_age" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFFFFFFF" bkcolor="#FFFFFFFF" textcolor="#FF767676" readonly="false"/>
+                    <Label width="171" text="最近康复内容" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="add_patient_detail" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="2016-11-21" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="184">
+                    <Label width="209" text="填加备注" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Container bordersize="1" bordercolor="#FFE7E7E7" bkcolor="FFFFFFFF" width="822" inset="22,22,22,22">
+                        <RichEdit name="add_patient_remark" font="2" text="001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001" nativebkcolor="#FFFFFFFF" bkcolor="#FFFFFFFF" textcolor="#FF767676" readonly="false"/>
+                    </Container>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="51">
+                    <Control />
+                    <Button name="manager_add_patient_save" width="291" normalimage="center_btn_save.png" hotimage="center_btn_save.png" pushedimage="center_btn_save.png"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

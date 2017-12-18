@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="evaluation_ydgn_add_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="evaluation_ydgn_add_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="evaluation_ydgn_add_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="运动功能评测" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout height="748" inset="3,3,3,3" bkimage="box_bg2.png">
+               <Control height="180"/>
+			   <HorizontalLayout height="194">
+					<Control />
+					<VerticalLayout width="498">
+						<HorizontalLayout height="20">
+							<Label text="助力参数：0.1" align="left" width="136" textcolor="#FF363636" font="2"/>
+							<Slider name="passive_train_progress" width="316" height="20" bkwidth="316" bkheight="4" thumbheight="14" thumbwidth="14" forewidth="316" hor="true" bkimage="jd3.png" foreimage="jd2.png" min="0" max="100" value="0" thumbimage="jd1.png" thumbhotimage="jd1.png" thumbpushedimage="jd1.png" />
+							<Label text="0.5" align="right" width="38" textcolor="#FF363636" font="2"/>
+						</HorizontalLayout>
+						<Control height="44"/>
+						<HorizontalLayout height="20">
+							<Control width="63"/>
+							<Label text="起始角" align="centervcenter" width="154" textcolor="#FF363636" font="2"/>
+							<Label text="终止角" align="centervcenter" width="158" textcolor="#FF363636" font="2"/>
+							<Control />
+						</HorizontalLayout>
+						<Control height="10"/>
+						<HorizontalLayout height="44">
+							<Label text="肘部：" align="left" width="63" textcolor="#FF363636" font="2"/>
+							<HorizontalLayout bkimage="pg_cp_bg.png" width="312">
+								<Label name="evaluation_angle01" align="centervcenter" width="154" textcolor="#FFFFFFFF" font="2"/>
+								<Label name="evaluation_angle02" align="centervcenter" width="158" textcolor="#FF363636" font="2"/>
+							</HorizontalLayout>
+							<Control />
+							<CheckBox name="evaluation_begin1" width="104" normalimage="pg_btn_ks.png" selectedimage="pg_btn_js.png" disabledimage="pg_btn_ks.png"/>
+						</HorizontalLayout>
+						<Control height="10"/>
+						<HorizontalLayout height="44">
+							<Label text="肩部：" align="left" width="63" textcolor="#FF363636" font="2"/>
+							<HorizontalLayout bkimage="pg_cp_bg.png" width="312">
+								<Label name="evaluation_angle11" align="centervcenter" width="154" textcolor="#FFFFFFFF" font="2"/>
+								<Label name="evaluation_angle12" align="centervcenter" width="158" textcolor="#FF363636" font="2"/>
+							</HorizontalLayout>
+							<Control />
+							<CheckBox name="evaluation_begin2" width="104" normalimage="pg_btn_ks.png" selectedimage="pg_btn_js.png" disabledimage="pg_btn_ks.png"/>
+						</HorizontalLayout>
+					</VerticalLayout>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="40"/>
+			   <HorizontalLayout height="85">
+					<Control />
+					<HorizontalLayout width="571">
+						<Button width="276" name="evaluation_start" normalimage="pg_btn_ks_n.png" hotimage="pg_btn_ks_h.png" pushedimage="pg_btn_ks_h.png"/>
+						<Control />
+						<Button width="276" name="evaluation_end" normalimage="yd_btn_js_n.png" hotimage="yd_btn_js_h.png" pushedimage="yd_btn_js_h.png"/>
+					</HorizontalLayout>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="19"/>
+			   <HorizontalLayout height="20">
+					<Label name="evaluation_ydgn_score" text="得分：88" align="right" width="870" textcolor="#FF363636" font="2"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

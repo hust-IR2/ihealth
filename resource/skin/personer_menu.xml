@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="240,192" bktrans="true">
+    <Font name="微软雅黑" size="22" bold="false" default="true"/>
+    <Font name="微软雅黑" size="14" bold="true"/>
+    <Menu bkimage="popup2_bg.png" bkcolor="#00000000" itemalign="center" itemfont="0" itemtextcolor="#FFFFFFFF" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#00FFFFFF">
+        <MenuElement height="6"/>
+        <MenuElement name="menu_personor_center" width="215" text="个人中心" height="59"/>
+        <MenuElement name="menu_change_account" width="215" text="切换账号" height="59"/>
+        <MenuElement name="menu_exit_system" width="215" text="退出系统" height="59"/>
+    </Menu>
+</Window>

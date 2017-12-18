@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="evaluation_add_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="evaluation_add_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="evaluation_add_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label name="evaluation_add_name" text="建立FMA评测" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout height="748" inset="3,3,3,3" bkimage="box_bg2.png">
+               <HorizontalLayout height="67" bkimage="lanse.png">
+					<Control width="30"/>
+					<Label name="evaluation_question" align="left" valign="center" textcolor="#FFFFFFFF" font="1"/>
+					<Label name="evaluation_question_index" width="70" align="right" valign="center" textcolor="#FFFFFFFF" font="1"/>
+					<Control width="30"/>
+			   </HorizontalLayout>
+			   <Control height="67"/>
+			   <HorizontalLayout name="answer1" height="80">
+					<Control width="125"/>
+					<VerticalLayout width="21">
+						<Control />
+						<Option name="question1" group="evaluation_answer" height="21" normalimage="radio_0.png" hotimage="radio_0.png" hotforeimage="radio_0.png" pushedimage="radio_0.png" selectedimage="radio_1.png" selectedforeimage="radio_1.png"/>
+						<Control />
+					</VerticalLayout>
+					<Control width="13"/>
+					<Text name="evaluation_text1" align="left" valign="center" textcolor="#FF000000" font="1"/>
+					<Control width="125"/>
+			   </HorizontalLayout>
+			   <HorizontalLayout name="answer2" height="80">
+					<Control width="125"/>
+					<VerticalLayout width="21">
+						<Control />
+						<Option name="question2" group="evaluation_answer" height="21" normalimage="radio_0.png" hotimage="radio_0.png" hotforeimage="radio_0.png" pushedimage="radio_0.png" selectedimage="radio_1.png" selectedforeimage="radio_1.png"/>
+						<Control />
+					</VerticalLayout>
+					<Control width="13"/>
+					<Text name="evaluation_text2" align="left"  valign="center" textcolor="#FF000000" font="1"/>
+					<Control width="125"/>
+			   </HorizontalLayout>
+			   
+			   <HorizontalLayout name="answer3" height="80">
+					<Control width="125"/>
+					<VerticalLayout width="21">
+						<Control />
+						<Option name="question3" group="evaluation_answer" height="21" normalimage="radio_0.png" hotimage="radio_0.png" hotforeimage="radio_0.png" pushedimage="radio_0.png" selectedimage="radio_1.png" selectedforeimage="radio_1.png"/>
+						<Control />
+					</VerticalLayout>
+					<Control width="13"/>
+					<Text name="evaluation_text3" align="left"  valign="center" textcolor="#FF000000" font="1"/>
+					<Control width="125"/>
+			   </HorizontalLayout>
+			   
+			   <HorizontalLayout name="answer4" height="80">
+					<Control width="125"/>
+					<VerticalLayout width="21">
+						<Control />
+						<Option name="question4" group="evaluation_answer" height="21" normalimage="radio_0.png" hotimage="radio_0.png" hotforeimage="radio_0.png" pushedimage="radio_0.png" selectedimage="radio_1.png" selectedforeimage="radio_1.png"/>
+						<Control />
+					</VerticalLayout>
+					<Control width="13"/>
+					<Text name="evaluation_text4" align="left"  valign="center" textcolor="#FF000000" font="1"/>
+					<Control width="125"/>
+			   </HorizontalLayout>
+			   
+			   <HorizontalLayout name="answer5" height="80">
+					<Control width="125"/>
+					<VerticalLayout width="21">
+						<Control />
+						<Option name="question5" group="evaluation_answer" height="21" normalimage="radio_0.png" hotimage="radio_0.png" hotforeimage="radio_0.png" pushedimage="radio_0.png" selectedimage="radio_1.png" selectedforeimage="radio_1.png"/>
+						<Control />
+					</VerticalLayout>
+					<Control width="13"/>
+					<Text name="evaluation_text5" align="left"  valign="center" textcolor="#FF000000" font="1"/>
+					<Control width="125"/>
+			   </HorizontalLayout>
+			   
+			   <HorizontalLayout name="answer6" height="80">
+					<Control width="125"/>
+					<VerticalLayout width="21">
+						<Control />
+						<Option name="question6" group="evaluation_answer" height="21" normalimage="radio_0.png" hotimage="radio_0.png" hotforeimage="radio_0.png" pushedimage="radio_0.png" selectedimage="radio_1.png" selectedforeimage="radio_1.png"/>
+						<Control />
+					</VerticalLayout>
+					<Control width="13"/>
+					<Text name="evaluation_text6" align="left"  valign="center" textcolor="#FF000000" font="1"/>
+					<Control width="125"/>
+			   </HorizontalLayout>
+			   <Control />
+			   <HorizontalLayout name="evaluation_continue" visible="true" height="40">
+					<Control />
+					<Button width="108" name="evaluation_add_prev" normalimage="11_03.png" hotimage="11_03.png" pushedimage="11_03.png"/>
+					<Control width="30"/>
+					<Button width="108" name="evaluation_add_next" normalimage="11_05.png" hotimage="11_05.png" pushedimage="11_05.png"/>
+					<Control />
+			   </HorizontalLayout>
+			   <HorizontalLayout name="evaluation_submit" visible="false" height="40">
+			   		<Control />
+					<Button width="108" name="evaluation_add_submit" normalimage="11_07.png" hotimage="11_07.png" pushedimage="11_07.png"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="50"/>
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

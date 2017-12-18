@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="patient_information" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="patient_information_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="patient_information_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <HorizontalLayout height="35">
+                <Label text="训练信息" height="35" textcolor="#FF253C6E" font="4"/>
+                <Button name="traininfo_export" width="99" normalimage="daochu.png" hotimage="daochu.png" pushedimage="daochu.png"/>
+            </HorizontalLayout>
+            <Control height="25"/>
+            <VerticalLayout name="patient_information_list" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+                    <Label text="患者编号" align="centervcenter" width="201" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="姓名" align="centervcenter" width="136" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="性别" align="centervcenter" width="232" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="年龄" align="centervcenter" width="100" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="创建时间" align="centervcenter" width="336" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="管理" align="centervcenter" width="163" textcolor="#FFFFFFFF" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+                <HorizontalLayout name="pf_row01" height="67">
+                    <Label name="pf_cell01" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell02" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell03" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell04" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell05" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail0" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row02" height="67">
+                    <Label name="pf_cell11" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell12" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell13" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell14" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell15" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail1" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row03" height="67">
+                    <Label name="pf_cell21" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell22" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell23" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell24" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell25" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail2" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row04" height="67">
+                    <Label name="pf_cell31" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell32" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell33" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell34" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell35" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail3" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row05" height="67">
+                    <Label name="pf_cell41" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell42" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell43" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell44" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell45" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail4" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row06" height="67">
+                    <Label name="pf_cell51" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell52" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell53" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell54" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell55" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail5" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row07" height="67">
+                    <Label name="pf_cell61" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell62" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell63" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell64" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell65" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail6" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pf_row08" height="67">
+                    <Label name="pf_cell71" text="001" align="centervcenter" width="201" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell72" text="廖聪" align="centervcenter" width="136" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell73" text="男" align="centervcenter" width="232" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell74" text="29" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pf_cell75" text="2015-09-15" align="centervcenter" width="336" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="patient_information_detail7" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <Control />
+                <HorizontalLayout height="76" inset="62,35,0,0">
+                    <HorizontalLayout width="244" bkimage="check_box.png">
+                        <Control width="46"/>
+                        <Edit name="pf_search_txt" text="请输入患者名称" padding="0,3,0,0" font="14" height="32" width="192"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control width="14"/>
+                    <Button name="pf_search" width="108" bkcolor="#FF184199" text="搜索" textcolor="#FFFFFFFF" font="3"/>
+                    <Control width="108"/>
+                    <HorizontalLayout padding="0,3,0,0" width="336" bordersize="1" bordercolor="#ffeaeaea">
+                        <Button name="pf_last_page" width="97" bkcolor="#ffffffff" align="centervcenter" text="&lt;&lt;上一页" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pf_page1" width="32" bkcolor="#ffffffff" align="centervcenter" text="1" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pf_page2" width="32" bkcolor="#FF184199" align="centervcenter" text="2" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pf_page3" width="32" bkcolor="#ffffffff" align="centervcenter" text="3" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pf_page4" width="32" bkcolor="#ffffffff" align="centervcenter" text="4" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pf_next_page" bkcolor="#ffffffff" align="centervcenter" text="下一页&gt;&gt;" textcolor="#ff000000" font="3"/>
+                    </HorizontalLayout>
+                </HorizontalLayout>
+                <Control height="46"/>
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="技术支持 润丰壹网信息科技有限公司" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

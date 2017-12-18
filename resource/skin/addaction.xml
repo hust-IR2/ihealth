@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="696,432" caption="0,0,0,36" roundcorner="4,4" bktrans="true">
+    <Font name="宋体" size="26" bold="true" italic="false"/>
+    <Font name="宋体" size="24" bold="true" italic="false"/>
+    <Font name="宋体" size="28" bold="false" italic="false"/>
+    <VerticalLayout bkimage="popup4_stebg.png">
+        <Label text="添加动作" align="centervcenter" textcolor="#FFFFFFFF" font="0" height="72"/>
+        <Control height="38"/>
+        <Label text="请输入动作名称" height="44" textcolor="#FF000000" font="1" align="centervcenter"/>
+        <Control height="9"/>
+        <HorizontalLayout height="41">
+            <Control />
+            <HorizontalLayout width="313" inset="3,3,3,3" bkimage="check_box.png">
+                <Edit name="addaction_actionname" text="" padding="0,3,0,0" font="1"/>
+            </HorizontalLayout>
+            <Control />
+        </HorizontalLayout>
+        <Control height="32"/>
+        <HorizontalLayout height="54">
+            <Control />
+            <HorizontalLayout width="313" bkimage="tj_box.png">
+                <CheckBox width="124" name="btn_record_action" normalimage="tj_btn_end.png" selectedimage="tj_btn_start.png"/>
+                <Label name="lbl_record_time" text="05:00" align="centervcenter" textcolor="#FF4F4F4F" font="2"/>
+            </HorizontalLayout>
+            <Control />
+        </HorizontalLayout>
+        <Control height="73"/>
+        <HorizontalLayout height="54">
+            <Control width="38"/>
+            <Button name="ok" width="288" normalimage="btn_qd.png" hotimage="btn_qd.png" pushedimage="btn_qd.png"/>
+            <Control />
+            <Button name="cancel" width="288" normalimage="btn_qux.png" hotimage="btn_qux.png" pushedimage="btn_qux.png"/>
+            <Control width="38"/>
+        </HorizontalLayout>
+        <Control />
+    </VerticalLayout>
+</Window>

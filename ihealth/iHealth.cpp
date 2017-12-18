@@ -30,7 +30,7 @@ int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*l
 	CWkeWebkitUI::WkeWebkit_Init();
 
 	CPaintManagerUI::SetInstance(hInstance);
-	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T("skin"));
+	CPaintManagerUI::SetResourcePath(CPaintManagerUI::GetInstancePath() + _T("../../resource/skin"));
 
 	RFMainWindow* pFrame = new RFMainWindow();
 	if( pFrame == NULL ) return 0;

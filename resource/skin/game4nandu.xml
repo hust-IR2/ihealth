@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="276,195" bktrans="true">
+    <Font name="微软雅黑" size="26" bold="false" default="true"/>
+    <Font name="微软雅黑" size="14" bold="true"/>
+    <Menu bkimage="zd_bg.png" width="276" height="195" bkcolor="#00000000"  itemfont="0" itemalign="center" itemtextcolor="#FFFFFFFF" itemselectedtextcolor="#FFFFFFFF" itemselectedbkcolor="#00FFFFFF">
+        <MenuElement width="276" height="9"/>
+        <MenuElement width="276" name="nandu1" text="高级/Hard" height="62"/>
+        <MenuElement width="276" name="nandu2" text="中级/Normal" height="62"/>
+        <MenuElement width="276" name="nandu3" text="低级/Easy" height="62"/>
+    </Menu>
+</Window>

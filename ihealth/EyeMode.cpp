@@ -138,7 +138,7 @@ unsigned int __stdcall EyeThread(PVOID pParam)
 {
 	EyeMode *eyeMode = (EyeMode*)pParam;
 	SLOG1("entry EyeThread function begin");
-    cv::VideoCapture leftCam(eyeMode->mLeftCamIndex);
+  cv::VideoCapture leftCam(eyeMode->mLeftCamIndex);
 	cv::VideoCapture rightCam(eyeMode->mRightCamIndex);
 	// cv::VideoCapture leftCam("1.avi"), rightCam("2.avi");
 	eyeMode->bLeftCamOpened = leftCam.isOpened();

@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul,li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+body{
+    background: url("img/bg_rep.png") repeat-x 0 0;
+    height:748px;
+    overflow: hidden;
+}
+.shatan{
+    width: 90%;
+    height: 748px;
+    background: url("img/shatan.png") repeat-x 0 210px;
+    margin-left: 10%;
+}
+.role{
+    position: fixed;
+    top:350px;
+    left:10px;
+
+}
+.role img{
+    width: 100px;
+}
+.gunzi{
+    position: fixed;
+    top:300px;
+    left:120px;
+    transform: rotate(160deg) ;
+    display: none;
+}
+.gunzi img{
+    width: 100px;
+}

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="manager_patient" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="manager_patient_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="manager_patient_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <HorizontalLayout height="35">
+                <Label text="管理患者" textcolor="#FF253C6E" font="4"/>
+                <Button name="manager_patient_import" width="99" normalimage="management_btn_daoru.png" hotimage="management_btn_daoru.png" pushedimage="management_btn_daoru.png"/>
+                <Control width="14"/>
+                <Option name="manager_patient_shaixuan" width="99" textcolor="#FFBDD1E8" font="2" normalimage="btn_saix1.png" hotimage="btn_saix1.png" pushedimage="btn_saix1.png" selectedimage="btn_saix2.png"/>
+                <Control width="14"/>
+                <Button name="manager_patient_export" width="99" normalimage="daochu.png" hotimage="daochu.png" pushedimage="daochu.png"/>
+                <Control width="3"/>
+            </HorizontalLayout>
+            <Control height="25"/>
+            <VerticalLayout name="manager_patient_list" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout name="manager_patient_header" height="67" bkimage="lanse.png" visible="true">
+                    <Label text="患者编号" align="centervcenter" width="160" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="姓名" align="centervcenter" width="160" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="性别" align="centervcenter" width="100" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="年龄" align="centervcenter" width="153" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="创建时间" align="centervcenter" width="185" textcolor="#FFFFFFFF" font="3"/>
+                    <Control width="54"/>
+                    <Label text="管理" align="centervcenter" width="368" textcolor="#FFFFFFFF" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+                <HorizontalLayout name="manager_patient_filter_header" height="67" bkimage="lanse.png" visible="false">
+                    <VerticalLayout>
+                        <Control />
+                        <HorizontalLayout height="40">
+                            <Control width="24"/>
+                            <Label text="姓名" align="left" valign="center" width="59" textcolor="#FFFFFFFF" font="3"/>
+                            <Edit name="manager_patient_name_search_txt" align="center" text="" bordercolor="#FFBBBBBB" bordersize="1" bkcolor="#FFFFFFFF" textcolor="#FF424242" textpadding="3,3,3,3" font="2" width="160"/>
+                            <Control width="28"/>
+                            <Label text="性别" align="left" valign="center" width="59" textcolor="#FFFFFFFF" font="3"/>
+                            <Combo name="manager_patient_sex_search_txt" textcolor="#FF767676" width="83" font="2" normalimage="dropbox_87.png" hotimage="dropbox_87.png" pushedimage="dropbox_87.png" itemtextpadding="12,1,1,1" textpadding="9,1,1,1">
+                                <ListLabelElement text="男"/>
+                                <ListLabelElement text="女"/>
+                                <ListLabelElement text="不限" selected="true"/>
+                            </Combo>
+                            <Control width="28"/>
+                            <Label text="年龄" align="left" valign="center" width="59" textcolor="#FFFFFFFF" font="3"/>
+                            <Edit name="manager_patient_age_search_from" align="center" text="0" bordercolor="#FFBBBBBB" bordersize="1" bkcolor="#FFFFFFFF" textcolor="#FF424242" textpadding="3,3,3,3" font="2" width="67"/>
+                            <Label text="-" align="centervcenter" width="30" textcolor="#FFFFFFFF" font="3"/>
+                            <Edit name="manager_patient_age_search_to" align="center" text="100" bordercolor="#FFBBBBBB" bordersize="1" bkcolor="#FFFFFFFF" textcolor="#FF424242" textpadding="3,3,3,3" font="2" width="67"/>
+                            <Control width="28"/>
+                            <Label text="创建时间" align="left" valign="center" width="104" textcolor="#FFFFFFFF" font="3"/>
+                            <DateTime name="manager_patient_createtime_from" align="center" text="2000-01-01" bordercolor="#FFBBBBBB" bordersize="1" bkcolor="#FFFFFFFF" textcolor="#FF424242" textpadding="3,3,3,3" font="2" width="168"/>
+                            <Label text="-" align="centervcenter" width="30" textcolor="#FFFFFFFF" font="3"/>
+                            <DateTime name="manager_patient_createtime_to" align="center" text="2027-01-01" bordercolor="#FFBBBBBB" bordersize="1" bkcolor="#FFFFFFFF" textcolor="#FF424242" textpadding="3,3,3,3" font="2" width="168"/>
+                        </HorizontalLayout>
+                        <Control />
+                    </VerticalLayout>
+                </HorizontalLayout>
+                <HorizontalLayout name="manage_row01" height="67">
+                    <Label name="manage_cell01" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell02" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell03" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell04" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell05" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell06" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row02" height="67">
+                    <Label name="manage_cell11" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell12" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell13" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell14" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell15" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell16" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row03" height="67">
+                    <Label name="manage_cell21" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell22" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell23" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell24" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell25" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell26" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row04" height="67">
+                    <Label name="manage_cell31" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell32" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell33" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell34" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell35" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell36" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row05" height="67">
+                    <Label name="manage_cell41" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell42" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell43" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell44" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell45" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell46" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row06" height="67">
+                    <Label name="manage_cell51" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell52" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell53" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell54" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell55" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell56" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row07" height="67">
+                    <Label name="manage_cell61" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell62" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell63" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell64" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell65" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell66" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="manage_row08" height="67">
+                    <Label name="manage_cell71" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell72" text="廖聪" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell73" text="男" align="centervcenter" width="100" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell74" text="29" align="centervcenter" width="153" textcolor="#FF353c3b" font="3"/>
+                    <Label name="manage_cell75" text="2015-09-15" align="centervcenter" width="185" textcolor="#FF353c3b" font="3"/>
+                    <Control width="54"/>
+                    <HorizontalLayout name="manage_cell76" inset="0,16,0,0" width="368">
+                        <Control width="12"/>
+                        <Button width="89" height="35" name="manager_patient_detail" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_modify" normalimage="management_btn_bianji.png" hotimage="management_btn_bianji.png" pushedimage="management_btn_bianji.png"/>
+                        <Control width="32"/>
+                        <Button width="89" height="35" name="manager_patient_delete" normalimage="management_btn_shanchu.png" hotimage="management_btn_shanchu.png" pushedimage="management_btn_shanchu.png"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <Control />
+                <HorizontalLayout height="76" inset="35,35,0,0">
+                    <HorizontalLayout width="230" bkimage="check_box.png">
+                        <Control width="46"/>
+                        <Edit name="manager_patient_search_txt" text="请输入患者名称" padding="0,3,0,0" font="2" height="32" width="166"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control width="14"/>
+                    <Button name="manager_patient_search" width="108" bkcolor="#FF184199" text="搜索" textcolor="#FFFFFFFF" font="3"/>
+                    <Control width="44"/>
+                    <HorizontalLayout padding="0,3,0,0" width="336" bordersize="1" bordercolor="#ffeaeaea">
+                        <Button name="manage_last_page" width="97" bkcolor="#ffffffff" align="centervcenter" text="&lt;&lt;上一页" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="manage_page1" width="32" bkcolor="#ffffffff" align="centervcenter" text="1" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="manage_page2" width="32" bkcolor="#FF184199" align="centervcenter" text="2" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="manage_page3" width="32" bkcolor="#ffffffff" align="centervcenter" text="3" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="manage_page4" width="32" bkcolor="#ffffffff" align="centervcenter" text="4" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="manage_next_page" bkcolor="#ffffffff" align="centervcenter" text="下一页&gt;&gt;" textcolor="#ff000000" font="3"/>
+                    </HorizontalLayout>
+                    <Control width="212"/>
+                    <Button name="management_btn_tianjia" width="182" height="44" normalimage="management_btn_tianjia.png" hotimage="management_btn_tianjia.png" pushedimage="management_btn_tianjia.png"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="46"/>
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+	
+	<HorizontalLayout name="active_train_game1_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+		<VerticalLayout width="225">
+			<Control height="300"/>
+			<HorizontalLayout height="74">
+				<Control width="36"/>
+				<Button width="43" name="active_train_game1_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+				<Control />
+			</HorizontalLayout>
+			<Control />
+		</VerticalLayout>
+		
+		<VerticalLayout width="752">
+			<Control height="37"/>
+			<HorizontalLayout height="20">
+				<Control />
+				<Button name="active_train_game1_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="20"  align="right" font="11" />
+			</HorizontalLayout>
+			<Control height="50"/>
+			<Label text="飞机大战" align="left"  height="22" textcolor="#FF253C6E" font="4" />
+			<Control height="16"/>
+			
+			<VerticalLayout  height="468" inset="24, 19, 27, 29" bkimage="box_bg2.png">
+				<HorizontalLayout height="426">
+					<Container width="322">
+						<wkeWebkit name="game1" bkcolor="#FFFFFFFF"/>  
+					</Container>
+				</HorizontalLayout>
+			</VerticalLayout>
+			<Control width=""/>
+			 <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+			<Control height="11"/>
+		</VerticalLayout>
+		<Control width="300"/>
+	</HorizontalLayout>
+</Window>

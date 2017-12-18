@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="patient_traindetail" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="patient_traindetail_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="patient_traindetail_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <HorizontalLayout height="38">
+                <Label text="训练信息" align="left" valign="vcenter" textcolor="#FF253C6E" font="4"/>
+                <Control />
+                <Button width="102" name="patient_traindetail_export" normalimage="daochu.png" hotimage="daochu.png" pushedimage="daochu.png"/>
+            </HorizontalLayout>
+            <Control height="25"/>
+            <VerticalLayout name="patient_infomation_view" height="150" inset="3,3,3,3" bkimage="box_bg3.png">
+                <HorizontalLayout height="72" bkimage="lanse.png">
+                    <Control width="96"/>
+                    <Label text="患者编号" align="centervcenter" width="160" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="姓名" align="centervcenter" width="292" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="性别" align="centervcenter" width="224" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="年龄" align="centervcenter" width="192" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="创建时间" align="centervcenter" width="163" textcolor="#FFFFFFFF" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+                <HorizontalLayout name="pfv_row01" height="72">
+                    <Label name="pfv_cell01" text="001" align="centervcenter" width="348" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pfv_cell02" text="廖聪" align="centervcenter" width="124" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pfv_cell03" text="男" align="centervcenter" width="304" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pfv_cell04" text="29" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pfv_cell05" text="2015-09-15" align="centervcenter" width="312" textcolor="#FF353c3b" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <Control height="54"/>
+            <VerticalLayout name="patient_traindetail_list" height="544" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+                    <Control width="96"/>
+                    <Label text="时间" align="centervcenter" width="160" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="训练内容" align="centervcenter" width="292" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="起始时间" align="centervcenter" width="224" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="时长" align="centervcenter" width="192" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="操作" align="centervcenter" width="163" textcolor="#FFFFFFFF" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+                <HorizontalLayout name="pd_row01" height="67">
+                    <Control width="96"/>
+                    <Label name="pd_cell01" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell02" text="廖聪" align="centervcenter" width="292" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell03" text="男" align="centervcenter" width="224" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell04" text="29" align="centervcenter" width="192" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="train_detail_detail1" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pd_row02" height="67">
+                    <Control width="96"/>
+                    <Label name="pd_cell11" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell12" text="廖聪" align="centervcenter" width="292" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell13" text="男" align="centervcenter" width="224" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell14" text="29" align="centervcenter" width="192" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="train_detail_detail2" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pd_row03" height="67">
+                    <Control width="96"/>
+                    <Label name="pd_cell21" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell22" text="廖聪" align="centervcenter" width="292" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell23" text="男" align="centervcenter" width="224" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell24" text="29" align="centervcenter" width="192" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="train_detail_detail3" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pd_row04" height="67">
+                    <Control width="96"/>
+                    <Label name="pd_cell31" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell32" text="廖聪" align="centervcenter" width="292" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell33" text="男" align="centervcenter" width="224" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell34" text="29" align="centervcenter" width="192" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="train_detail_detail4" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="pd_row05" height="67">
+                    <Control width="96"/>
+                    <Label name="pd_cell41" text="001" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell42" text="廖聪" align="centervcenter" width="292" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell43" text="男" align="centervcenter" width="224" textcolor="#FF353c3b" font="3"/>
+                    <Label name="pd_cell44" text="29" align="centervcenter" width="192" textcolor="#FF353c3b" font="3"/>
+                    <HorizontalLayout width="163">
+                        <Control />
+                        <VerticalLayout width="89">
+                            <Control />
+                            <Button height="32" name="train_detail_detail5" normalimage="management_btn_xiangqing.png" hotimage="management_btn_xiangqing.png" pushedimage="management_btn_xiangqing.png"/>
+                            <Control />
+                        </VerticalLayout>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout height="76" inset="62,35,0,0">
+                    <HorizontalLayout width="244" bkimage="check_box.png">
+                        <Control width="46"/>
+                        <Edit name="traindetail_search_txt" text="请输入训练时间" padding="0,3,0,0" font="14" height="32" width="192"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control width="14"/>
+                    <Button name="traindetail_search" width="108" bkcolor="#FF184199" text="搜索" textcolor="#FFFFFFFF" font="3"/>
+                    <Control width="108"/>
+                    <HorizontalLayout padding="0,3,0,0" width="336" bordersize="1" bordercolor="#ffeaeaea">
+                        <Button name="pd_last_page" width="97" bkcolor="#ffffffff" align="centervcenter" text="&lt;&lt;上一页" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pd_page1" width="32" bkcolor="#ffffffff" align="centervcenter" text="1" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pd_page2" width="32" bkcolor="#FF184199" align="centervcenter" text="2" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pd_page3" width="32" bkcolor="#ffffffff" align="centervcenter" text="3" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pd_page4" width="32" bkcolor="#ffffffff" align="centervcenter" text="4" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="pd_next_page" bkcolor="#ffffffff" align="centervcenter" text="下一页&gt;&gt;" textcolor="#ff000000" font="3"/>
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="46"/>
+            </VerticalLayout>
+            <Control width="0"/>
+             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="evaluation_detail_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="evaluation_detail_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="evaluation_detail_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label name="evaluation_detail_name" text="FMA评测详情" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout height="748" inset="3,3,3,3" bkimage="box_bg2.png">
+               <HorizontalLayout height="67" bkimage="lanse.png">
+					<Label text="项目" width="319" align="center" valign="center" textcolor="#FFFFFFFF" font="1"/>
+					<Control width="93"/>
+					<HorizontalLayout width="741">
+						<Label text="结果" align="left" valign="center" textcolor="#FFFFFFFF" font="1"/>
+						<Label name="evaluation_detail_score" text="综合得分:92分" align="right" valign="center" textcolor="#FFFFFFFF" font="1"/>
+					</HorizontalLayout>
+					<Control />
+			   </HorizontalLayout>
+			   <HorizontalLayout name="evd_row01" height="143">
+					<Text name="evd_cell01" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_cell02" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   <HorizontalLayout name="evd_row02" height="143">
+					<Text name="evd_cell11" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_cell12" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   <HorizontalLayout name="evd_row03" height="143">
+					<Text name="evd_cell21" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_cell22" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   <HorizontalLayout name="evd_row04" height="143">
+					<Text name="evd_cell31" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_cell32" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			    <HorizontalLayout height="36">
+					<Control />
+                    <HorizontalLayout width="336" bordersize="1" bordercolor="#ffeaeaea">
+                        <Button name="evd_last_page" width="97" bkcolor="#ffffffff" align="centervcenter" text="&lt;&lt;上一页" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="evd_page1" width="32" bkcolor="#ffffffff" align="centervcenter" text="1" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="evd_page2" width="32" bkcolor="#FF184199" align="centervcenter" text="2" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="evd_page3" width="32" bkcolor="#ffffffff" align="centervcenter" text="3" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="evd_page4" width="32" bkcolor="#ffffffff" align="centervcenter" text="4" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="evd_next_page" bkcolor="#ffffffff" align="centervcenter" text="下一页&gt;&gt;" textcolor="#ff000000" font="3"/>
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+				<Control />
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>
