@@ -1,0 +1,143 @@
+@CHARSET "UTF-8";
+
+#contentdiv{
+	position:absolute;
+	left:500px;
+	overflow:hidden;
+}
+#startdiv{
+    width: 320px;
+	
+    height: 568px;
+    overflow:hidden;
+    background-image: url(../image/ks.jpg);
+}
+button{
+    outline: none;
+}
+#startdiv button{
+    position: absolute;
+    top: 500px;
+    left: 82px;
+    font-weight:bold;
+    width: 150px;
+    height: 30px;
+    border: 1px solid #1e8df6;
+    border-radius: 30px;
+    background-color: #1e8df6;
+}
+#maindiv{
+	 color:red;
+    width: 320px;
+    height: 568px;
+    background-image:url(../image/bg2.jpg) ;
+    display: none;
+    overflow:hidden;
+}
+#scorediv{
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: none;
+}
+#mouseXY{
+    font-size: 16px;
+    font-weight: bold;
+    position: absolute;
+    top: 30px;
+    color:red;
+    left: 10px;
+    display: none;
+}
+#suspenddiv{
+    position: absolute;
+    top: 210px;
+    left: 82px;
+    display: none;
+    z-index: 2;
+}
+#suspenddiv button{
+    width: 150px;
+    height: 30px;
+    margin-bottom: 20px;
+    border: 1px solid black;
+    border-radius: 30px;
+    background-color: #efd141;
+}
+#maindiv img{
+    position: absolute;
+    z-index: 1;
+}
+#enddiv{
+    position: absolute;
+    top: 210px;
+    left: 75px;
+    border: 1px solid gray;
+    border-radius: 5px;
+    text-align: center;
+    background-color:#1f9de0;
+    display: none;
+    z-index: 2;
+     background-image:url(../image/end2.png) ;
+}
+.plantext{
+    width: 160px;
+    height: 30px;
+    line-height: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+#planscore{
+    width: 160px;
+    height: 80px;
+    line-height: 80px;
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    font-size: 16px;
+    font-weight: bold;
+     
+}
+#enddiv div{
+    width: 160px;
+    height: 50px;
+    
+}
+#enddiv div button{
+    margin-top:10px ;
+    width: 90px;
+    height: 30px;
+    border: 1px solid gray;
+    border-radius: 30px;
+     background-color: #efd141;
+      background-image:url(../image/end2.png) ;
+}
+#weaps{
+	position:absolute;
+	bottom:10px;
+	left:0px;
+	
+    
+     
+     width:200px;
+     height:50px;
+     z-index:1;
+}
+#daodanlist{
+	font-size: 16px;
+    font-weight: bold;
+    color:blue;
+    width:300px;
+    display:none;
+	
+}
+#numdaodan{
+	position:relative;
+	display:inline-bolck;
+	top:37px;
+	left:24px;
+}
+#numdaodan,#daodanimg{
+	display:inline-bolck;
+}

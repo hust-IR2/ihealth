@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="personor_info_edit_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="personor_info_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="personor_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <HorizontalLayout height="35">
+                <Label text="个人中心" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            </HorizontalLayout>
+            <Control height="25"/>
+            <VerticalLayout name="personor_info" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="huise.png">
+                    <Label text="个人信息" align="centervcenter" textcolor="#FFCFDDF0" bkimage="lanse.png" font="4"/>
+                    <Button name="begin_change_pwd" text="修改密码" align="centervcenter" textcolor="#FF5E5E5E" font="4"/>
+                </HorizontalLayout>
+                <Control height="48"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="编号" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_id" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="学历" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_education" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="姓名" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_name" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="民族" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_nation" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="性别" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_sex" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="籍贯" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_originplace" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="出生日期" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <DateTime name="personor_birthday" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="户籍性质" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_householdprop" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="身份证" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_certid" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="部门" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_department" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="电话" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_tel" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="科室" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_keshi" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="血型" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_bloodtype" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="职位" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_position" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="25"/>
+                <HorizontalLayout height="40">
+                    <Label width="230" text="详细地址" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_address" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Label width="121" text="入职日期" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <DateTime name="personor_entrydate" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF878A91"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="41"/>
+                <HorizontalLayout height="51">
+                    <Control />
+                    <Button name="personorinfo_save" width="291" normalimage="center_btn_save.png" hotimage="center_btn_save.png" pushedimage="center_btn_save.png"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <VerticalLayout name="changepwd_box" height="752" inset="3,3,3,3" bkimage="box_bg2.png" visible="false">
+                <HorizontalLayout height="67" bkimage="huise.png">
+                    <Button name="begin_edit_person_info" text="个人信息" align="centervcenter" textcolor="#FF5E5E5E" font="4"/>
+                    <Label text="修改密码" align="centervcenter" textcolor="#FFCFDDF0" bkimage="lanse.png" font="4"/>
+                </HorizontalLayout>
+                <Control height="140"/>
+                <HorizontalLayout height="41">
+                    <Label width="452" text="原密码" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_old_pwd" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFFFFFFF" bkcolor="#FFFFFFFF" textcolor="#FFE1E1E1"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="452" text="新密码" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_new_pwd" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFFFFFFF" bkcolor="#FFFFFFFF" textcolor="#FFE1E1E1"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="452" text="新密码" align="right" textcolor="#FF5F6B6B" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="personor_confirm_new_pwd" bordersize="1" bordercolor="#FFE7E7E7" align="center" font="2" text="" width="310" nativebkcolor="#FFFFFFFF" bkcolor="#FFFFFFFF" textcolor="#FFE1E1E1"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="67"/>
+                <HorizontalLayout height="51">
+                    <Control />
+                    <Button name="personorinfo_pwd_save" width="291" normalimage="center_btn_modify.png" hotimage="center_btn_modify.png" pushedimage="center_btn_modify.png"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="active_train_game4_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="active_train_game4_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="active_train_game4_welcom" text="Welcome Liquan!" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+             <Label text="飞机大战" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Label text="Aircraft Battle" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout height="748" inset="0,30,43,46" bkimage="box_bg2.png">
+                <HorizontalLayout height="681">
+                    <Control />
+                    <Container width="800">
+                        <wkeWebkit name="game4" bkcolor="#FFFFFFFF"/>
+                    </Container>
+                    <Control width="48"/>
+                    <VerticalLayout width="276">
+                        <Control />
+                        <CheckBox name="game4_nandu_select" height="54" normalimage="zd_btn_n1.png" selectedimage="zd_btn_n1.png" disabledimage="zd_btn_n1.png"/>
+                        <Control height="310"/>
+                        <CheckBox name="game4_start" height="84" normalimage="btn_ks1_n.png" selectedimage="btn_zt1_n.png" disabledimage="btn_ks1_n.png"/>
+                        <Control height="38"/>
+                        <Button height="84" name="game4_recovery" normalimage="yd_btn_fw_n.png" hotimage="yd_btn_fw_n.png" pushedimage="yd_btn_fw_n.png"/>
+                        <Control />
+                    </VerticalLayout>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

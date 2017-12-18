@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="evaluation_ydgn_detail_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="evaluation_ydgn_detail_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="evaluation_ydgn_detail_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="运动功能评测详情" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout height="748" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+					<Label text="项目" width="319" align="center" valign="center" textcolor="#FFFFFFFF" font="1"/>
+					<Control width="93"/>
+					<HorizontalLayout width="741">
+						<Label text="结果" align="left" valign="center" textcolor="#FFFFFFFF" font="1"/>
+						<Label name="evaluation_ydgn_detail_score" text="综合得分:92分" align="right" valign="center" textcolor="#FFFFFFFF" font="1"/>
+					</HorizontalLayout>
+					<Control />
+			   </HorizontalLayout>
+			   <HorizontalLayout name="evd_ydgn_row01" height="69">
+					<Text name="evd_ydgn_cell01" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell02" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   		
+			   <HorizontalLayout name="evd_ydgn_row02" height="69">
+					<Text name="evd_ydgn_cell11" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell12" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   			   <HorizontalLayout name="evd_ydgn_row03" height="69">
+					<Text name="evd_ydgn_cell21" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell22" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   			   <HorizontalLayout name="evd_ydgn_row04" height="69">
+					<Text name="evd_ydgn_cell31" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell32" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   			   <HorizontalLayout name="evd_ydgn_row05" height="69">
+					<Text name="evd_ydgn_cell41" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell42" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   			   <HorizontalLayout name="evd_ydgn_row06" height="69">
+					<Text name="evd_ydgn_cell51" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell52" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   			   <HorizontalLayout name="evd_ydgn_row07" height="69">
+					<Text name="evd_ydgn_cell61" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell62" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   			   <HorizontalLayout name="evd_ydgn_row08" height="69">
+					<Text name="evd_ydgn_cell71" width="319" align="center" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control width="93"/>
+					<Text name="evd_ydgn_cell72" width="741" align="left" valign="center" textcolor="#FF4D4D4D" font="1"/>
+					<Control />
+			   </HorizontalLayout>
+			   <Control height="1" bkcolor="#FFecedef"/>
+			   
+			   <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

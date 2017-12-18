@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="emg_mode" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="emg_mode_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="emg_mode_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="EMG模式" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout name="emg_mode_list" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <Control height="83"/>
+                <HorizontalLayout height="601">
+                    <Control width="40"/>
+                    <VerticalLayout width="819">
+                        <HorizontalLayout height="284">
+                            <VerticalLayout width="393" bkimage="emg_chart_bk2.png">
+                                <Control height="72"/>
+                                <HorizontalLayout height="161">
+                                    <Control width="38"/>
+                                    <EMGWave name="emgmode_wave1" width="291" linecolor="#FFFFFFFF" linesize="2" linetype="0" min="0" max="500"/>
+                                    <Control />
+                                </HorizontalLayout>
+                                <Control height="12"/>
+                                <HorizontalLayout height="12">
+                                    <Control width="65"/>
+                                    <Label text="2" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="4" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="6" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="8" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="10" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Control />
+                                </HorizontalLayout>
+                            </VerticalLayout>
+                            <Control />
+                            <VerticalLayout width="393" bkimage="emg_chart_bk2.png">
+                                <Control height="72"/>
+                                <HorizontalLayout height="161">
+                                    <Control width="38"/>
+                                    <EMGWave name="emgmode_wave2" width="291" linecolor="#FFFFFFFF" linesize="2" linetype="0" min="0" max="500"/>
+                                    <Control />
+                                </HorizontalLayout>
+                                <Control height="12"/>
+                                <HorizontalLayout height="12">
+                                    <Control width="65"/>
+                                    <Label text="2" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="4" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="6" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="8" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="10" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Control />
+                                </HorizontalLayout>
+                            </VerticalLayout>
+                        </HorizontalLayout>
+                        <Control />
+                        <HorizontalLayout height="284">
+                            <VerticalLayout width="393" bkimage="emg_chart_bk2.png">
+                                <Control height="72"/>
+                                <HorizontalLayout height="161">
+                                    <Control width="38"/>
+                                    <EMGWave name="emgmode_wave3" width="291" linecolor="#FFFFFFFF" linesize="2" linetype="0" min="0" max="500"/>
+                                    <Control />
+                                </HorizontalLayout>
+                                <Control height="12"/>
+                                <HorizontalLayout height="12">
+                                    <Control width="65"/>
+                                    <Label text="2" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="4" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="6" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="8" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="10" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Control />
+                                </HorizontalLayout>
+                            </VerticalLayout>
+                            <Control />
+                            <VerticalLayout width="393" bkimage="emg_chart_bk2.png">
+                                <Control height="72"/>
+                                <HorizontalLayout height="161">
+                                    <Control width="38"/>
+                                    <EMGWave name="emgmode_wave4" width="291" linecolor="#FFFFFFFF" linesize="2" linetype="0" min="0" max="500"/>
+                                    <Control />
+                                </HorizontalLayout>
+                                <Control height="12"/>
+                                <HorizontalLayout height="12">
+                                    <Control width="65"/>
+                                    <Label text="2" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="4" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="6" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="8" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Label text="10" align="centervcenter" width="59" textcolor="#FFcee3eb" font="16"/>
+                                    <Control />
+                                </HorizontalLayout>
+                            </VerticalLayout>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <Control />
+                    <VerticalLayout width="276">
+                        <CheckBox name="emg_mode_start" height="84" normalimage="btn_ks1_n.png" selectedimage="btn_zt1_n.png" disabledimage="btn_ks1_n.png"/>
+                        <Control height="38"/>
+                        <Button height="84" name="emg_mode_recovery" normalimage="yd_btn_fw_n.png" hotimage="yd_btn_fw_h.png" pushedimage="yd_btn_fw_h.png"/>
+                    </VerticalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="train_main_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="train_main_page_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <Control />
+        <VerticalLayout width="1193">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="train_main_page_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="进入训练" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="28"/>
+            <HorizontalLayout height="755">
+                <Button float="true" pos="0,0,532,310" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_active" normalimage="Training_mode1.png" hotimage="Training_mode1.png" pushedimage="Training_mode1.png"/>
+                <Button float="true" pos="542,121,1073,435" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_passive" normalimage="Training_mode2.png" hotimage="Training_mode2.png" pushedimage="Training_mode2.png"/>
+                <Button float="true" pos="126,321,656,632" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_sEMG" normalimage="Training_mode3.png" hotimage="Training_mode3.png" pushedimage="Training_mode3.png"/>
+                <Button float="true" pos="660,441,1070,755" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_eye" normalimage="Training_mode4.png" hotimage="Training_mode4.png" pushedimage="Training_mode4.png"/>
+            </HorizontalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control />
+        <Control width="360"/>
+    </HorizontalLayout>
+</Window>

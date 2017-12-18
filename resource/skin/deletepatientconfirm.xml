@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="548,275" caption="0,0,0,36" roundcorner="4,4" bktrans="true">
+    <Font name="宋体" size="38" bold="true" italic="false"/>
+    <Font name="宋体" size="26" bold="true" italic="false"/>
+    <VerticalLayout bkimage="popup_bg.png">
+        <Control height="76"/>
+        <Label text="是否确认删除患者?" height="44" textcolor="#FFf63232" font="0" align="centervcenter"/>
+        <Control height="46"/>
+        <HorizontalLayout height="35">
+            <Control />
+            <Button name="delete_patient_ok" height="35" width="192" font="1" text="确定" textcolor="#FFFFFFFF" align="centervcenter" bkcolor="#FF184199" hotbkcolor="#FF184199" hottextcolor="#ffffffff" pushedtextcolor="#ffffffff" focusedtextcolor="#ffffffff"/>
+            <Control />
+            <Button name="delete_patient_cancel" height="35" width="192" font="1" text="取消" textcolor="#FFFFFFFF" align="centervcenter" bkcolor="#FF184199" hotbkcolor="#FF184199" hottextcolor="#ffffffff" pushedtextcolor="#ffffffff" focusedtextcolor="#ffffffff"/>
+            <Control />
+        </HorizontalLayout>
+        <Control />
+    </VerticalLayout>
+</Window>

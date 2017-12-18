@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="548,275" caption="0,0,0,36" roundcorner="4,4" bktrans="true">
+    <Font name="宋体" size="26" bold="true" italic="false"/>
+    <Font name="宋体" size="16" bold="true" italic="false"/>
+    <VerticalLayout bkimage="popup_bg.png">
+        <Control height="76"/>
+        <Label text="密码错误，请重新输入！" height="44" textcolor="#FFf63232" font="0" align="centervcenter"/>
+        <Control height="46"/>
+        <HorizontalLayout height="54">
+            <Control />
+            <Button name="remodifypwd" height="54" width="288" font="1" text="确定" textcolor="#FFFFFFFF" align="centervcenter" bkcolor="#FF184199" hotbkcolor="#FF184199" hottextcolor="#ffffffff" pushedtextcolor="#ffffffff" focusedtextcolor="#ffffffff"/>
+            <Control />
+        </HorizontalLayout>
+        <Control />
+    </VerticalLayout>
+</Window>

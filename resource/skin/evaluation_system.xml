@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="evaluation_page" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="evaluation_page_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="evaluation_page_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="评估系统" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="153"/>
+			
+            <HorizontalLayout height="463">
+				<Button width="385" name="evaluation1" normalimage="pg_btn_fmapc.png" hotimage="pg_btn_fmapc.png" pushedimage="pg_btn_fmapc.png"/>
+                <Control />
+				<Button width="385" name="evaluation2" normalimage="pg_btn_maspc.png" hotimage="pg_btn_maspc.png" pushedimage="pg_btn_maspc.png"/>
+                <Control />
+				<Button width="385" name="evaluation3" normalimage="pg_btn_ydpc.png" hotimage="pg_btn_ydpc.png" pushedimage="pg_btn_ydpc.png"/>
+            </HorizontalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

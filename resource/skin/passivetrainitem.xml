@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <ListContainerElement name="passivetrainitem" height="68">
+        <VerticalLayout height="67">
+            <HorizontalLayout>
+                <Control width="140"/>
+                <Label name="passivetrainitem_sort" text="01" align="centervcenter" width="121" textcolor="#FF65696C" font="3"/>
+                <Label name="passivetrainitem_name" text="摸头" align="centervcenter" width="222" textcolor="#FF65696C" font="3"/>
+                <Label name="passivetrainitem_type" text="被动训练" align="centervcenter" width="177" textcolor="#FF65696C" font="3"/>
+                <Label name="passivetrainitem_timelen" text="05:00" align="centervcenter" width="243" textcolor="#FF65696C" font="3"/>
+                <HorizontalLayout width="166">
+                    <Control />
+                    <HorizontalLayout width="200" align="centervcenter">
+						<Control />
+                        <Button height="35" name="bd_add_action" normalimage="icon_addto.png" hotimage="icon_addto.png" pushedimage="icon_addto.png"/>
+						<HorizontalLayout width="20" />
+						<Button height="35" name="bd_delete_action" normalimage="icon_delete.png" hotimage="icon_delete.png" pushedimage="icon_delete.png" />
+						<Control />
+                    </HorizontalLayout>
+                    <Control />
+                </HorizontalLayout>
+                <Control width="118"/>
+            </HorizontalLayout>
+            <Control height="1" bkcolor="#FFecedef"/>
+        </VerticalLayout>
+    </ListContainerElement>
+</Window>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <ListContainerElement name="passivetrainitem" height="44">
+        <Label name="music_cell01" width="60" align="centervcenter" textcolor="#FF818181" font="0"/>
+        <Label name="music_cell02" width="116" align="left" textcolor="#FF484848" font="0"/>
+        <Label name="music_cell03" width="116" align="left" textcolor="#FF818181" font="0"/>
+        <VerticalLayout width="20">
+            <Control />
+            <Button height="20" name="music_item_delete" normalimage="icon_delete_n.png" hotimage="icon_delete_h.png" pushedimage="icon_delete_h.png"/>
+            <Control />
+        </VerticalLayout>
+    </ListContainerElement>
+</Window>

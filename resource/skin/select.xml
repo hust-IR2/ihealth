@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="select_patient" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="select_patient_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="select_patient_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="选择患者" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout name="select_patient_list" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+                    <Control width="35"/>
+                    <Label text="患者编号" align="centervcenter" width="96" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="姓名" align="centervcenter" width="89" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="性别" align="centervcenter" width="84" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="年龄" align="centervcenter" width="57" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="创建时间" align="centervcenter" width="188" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="上次治疗时间" align="centervcenter" width="144" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="累积康复时间" align="centervcenter" width="150" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="最近康复内容" align="centervcenter" width="160" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="添加备注" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                </HorizontalLayout>
+                <HorizontalLayout name="row01" height="67">
+                    <Control width="35"/>
+                    <Label name="cell01" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell02" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell03" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell04" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell05" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell06" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell07" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell08" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell09" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row02" height="67">
+                    <Control width="35"/>
+                    <Label name="cell11" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell12" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell13" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell14" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell15" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell16" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell17" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell18" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell19" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row03" height="67">
+                    <Control width="35"/>
+                    <Label name="cell21" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell22" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell23" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell24" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell25" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell26" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell27" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell28" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell29" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row04" height="67">
+                    <Control width="35"/>
+                    <Label name="cell31" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell32" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell33" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell34" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell35" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell36" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell37" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell38" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell39" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row05" height="67">
+                    <Control width="35"/>
+                    <Label name="cell41" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell42" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell43" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell44" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell45" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell46" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell47" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell48" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell49" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row06" height="67">
+                    <Control width="35"/>
+                    <Label name="cell51" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell52" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell53" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell54" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell55" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell56" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell57" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell58" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell59" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row07" height="67">
+                    <Control width="35"/>
+                    <Label name="cell61" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell62" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell63" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell64" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell65" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell66" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell67" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell68" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell69" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <HorizontalLayout name="row08" height="67">
+                    <Control width="35"/>
+                    <Label name="cell71" text="001" align="centervcenter" width="96" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell72" text="廖聪" align="centervcenter" width="89" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell73" text="男" align="centervcenter" width="84" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell74" text="29" align="centervcenter" width="57" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell75" text="2015-09-15" align="centervcenter" width="188" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell76" text="2016-11-19" align="centervcenter" width="144" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell77" text="124小时" align="centervcenter" width="150" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell78" text="被动模式" align="centervcenter" width="160" textcolor="#FF353c3b" font="3"/>
+                    <Label name="cell79" text="可+0.5h被动" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+                <Control height="1" bkcolor="#FFecedef"/>
+                <Control />
+                <HorizontalLayout height="76" inset="62,35,0,0">
+                    <HorizontalLayout width="244" bkimage="check_box.png">
+                        <Control width="46"/>
+                        <Edit name="select_patient_search_txt" text="请输入患者名称" padding="0,3,0,0" font="14" height="32" width="192"/>
+                        <Control />
+                    </HorizontalLayout>
+                    <Control width="14"/>
+                    <Button name="select_patient_search" width="108" bkcolor="#FF184199" text="搜索" textcolor="#FFFFFFFF" font="3"/>
+                    <Control width="108"/>
+                    <HorizontalLayout padding="0,3,0,0" width="336" bordersize="1" bordercolor="#ffeaeaea">
+                        <Button name="last_page" width="97" bkcolor="#ffffffff" align="centervcenter" text="&lt;&lt;上一页" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="page1" width="32" bkcolor="#ffffffff" align="centervcenter" text="1" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="page2" width="32" bkcolor="#FF184199" align="centervcenter" text="2" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="page3" width="32" bkcolor="#ffffffff" align="centervcenter" text="3" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="page4" width="32" bkcolor="#ffffffff" align="centervcenter" text="4" textcolor="#ff000000" font="3"/>
+                        <Control width="1" bkcolor="#ffeaeaea"/>
+                        <Button name="next_page" bkcolor="#ffffffff" align="centervcenter" text="下一页&gt;&gt;" textcolor="#ff000000" font="3"/>
+                    </HorizontalLayout>
+                </HorizontalLayout>
+                <Control height="46"/>
+            </VerticalLayout>
+            <Control width="0"/>
+             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

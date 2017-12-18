@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="manager_patient_detail" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="manager_patient_detail_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="manager_patient_detail_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <HorizontalLayout height="35">
+                <Label text="管理患者" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+                <Button name="manager_patient_detail_edit" width="99" normalimage="bianji.png" hotimage="bianji.png" pushedimage="bianji.png"/>
+                <Control width="12"/>
+                <Button name="manager_patient_detail_delete" width="99" normalimage="shanchu.png" hotimage="shanchu.png" pushedimage="shanchu.png"/>
+                <Control width="12"/>
+                <Button name="manager_patient_detail_export" width="99" normalimage="daochu.png" hotimage="daochu.png" pushedimage="daochu.png"/>
+                <Control width="3"/>
+            </HorizontalLayout>
+            <Control height="25"/>
+            <VerticalLayout name="manager_patient_detail_list" height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="67" bkimage="lanse.png">
+                    <Control width="48"/>
+                    <Label text="患者详情" align="left" textcolor="#FFBAD2EA" font="4"/>
+                </HorizontalLayout>
+                <Control height="59"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="编号" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_id" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Label width="171" text="创建时间" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_createtime" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="2015-03-21" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="姓名" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_name" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Label width="171" text="上次治疗时间" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_lasttime" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="2016-11-21" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="性别" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_sex" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Label width="171" text="累计康复时间" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_totaltime" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="2016-11-21" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="41">
+                    <Label width="209" text="年龄" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_age" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="001" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Label width="171" text="最近康复内容" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Edit name="detail_patient_detail" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" align="center" font="2" text="2016-11-21" width="310" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    <Control />
+                </HorizontalLayout>
+                <Control height="32"/>
+                <HorizontalLayout height="184">
+                    <Label width="209" text="填加备注" align="right" textcolor="#FFB7BBBF" font="2"/>
+                    <Control width="30"/>
+                    <Container bkcolor="FFe4e3e8" bordersize="1,1,1,1" bordercolor="#FFE7E7E7" width="822" inset="22,22,22,22">
+                        <RichEdit name="detail_patient_remark" font="2" text="001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001" nativebkcolor="#FFe4e3e8" bkcolor="#FFe4e3e8" textcolor="#FF767676" readonly="true"/>
+                    </Container>
+                    <Control />
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

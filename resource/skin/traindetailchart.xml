@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="traindetail_chart" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="traindetail_chart_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="traindetail_chart_welcom" text="Welcome Liquan！" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <HorizontalLayout height="38">
+                <Label text="训练详情" align="left" valign="vcenter" textcolor="#FF253C6E" font="4"/>
+                <Control />
+                <Button width="102" name="traindetail_chart_export" normalimage="daochu.png" hotimage="daochu.png" pushedimage="daochu.png"/>
+            </HorizontalLayout>
+            <Control height="25"/>
+            <VerticalLayout name="traindetail_chart_zd_title" height="150" inset="3,3,3,3" bkimage="box_bg3.png">
+                <HorizontalLayout height="72" bkimage="lanse.png">
+                    <Label text="时间" align="centervcenter" width="240" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="模式" align="centervcenter" width="240" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="游戏" align="centervcenter" width="240" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="难度" align="centervcenter" width="240" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="得分" align="centervcenter" width="240" textcolor="#FFFFFFFF" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+                <HorizontalLayout name="zd_chart_row01" height="72">
+                    <Label name="zd_cell01" text="001" align="centervcenter" width="240" textcolor="#FF353c3b" font="3"/>
+                    <Label name="zd_cell02" text="廖聪" align="centervcenter" width="240" textcolor="#FF353c3b" font="3"/>
+                    <Label name="zd_cell03" text="男" align="centervcenter" width="240" textcolor="#FF353c3b" font="3"/>
+                    <Label name="zd_cell04" text="29" align="centervcenter" width="240" textcolor="#FF353c3b" font="3"/>
+                    <Label name="zd_cell05" text="2015-09-15" align="centervcenter" width="240" textcolor="#FF353c3b" font="3"/>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <VerticalLayout name="traindetail_chart_bd_title" height="150" inset="3,3,3,3" bkimage="box_bg3.png" visible="false">
+                <HorizontalLayout height="72" bkimage="lanse.png">
+                    <Label text="时间" align="centervcenter" width="294" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="模式" align="centervcenter" width="304" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="完成动作" align="centervcenter" width="296" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="训练时间" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                </HorizontalLayout>
+                <HorizontalLayout name="bd_chart_row01" height="72">
+                    <Label name="bd_cell01" text="001" align="centervcenter" width="294" textcolor="#FF353c3b" font="3"/>
+                    <Label name="bd_cell02" text="廖聪" align="centervcenter" width="304" textcolor="#FF353c3b" font="3"/>
+                    <Label name="bd_cell03" text="男" align="centervcenter" width="296" textcolor="#FF353c3b" font="3"/>
+                    <Label name="bd_cell04" text="29" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+            </VerticalLayout>
+            <VerticalLayout name="traindetail_chart_yd_title" height="150" inset="3,3,3,3" bkimage="box_bg3.png" visible="false">
+                <HorizontalLayout height="72" bkimage="lanse.png">
+                    <Label text="时间" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="模式" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="训练时间" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                </HorizontalLayout>
+                <HorizontalLayout name="yd_chart_row01" height="72">
+                    <Label name="yd_cell01" text="001" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                    <Label name="yd_cell02" text="廖聪" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                    <Label name="yd_cell03" text="男" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+            </VerticalLayout>
+            <VerticalLayout name="traindetail_chart_emg_title" height="150" inset="3,3,3,3" bkimage="box_bg3.png" visible="false">
+                <HorizontalLayout height="72" bkimage="lanse.png">
+                    <Label text="时间" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="模式" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                    <Label text="训练时间" align="centervcenter" textcolor="#FFFFFFFF" font="3"/>
+                </HorizontalLayout>
+                <HorizontalLayout name="emg_chart_row01" height="72">
+                    <Label name="emg_cell01" text="001" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                    <Label name="emg_cell02" text="廖聪" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                    <Label name="emg_cell03" text="男" align="centervcenter" textcolor="#FF353c3b" font="3"/>
+                </HorizontalLayout>
+            </VerticalLayout>
+            <Control height="54"/>
+            <VerticalLayout name="traindetail_chart_zd_view" height="544" inset="3,3,3,3" bkimage="box_bg2.png">
+                <HorizontalLayout height="57">
+                    <Control width="57"/>
+                    <Label name="traindetial_chart_zd_name" text="关节运动角度" align="left" valign="center" textcolor="#FF315283" font="4"/>
+                </HorizontalLayout>
+                <HorizontalLayout height="456">
+                    <Control width="57"/>
+                    <VerticalLayout name="zd_gjjd_chart_bk" width="688" bkimage="gjjd_chart_bk.png" visible="true">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="zd_gjjd_wave" width="507" scrollname="zd_gjjd_scroll" linecolor="#FFc7e037" linecolor1="#FFea2aed" linenum="2" linesize="2" linetype="1" min="0" max="90"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="zd_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="zd_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="zd_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="zd_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="zd_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="zd_gjjd_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <VerticalLayout name="zd_wl_chart_bk" width="688" bkimage="wl_chart_bk.png" visible="false">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="zd_wl_wave" width="507" scrollname="zd_wl_scroll" linecolor="#FFFFFFFF" linesize="2" linetype="1" min="0" max="200"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="zd_wl_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="zd_wl_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="zd_wl_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="zd_wl_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="zd_wl_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="zd_wl_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <Control width="132"/>
+                    <VerticalLayout width="278">
+                        <Control height="40"/>
+                        <Button height="83" name="zd_gjjd_chart_btn" normalimage="xq_btn_gjjd_n.png" hotimage="xq_btn_gjjd_h.png" pushedimage="xq_btn_gjjd_h.png"/>
+                        <Control height="40"/>
+                        <Button height="83" name="zd_wl_chart_btn" normalimage="xq_btn_wl_n.png" hotimage="xq_btn_wl_h.png" pushedimage="xq_btn_wl_h.png"/>
+                        <Control height="14"/>
+                        <HorizontalLayout name="zd_gjjd_chart_tuli" height="192">
+                            <Control />
+                            <Control width="155" bkimage="tuli_ydjd.png"/>
+                        </HorizontalLayout>
+                        <Control />
+                    </VerticalLayout>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <VerticalLayout name="traindetail_chart_bd_view" height="544" inset="3,3,3,3" bkimage="box_bg2.png" visible="false">
+                <HorizontalLayout height="57">
+                    <Control width="57"/>
+                    <Label name="traindetial_chart_bd_name" text="肩关节力矩值" align="left" valign="center" textcolor="#FF315283" font="4"/>
+                </HorizontalLayout>
+                <HorizontalLayout height="456">
+                    <Control width="57"/>
+                    <VerticalLayout name="bd_jgj_chart_bk" width="688" bkimage="gjlj_chart_bk.png" visible="true">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="bd_jgj_wave" width="507" scrollname="bd_jgj_scroll" linecolor="#FFFFFFFF" linesize="2" linetype="1" min="-20" max="20"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="bd_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="bd_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="bd_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="bd_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="bd_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="bd_jgj_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <VerticalLayout name="bd_zgj_chart_bk" width="688" bkimage="gjlj_chart_bk.png" visible="false">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="bd_zgj_wave" width="507" scrollname="bd_zgj_scroll" linecolor="#FFFFFFFF" linesize="2" linetype="1" min="-20" max="20"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="bd_zgj_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="bd_zgj_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="bd_zgj_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="bd_zgj_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="bd_zgj_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="bd_zgj_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <Control width="132"/>
+                    <VerticalLayout width="278">
+                        <Control height="40"/>
+                        <Button height="83" name="bd_zgj_chart_btn" normalimage="xq_btn_zj_n.png" hotimage="xq_btn_zj_h.png" pushedimage="xq_btn_zj_h.png"/>
+                        <Control height="40"/>
+                        <Button height="83" name="bd_jgj_chart_btn" normalimage="xq_btn_jj_n.png" hotimage="xq_btn_jj_h.png" pushedimage="xq_btn_jj_h.png"/>
+                        <Control />
+                    </VerticalLayout>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <VerticalLayout name="traindetail_chart_yd_view" height="544" inset="3,3,3,3" bkimage="box_bg2.png" visible="false">
+                <HorizontalLayout height="57">
+                    <Control width="57"/>
+                    <Label name="traindetial_chart_yd_name" text="关节运动角度" align="left" valign="center" textcolor="#FF315283" font="4"/>
+                </HorizontalLayout>
+                <HorizontalLayout height="456">
+                    <Control width="57"/>
+                    <VerticalLayout name="yd_gjydjd_chart_bk" width="688" bkimage="gjjd_chart_bk.png" visible="true">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="yd_gjydjd_wave" width="507" scrollname="yd_gjydjd_scroll" linecolor="#FFc7e037" linecolor1="#FFea2aed" linenum="2" linesize="2" linetype="1" min="0" max="90"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="yd_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="yd_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="yd_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="yd_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="yd_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="yd_gjydjd_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <Control width="132"/>
+                    <VerticalLayout width="278">
+                        <Control height="40"/>
+                        <Button height="83" name="yd_chart_btn" normalimage="xq_btn_gjjd_n.png" hotimage="xq_btn_gjjd_h.png" pushedimage="xq_btn_gjjd_h.png"/>
+                        <Control height="14"/>
+                        <HorizontalLayout height="192">
+                            <Control />
+                            <Control width="155" bkimage="tuli_ydjd.png"/>
+                        </HorizontalLayout>
+                        <Control />
+                    </VerticalLayout>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <VerticalLayout name="traindetail_chart_emg_view" height="544" inset="3,3,3,3" bkimage="box_bg2.png" visible="false">
+                <HorizontalLayout height="57">
+                    <Control width="57"/>
+                    <Label name="traindetial_chart_emg_name" text="EMG信号" align="left" valign="center" textcolor="#FF315283" font="4"/>
+                </HorizontalLayout>
+                <HorizontalLayout height="456">
+                    <Control width="57"/>
+                    <VerticalLayout name="emg_chart_bk" width="688" bkimage="emg_chart_bk.png" visible="true">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="emg_wave" width="507" scrollname="emg_scroll" linecolor="#FFcc674e" linecolor1="#FF27e117" linecolor2="#FFc158c7" linecolor3="#FFf5e010" linenum="4" linesize="2" linetype="0" min="0" max="500"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="emg_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="emg_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="emg_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="emg_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="emg_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="emg_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <VerticalLayout name="emg_gjyd_chart_bk" width="688" bkimage="gjjd_chart_bk.png" visible="false">
+                        <Control height="91"/>
+                        <HorizontalLayout height="281">
+                            <Control width="67"/>
+                            <Wave name="emg_gjyd_wave" width="507" scrollname="emg_gjyd_scroll" linecolor="#FFc7e037" linecolor1="#FFea2aed" linenum="2" linesize="2" linetype="1" min="0" max="90"/>
+                            <Control />
+                        </HorizontalLayout>
+                        <Control height="9"/>
+                        <HorizontalLayout height="19">
+                            <Control width="118"/>
+                            <Label name="emg_gjyd_chart_x0" text="2.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="emg_gjyd_chart_x1" text="4.00" align="centervcenter" width="99" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="emg_gjyd_chart_x2" text="6.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Label name="emg_gjyd_chart_x3" text="8.00" align="centervcenter" width="102" textcolor="#FFcee3eb" font="3"/>
+                            <Control width="20"/>
+                            <Label name="emg_gjyd_chart_x4" text="10" align="centervcenter" width="57" textcolor="#FFcee3eb" font="3"/>
+                        </HorizontalLayout>
+                        <Control height="14"/>
+                        <HorizontalLayout height="22">
+                            <Control width="67"/>
+                            <ScrollBar name="emg_gjyd_scroll" range="0" hor="true" bknormalimage="scrollbk.png" bkhotimage="scrollbk.png" bkpushedimage="scrollbk.png" thumbnormalimage="scrollthumb.png" thumbhotimage="scrollthumb.png" thumbpushedimage="scrollthumb.png" showbutton1="false" showbutton2="false"/>
+                            <Control width="112"/>
+                        </HorizontalLayout>
+                    </VerticalLayout>
+                    <Control width="132"/>
+                    <VerticalLayout width="278">
+                        <Control height="40"/>
+                        <Button height="83" name="emg_chart_btn" normalimage="xq_btn_emg_n.png" hotimage="xq_btn_emg_h.png" pushedimage="xq_btn_emg_h.png"/>
+                        <Control height="40"/>
+                        <Button height="83" name="emg_gjyd_chart_btn" normalimage="xq_btn_gjjd_n.png" hotimage="xq_btn_gjjd_h.png" pushedimage="xq_btn_gjjd_h.png"/>
+                        <Control height="14"/>
+                        <HorizontalLayout name="emg_chart_tuli" height="192">
+                            <Control />
+                            <Control width="155" bkimage="tuli_emg.png"/>
+                        </HorizontalLayout>
+                        <HorizontalLayout name="emg_gjjd_chart_tuli" height="192" visible="false">
+                            <Control />
+                            <Control width="155" bkimage="tuli_ydjd.png"/>
+                        </HorizontalLayout>
+                        <Control />
+                    </VerticalLayout>
+                    <Control />
+                </HorizontalLayout>
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

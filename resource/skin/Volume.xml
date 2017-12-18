@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<Window size="32,160" bktrans="true">
+    <VerticalLayout>
+        <Slider name="passive_train_voice" width="32" height="160" hor="false" min="0" max="100" value="10" step="1" bkimage="passive_playbg1.png" bkwidth="5" forewidth="5" thumbwidth="10" thumbheight="10" foreimage="passive_playjindu1.png" isstretchfore="false" thumbimage="passive_playmake.png" thumbhotimage="passive_playmake.png&apos; " thumbpushedimage="passive_playmake.png" thumbsize="10,10" sendmove="true"/>
+    </VerticalLayout>
+</Window>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>微信打飞机</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="wechat.css">
+</head>
+<body>
+	<!-- 总界面 -->
+	<div id="contentdiv">
+	<!-- 开始界面 -->
+		<div id="startdiv">
+		<button onclick="begin()">开始游戏</button>
+		</div>
+	<!-- 游戏界面 -->
+	<div id="maindiv">
+	<!-- 分数 -->
+		<div id="scorediv">
+		<label>分数:</label>
+		<label id="score">0</label>
+		</div>
+	<!-- 结束界面 -->
+	<div id="enddiv">
+		<p id="planetext">飞机大战得分</p>
+		<p id="totalscore">0</p>
+		<div>
+			<a id="restartend" href="javascript:;" onclick="restart()">重新开始</a>
+		</div>
+	</div>
+	</div>
+	</div>
+	<script src='wechat.js'></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window>
+    <HorizontalLayout name="about" bordersize="1" bkimage="main_page_bg.png" visible="false">
+        <VerticalLayout width="360">
+            <Control height="480"/>
+            <HorizontalLayout height="118">
+                <Control width="57"/>
+                <Button width="68" name="about_return" normalimage="btn_return.png" hotimage="btn_return.png" pushedimage="btn_return.png"/>
+                <Control />
+            </HorizontalLayout>
+            <Control />
+        </VerticalLayout>
+        <VerticalLayout width="1203">
+            <Control height="59"/>
+            <HorizontalLayout height="32">
+                <Control />
+                <Button name="about_welcom" text="欢迎您，李权！∨" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
+            </HorizontalLayout>
+            <Control height="80"/>
+            <Label text="关于版本" align="left" height="35" textcolor="#FF253C6E" font="4"/>
+            <Control height="25"/>
+            <VerticalLayout height="752" inset="3,3,3,3" bkimage="box_bg2.png">
+                <Control height="220"/>
+                <HorizontalLayout height="28">
+                    <Control width="358"/>
+                    <Label text="软件版本:1.0" align="left" textcolor="#FF504f54" font="4"/>
+                </HorizontalLayout>
+                <Control height="14"/>
+                <HorizontalLayout height="28">
+                    <Control width="358"/>
+                    <Label text="许可证号:1234-5678-9012-3456" align="left" textcolor="#FF504f54" font="4"/>
+                </HorizontalLayout>
+                <Control height="14"/>
+                <HorizontalLayout height="28">
+                    <Control width="358"/>
+                    <Label text="Copyright@2016HUST" align="left" textcolor="#FF504f54" font="4"/>
+                </HorizontalLayout>
+                <Control height="14"/>
+                <HorizontalLayout height="28">
+                    <Control width="358"/>
+                    <Label text="Powered By HUST-IR2 Version 1.0.0" align="left" textcolor="#FF504f54" font="4"/>
+                </HorizontalLayout>
+                <Control />
+            </VerticalLayout>
+            <Control width="0"/>
+            <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Label text="Supervised By Tongji Medical College,Huazhong University of Science and Technology" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>
+            <Control height="17"/>
+        </VerticalLayout>
+        <Control width="480"/>
+    </HorizontalLayout>
+</Window>

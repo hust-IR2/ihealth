@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Window size="696,432" caption="0,0,0,36" roundcorner="4,4" bktrans="true">
+    <Font name="宋体" size="26" bold="true" italic="false"/>
+    <Font name="宋体" size="22" bold="true" italic="false"/>
+    <Font name="宋体" size="22" bold="false" italic="false"/>
+    <Font name="宋体" size="22" bold="false" italic="false"/>
+    <Font name="宋体" size="18" bold="false" italic="false"/>
+    <VerticalLayout bkimage="popup4_stebg.png">
+        <Label text="设置" align="centervcenter" textcolor="#FFFFFFFF" font="0" height="72"/>
+        <Control height="88"/>
+        <HorizontalLayout height="41">
+            <VerticalLayout width="305">
+                <Label text="速度控制" align="right" valign="vcenter" textcolor="#FF535353" font="3" height="22"/>
+                <Label text="(调节范围(0-1))" align="right" valign="vcenter" textcolor="#FF8a8a8a" font="4" height="19"/>
+            </VerticalLayout>
+            <Control width="19"/>
+            <Button width="41" name="eyemode_jian" normalimage="yd_set_btn_jian_n.png" hotimage="yd_set_btn_jian_inv.png" pushedimage="yd_set_btn_jian_inv.png"/>
+            <Control width="9"/>
+            <Label name="eyemode_value" bordersize="1" bordercolor="#FF8a8a8a" text="0.1" align="centervcenter" textcolor="#FF535353" font="2"/>
+            <Control width="9"/>
+            <Button width="41" name="eyemode_jia" normalimage="yd_set_btn_jia_n.png" hotimage="yd_set_btn_jia_inv.png" pushedimage="yd_set_btn_jia_inv.png"/>
+            <Control />
+        </HorizontalLayout>
+        <Control height="38"/>
+        <HorizontalLayout height="25">
+            <Label text="图像设置" width="305" align="right" valign="vcenter" textcolor="#FF535353" font="3" height="25"/>
+            <Control width="19"/>
+            <CheckBox name="eyemode_show" selected="true" width="22" normalimage="yd_set_check_un.png" selectedimage="yd_set_check_se.png" disabledimage="passive_check_unselected.png"/>
+            <Control width="9"/>
+            <Label text="显示图像" width="108" align="left" valign="vcenter" textcolor="#FF535353" font="3" height="25"/>
+			<Button width="51" name="btn_bding" normalimage="btn_bding.png" hotimage="btn_bding.png" pushedimage="btn_bding.png"/>
+            
+			<Control />
+        </HorizontalLayout>
+        <Control height="73"/>
+        <HorizontalLayout height="54">
+            <Control width="38"/>
+            <Button name="eyemode_ok" width="288" normalimage="btn_qd.png" hotimage="btn_qd.png" pushedimage="btn_qd.png"/>
+            <Control />
+            <Button name="eyemode_cancel" width="288" normalimage="btn_qux.png" hotimage="btn_qux.png" pushedimage="btn_qux.png"/>
+            <Control width="38"/>
+        </HorizontalLayout>
+        <Control />
+    </VerticalLayout>
+</Window>
