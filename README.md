@@ -21,5 +21,5 @@ ihealth是一个康复机器人的工程，实验室内部合作开发。没钱�
 * 下载windows版本的cmake gui，[下载地址](https://cmake.org/download/)；
 * 利用cmake gui编译ihealth，这个流程在这里就不详细介绍，只提几个关键位置
   * 需要OpenCV、Eigen、Boost、TBB的路径，如果报错，自己多尝试一下，可能路径的层次不对；
-  * 此外还有几个库，像NI、WKE，也要手动添加，放在ihealth文件夹里了（这个后面或许会抽出来）
-  
+  * 此外还有几个库，像NI、WKE，也要手动添加，放在ihealth文件夹里了（这个后面或许会抽出来)
+  * 注意需要把动态库dll所在的文件夹设置到path环境变量中。
