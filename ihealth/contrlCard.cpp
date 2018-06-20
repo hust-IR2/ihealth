@@ -1,6 +1,7 @@
 ﻿#include "contrlCard.h"
 #include<math.h>
 #include <iostream>
+
 contrlCard::contrlCard()
 {
 	v_card_name = 0;
