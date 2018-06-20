@@ -1,11 +1,14 @@
 ﻿#pragma once
-#include <Eigen/Core>
-#include <unsupported/Eigen/MatrixFunctions>
-#include "math.h"
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <iostream>
 #include <fstream>
+
+#include <Eigen/Core>
+#include <unsupported/Eigen/MatrixFunctions>
+
+
 using namespace Eigen;
-const double M_PI = 3.1415926;
 const double ShoulderWidth = 0.297;
 const double ShoulderLength = 0.435;
 const double UpperArmLength = 0.296;

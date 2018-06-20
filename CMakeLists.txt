@@ -1,11 +1,3 @@
-# CMake root file for duilib related apps
-#Date 2012-09-16
-#Author: Qi Gao(monkgau@gmail.com)
-#
-#  CMake files for duilib
-#  file for each app is under the related sub-dir
-#
-
 cmake_minimum_required(VERSION 3.8)
 
 project(ihealth)
@@ -15,6 +7,7 @@ if(NOT CMAKE_DEBUG_POSTFIX)
   set(CMAKE_DEBUG_POSTFIX d)
 endif()
 
+#set output dir for all config type
 foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
     string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
     set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${PROJECT_BINARY_DIR}/bin )
