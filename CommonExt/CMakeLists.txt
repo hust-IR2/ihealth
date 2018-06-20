@@ -1,12 +1,16 @@
-#cmake file for CommonExt
-#Author Can HUANG
-#Created: 2017/12/14
-
 aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} Root_src)
+
+file(GLOB Root_header *.h *.hpp) 
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_library(CommonExt SHARED  ${Root_src})
+add_library(CommonExt SHARED  ${Root_src} ${Root_header})
+
+source_group("Source Files" FILES ${Root_src})
+
+source_group("Header Files" FILES ${Root_header})
+
+
 ADD_DEFINITIONS(-D_AFXDLL)
 
 SET(CMAKE_MFC_FLAG 2)

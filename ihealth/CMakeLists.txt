@@ -1,6 +1,3 @@
-#cmake file for ihealth
-#Author Can HUANG
-#Created: 2017/12/14
 cmake_minimum_required(VERSION 3.8)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -31,34 +28,49 @@ ${EIGEN_INCLUDE_DIRS}
 ${NI_INCLUDE_DIRS}
 ${ZPLAY_INCLUDE_DIRS}
 ${TBB_INCLUDE_DIRS})
-aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} Root_src)
-set(AIT_src 
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/DAQSys.cpp
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/dom.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/expatls.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/ftconfig.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/ftrt.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/FTWrapper.cpp
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/node.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/stack.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmlparse.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmlrole.c
-${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmltok.c
-)
-ADD_DEFINITIONS(-D_AFXDLL)
-add_executable(ihealthDemo ${Root_src} ${AIT_src})
-add_dependencies(ihealthDemo duilib CommonExt)
 
-target_link_libraries(ihealthDemo duilib CommonExt ${PUPILTRACKER_LIBRARY} ${APS_LIBRARY} ${MYSQL_LIBRARY} ${MSC_LIBRARY} ${WKE_LIBRARY} ${NI_LIBRARY} ${OpenCV_LIBRARIES} 
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR} Root_src)
+aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ ATI_src)
+
+file(GLOB Root_header ${CMAKE_CURRENT_SOURCE_DIR}/*.h ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
+file(GLOB ATI_header ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/*.h ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/*.hpp)
+
+
+
+# set(ATI_src 
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/DAQSys.cpp
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/dom.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/expatls.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/ftconfig.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/ftrt.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/FTWrapper.cpp
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/node.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/stack.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmlparse.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmlrole.c
+# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmltok.c
+# )
+
+
+ADD_DEFINITIONS(-D_AFXDLL)
+add_executable(ihealth ${Root_src} ${ATI_src} ${Root_header} ${ATI_header})
+add_dependencies(ihealth duilib CommonExt)
+
+source_group("Source Files" FILES ${Root_src})
+source_group("Source Files\\ATI" FILES ${ATI_src})
+source_group("Header Files" FILES ${Root_header})
+source_group("Header Files\\ATI" FILES ${ATI_header})
+
+target_link_libraries(ihealth duilib CommonExt ${PUPILTRACKER_LIBRARY} ${APS_LIBRARY} ${MYSQL_LIBRARY} ${MSC_LIBRARY} ${WKE_LIBRARY} ${NI_LIBRARY} ${OpenCV_LIBRARIES} 
 ${TBB_LIBRARY} 
 ${ZPLAY_LIBRARY} 
 )
 
 if(WIN32)
-   set_target_properties(ihealthDemo PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
-   set_target_properties(ihealthDemo PROPERTIES COMPILE_DEFINITIONS_DEBUG "/SUBSYSTEM:windows")
-   set_target_properties(ihealthDemo PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
-   set_target_properties(ihealthDemo PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "/SUBSYSTEM:windows")
-   set_target_properties(ihealthDemo PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
-   set_target_properties(ihealthDemo PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
+   set_target_properties(ihealth PROPERTIES LINK_FLAGS_DEBUG "/SUBSYSTEM:windows")
+   set_target_properties(ihealth PROPERTIES COMPILE_DEFINITIONS_DEBUG "/SUBSYSTEM:windows")
+   set_target_properties(ihealth PROPERTIES LINK_FLAGS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+   set_target_properties(ihealth PROPERTIES COMPILE_DEFINITIONS_RELWITHDEBINFO "/SUBSYSTEM:windows")
+   set_target_properties(ihealth PROPERTIES LINK_FLAGS_RELEASE "/SUBSYSTEM:windows")
+   set_target_properties(ihealth PROPERTIES LINK_FLAGS_MINSIZEREL "/SUBSYSTEM:windows")
 endif(WIN32)
