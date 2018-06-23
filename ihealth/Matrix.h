@@ -19,6 +19,8 @@ const double InitAngle[5] = {
 
 #define LEFT_ARM 1
 #ifdef LEFT_ARM
+//这里的AxisDirection就是定义了每个角速度方向上的单位矢量w
+//这个就是根据我们的旋转怎么转决定的。
 const Vector3d AxisDirection[5] = {
 	Vector3d(1.0,0,0),
 	Vector3d(0,0,1.0),
@@ -50,6 +52,7 @@ const Vector3d AxisPosition[5] = {
 };
 #endif
 
+//这个函数实际上就是在计算运动旋量ζ
 template<typename DerivedA, typename DerivedB, typename DerivedC>
 void CalcTwist(const MatrixBase<DerivedA>& axis, const MatrixBase<DerivedB>&pos, MatrixBase<DerivedC>& twist) {
 	Matrix3d axis_hat;
@@ -58,6 +61,7 @@ void CalcTwist(const MatrixBase<DerivedA>& axis, const MatrixBase<DerivedB>&pos,
 		0, -axis(2), axis(1),
 		axis(2), 0, -axis(0),
 		-axis(1), axis(0), 0;
+	//这里算出来的w_q就是运动w × q
 	Vector3d w_q = axis.cross(pos);
 	twist.block(0, 0, 3, 3) = axis_hat;
 	twist.block(0, 3, 3, 1) = -w_q;
@@ -66,6 +70,7 @@ void CalcTwist(const MatrixBase<DerivedA>& axis, const MatrixBase<DerivedB>&pos,
 template<typename DerivedA, typename DerivedB,typename DerivedC>
 void pinv(const MatrixBase<DerivedA>& A,const MatrixBase<DerivedB>&G, MatrixBase<DerivedC>& B)
 {
+	//这里就是在算这个投影矩阵p，最后的结果用B输出来，这里的A就是那个Γ，这里的G就是那个G
 	MatrixXd A_temp(2,2);
 	A_temp=A.transpose()*G*A;
 	B=(A_temp.inverse())*A.transpose()*G;
@@ -81,6 +86,8 @@ void V2h(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& Y)
 	y(0,1)=-X(2);
 	Y=y-y.transpose();	
 }
+
+//这个函数的意思居然是求伴随矩阵，从4*4的转换到6*6的
 template<typename DerivedA, typename DerivedB>
 void Ad426(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& A)
 {
@@ -96,6 +103,8 @@ void Ad426(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& A)
 template<typename DerivedA, typename DerivedB>
 void h2V(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& b)
 {
+	//这里出来的这个b就是旋转矢量ξ，只不过是因为我们之前的Bh是个4*4，这里又把它弄回来了而已
+	//这里的b就是6*1的了
 	b(0)=-X(1,2);
 	b(1)=X(0,2);
 	b(2)=-X(0,1);
@@ -106,6 +115,8 @@ void fwd_geo_coup(const MatrixBase<DerivedA>& U, MatrixBase<DerivedB>& theta)
 {
 	MatrixXd meta(5,2);
 	VectorXd thetab(5);
+
+	//meta就是传动矩阵η
 	meta <<1,0,
 		0.88,0,
 		0,1,
@@ -113,6 +124,7 @@ void fwd_geo_coup(const MatrixBase<DerivedA>& U, MatrixBase<DerivedB>& theta)
 		0,0.6607;
 
 	thetab << InitAngle[0] , InitAngle[1] , InitAngle[2] , InitAngle[3] , InitAngle[4];
+	//电机的角度就是初始角度加上转换后的角度
 	theta=thetab+meta*U;
 }
 template<typename DerivedA, typename DerivedB,typename DerivedC>
@@ -133,18 +145,28 @@ void damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,Mat
 	MatrixXd Co(2,2);
 	VectorXd Co_tem(6);
 	MatrixXd G(6,6);
-
+	//这里的U是电机的输出角度2*1（我们可以通过获取当前角度直接获得），然后theta是5*1，分别是
+	//5个关节的角度。下面这个函数就是把电机的角度转换为关节的角度。
 	fwd_geo_coup(U,theta);
 
 	con <<360.0/(2*M_PI),0,
 		0,360.0/(2*M_PI);
 
+	//这里的Bh和bb就是为了算J的每一列得到的
 	Matrix4d Bh[5];
 	Matrix<double, 6, 1> bb[5];
 	for (size_t i = 0; i < 5; ++i) {
+		//AxisDirection:3*3 AxisPosition:3*3 Bh:4*4
+		//这里的Bh输出的是一个4*4的矩阵，令人费解。然后h2V是把矩阵变成向量。
+		//这里的bb[i]是一个6*1的向量
 		CalcTwist(AxisDirection[i], AxisPosition[i], Bh[i]);
 		h2V(Bh[i], bb[i]);
 	}
+	/*
+	这里的m应该是ζhat，这一点我还不知道是什么东西。
+	从这里看来，这里的计算只计算了四个关节的。
+	也就是把θ5看为了0.这样就导致了最后一个直接就是关节旋量。
+	*/
 	Matrix4d m[4];
 	for (size_t i = 0; i < 4; ++i) {
 		m[i] = -Bh[i+1] * (2 * M_PI / 360.0)*theta(i+1);
@@ -176,9 +198,12 @@ void damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,Mat
 		0, 1,
 		0, 1.3214,
 		0, 0.6607;
+	//这里就是Γ = J * η。所以说这个meta就是η，Jb就是J
 	Matrix<double, 6, 2> J = Jb*meta;
 	pinv(J,G,p_X);//投影矩阵
 	//Fc-导纳系数，Fh-六维力，co-六维力单位转换矩阵，con-六维速度单位转换矩阵（从弧度转为度），Ub-电机转速
+	//这里p_X就是这个投影矩阵了，最后的Vd = ACF,这里Co就是这个C，然后Fc就是这个导纳系数。最后多乘个0.1应该是太
+	//灵敏了的调整。然后最后要转换，把电机的速度变为角度，因为我们外面是用的角度。
 	Ub=con*(p_X*Co*Fh*Fc*0.1);
 }
 template<typename DerivedA, typename DerivedB>

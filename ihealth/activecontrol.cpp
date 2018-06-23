@@ -122,11 +122,14 @@ void activecontrol::timerAcquisit()
 }
 void activecontrol::Raw2Trans(double RAWData[6],double DistData[6])
 {
+	//这一段就是为了把力从六维力传感器上传到手柄上，这里的A就是总的一个转换矩阵。
+	//具体的旋转矩阵我们要根据六维力的安装确定坐标系方向之后然后再确定。
         MatrixXd A(6,6);
 		A.setZero();
         VectorXd Value_Origi(6);
         VectorXd Value_Convers(6);
 		Matrix3d ForceAxisXYZ;
+		//这里的旋转矩阵要根据六维力坐标系和手柄坐标系来具体得到
 		ForceAxisXYZ <<
 			1, 0, 0,
 			0, 0, -1,
@@ -134,6 +137,10 @@ void activecontrol::Raw2Trans(double RAWData[6],double DistData[6])
 		//Vector3d ForcePosition(-0.075,0.035,0);
 		Vector3d ForcePosition(-0.075, 0.035, 0);
 		Matrix3d ForcePositionHat;
+		//这里就是这个p，我们可以想象，fx不会产生x方向的力矩，fy产生的看z坐标，fz产生的y坐标。
+		//这里做的就是把力矩弄过去。这个相对坐标都是六维力坐标在手柄坐标系下的位置。
+		//比如fx在y方向上有一个力臂，就会产生一个z方向上的力矩。这个力矩的方向和相对位置无关。
+		//所以这个地方我们不用改这个ForcePositionHat，只用改ForcePosition这个相对位置就可以了
 		ForcePositionHat <<
 			0, -ForcePosition[2], ForcePosition[1],
 			ForcePosition[2], 0, -ForcePosition[0],
