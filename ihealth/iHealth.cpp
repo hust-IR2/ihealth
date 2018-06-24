@@ -11,21 +11,20 @@ long   __stdcall   ExcuteExceptionHandler(_EXCEPTION_POINTERS*   excp)
 	return   EXCEPTION_EXECUTE_HANDLER;   
 }
 
-int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow)
-{
+int APIENTRY WinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/, LPSTR /*lpCmdLine*/, int nCmdShow) {
 	SetUnhandledExceptionFilter(ExcuteExceptionHandler);
 
 	HRESULT Hr = ::CoInitialize(NULL);
-	if( FAILED(Hr) ) return 0;
-	{
-		int width = GetSystemMetrics ( SM_CXSCREEN ); 
-		int height= GetSystemMetrics ( SM_CYSCREEN ); 
-
-		char resolution[128];
-		sprintf(resolution, "resolution is : width:%d, height: %d", width, height);
-		SLOG1(resolution);
+	if (FAILED(Hr)) {
+		return 0;
 	}
 
+	int width = GetSystemMetrics ( SM_CXSCREEN ); 
+	int height= GetSystemMetrics ( SM_CYSCREEN ); 
+
+	char resolution[128];
+	sprintf(resolution, "resolution is : width:%d, height: %d", width, height);
+	SLOG1(resolution);
 
 	CWkeWebkitUI::WkeWebkit_Init();
 

@@ -35,8 +35,7 @@ CUIThread* RFMainWindow::UIThread = NULL;
 RFMySQLThread* RFMainWindow::DBThread = NULL;
 RFMainWindow* RFMainWindow::MainWindow = NULL;
 
-RFMainWindow::RFMainWindow(void)
-{
+RFMainWindow::RFMainWindow(void) {
 	m_mysql_connected = false;
 
 	m_current_patient.id = -1;
@@ -45,8 +44,7 @@ RFMainWindow::RFMainWindow(void)
 	m_emg_createtime = 0;
 }
 
-RFMainWindow::~RFMainWindow(void)
-{
+RFMainWindow::~RFMainWindow(void) {
 	m_robotEvent.Stop();
 	RFPatientsManager::release();
 	RFPatientsTrainInfo::release();
@@ -64,22 +62,17 @@ RFMainWindow::~RFMainWindow(void)
 	CWorkThread::Dispose();
 }
 
-LPCTSTR RFMainWindow::GetWindowClassName() const 
-{ 
+LPCTSTR RFMainWindow::GetWindowClassName() const { 
 	return _T("RFMainWindow");
 }
 
-UINT RFMainWindow::GetClassStyle() const 
-{ 
+UINT RFMainWindow::GetClassStyle() const { 
 	return CS_DBLCLKS; 
 }
 
-void RFMainWindow::OnFinalMessage(HWND /*hWnd*/) 
-{
-}
+void RFMainWindow::OnFinalMessage(HWND /*hWnd*/) { }
 
-CControlUI* RFMainWindow::CreateControl(LPCTSTR pstrClass)
-{
+CControlUI* RFMainWindow::CreateControl(LPCTSTR pstrClass) {
 	if (_tcsicmp(pstrClass, _T("wkeWebkit")) == 0) return  new CWkeWebkitUI;
 	else if (_tcsicmp(pstrClass, _T("MusicProgress")) == 0) return new CProgressExUI;
 	else if (_tcsicmp(pstrClass, _T("AVCamera")) == 0)	return new CAVPlayerUI;
@@ -88,8 +81,7 @@ CControlUI* RFMainWindow::CreateControl(LPCTSTR pstrClass)
 	return NULL;
 }
 
-void RFMainWindow::Init() 
-{
+void RFMainWindow::Init() {
 	Panic panic1 = CUIThread::Create(this->GetHWND());
 	UIThread = panic1.GetTag<CUIThread*>();
 
@@ -105,16 +97,11 @@ void RFMainWindow::Init()
 	ShowLoginPage();
 }
 
-void RFMainWindow::OnPrepare() 
-{
-}
+void RFMainWindow::OnPrepare() { }
 
-void RFMainWindow::Closing()
-{
-}
+void RFMainWindow::Closing() { }
 
-void RFMainWindow::Notify(TNotifyUI& msg)
-{
+void RFMainWindow::Notify(TNotifyUI& msg) {
 	if( msg.sType == _T("windowinit") ) 
 	{
 		OnPrepare();

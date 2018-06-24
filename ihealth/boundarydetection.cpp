@@ -1,9 +1,12 @@
 #include "boundarydetection.h"
+
 #include<math.h>
 #include <iostream>
 #include <process.h> 
 #include <tchar.h>
+
 #include "robot.h"
+#include "data_acquisition.h"
 
 #define BOYDET_TIME 0.1 
 #define BrokenTorque0 20
