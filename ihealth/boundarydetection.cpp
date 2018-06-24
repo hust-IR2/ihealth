@@ -38,17 +38,11 @@ boundaryDetection::boundaryDetection()
 	m_emergency_stop_status = true;
 	vel_i = 0;
     m_stop=false;
-    ctrlCardOfTorque=NULL;
-    ctrlCardOfTorque=new contrlCard;
 	//创建一个匿名的互斥对象，且为有信号状态，
 	hMutex = CreateMutex(NULL, FALSE, NULL);	hAngleMutex= CreateMutex(NULL, FALSE, NULL);
 	hVelMutex= CreateMutex(NULL, FALSE, NULL);
 }
-boundaryDetection::~boundaryDetection()
-{
-    //qDebug()<<"boundaryDetection destroyed.";
-    if(ctrlCardOfTorque!=NULL)
-        delete ctrlCardOfTorque;  
+boundaryDetection::~boundaryDetection() {
 	stopBydetect();
 }
 unsigned int __stdcall BydetectThreadFun(PVOID pParam)
@@ -101,10 +95,10 @@ void boundaryDetection::getSensorData()
 {
     I32 DI_Group = 0; // If DI channel less than 32
     I32 DI_Data = 0; // Di data
-    I32 di_ch[__MAX_DI_CH];
+    I32 di_ch[InputChannels];
     I32 returnCode = 0; // Function return code
     returnCode = APS_read_d_input(0, DI_Group, &DI_Data);
-    for (int i = 0; i < __MAX_DI_CH; i++)
+    for (int i = 0; i < InputChannels; i++)
         di_ch[i] = ((DI_Data >> i) & 1);
 
 	Travel_Switch[0]=di_ch[16];//ORG信号-肘部电机
@@ -203,8 +197,8 @@ void boundaryDetection::getEncoderData()
 	int ret = 0;
 	double raw_arm = 0;
 	double  raw_shoulder = 0;
-	ret = APS_get_position_f(elbowAxisId, &raw_arm);
-	ret = APS_get_position_f(shoudlerAxisId, &raw_shoulder);
+	ret = APS_get_position_f(ElbowAxisId, &raw_arm);
+	ret = APS_get_position_f(ShoulderAxisId, &raw_shoulder);
 	angle[0] = raw_shoulder*Unit_Convert;
 	angle[1] = raw_arm*Unit_Convert;
 }

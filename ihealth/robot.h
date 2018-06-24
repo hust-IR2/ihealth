@@ -1,7 +1,7 @@
 #pragma once
 #include"pasvcontrl.h"
 #include "boundarydetection.h"
-#include "contrlCard.h"
+#include "control_card.h"
 #include"activecontrol.h"
 #include"emgcontrl.h"
 #include "EyeMode.h"
@@ -79,7 +79,6 @@ public:
 public:
 	pasvContrl *pasvMode;//被动控制模式
 	boundaryDetection *bDetect;//边界检测
-	contrlCard *ctrlCard;
 	activecontrol *activeCtrl;
 	emgcontrl *EMGContrl;
 	EyeMode *eyeModeCtl;

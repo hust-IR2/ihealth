@@ -1,5 +1,5 @@
 #pragma once
-#include"contrlCard.h"
+#include"control_card.h"
 #include"eyeControl.h"
 //#include<thread>
 #include <process.h>
@@ -9,7 +9,7 @@ unsigned int __stdcall EyeThread(PVOID pParam);
 class EyeMode
 {
 public:
-	EyeMode(boundaryDetection*, contrlCard*);
+	EyeMode(boundaryDetection*);
 	~EyeMode();
 	friend unsigned int __stdcall EyeThread(PVOID pParam);
 	enum RGB24{LEFT = 0, RIGHT = 1};
@@ -22,7 +22,6 @@ public:
 	void exit();
 
 private:
-	contrlCard* pControlCard;
 	EyeControl* pEyeControl;
 	boundaryDetection* pBound;
 	cv::Mat* pLeftEye;

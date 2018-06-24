@@ -1,6 +1,6 @@
 #ifndef PASVCONTRL_H
 #define PASVCONTRL_H
-#include"contrlCard.h"
+#include"control_card.h"
 #include"boundarydetection.h"
 #include"activecontrol.h"
 #include <vector>
@@ -64,7 +64,6 @@ private:
 	HWND m_hWnd = NULL;
     int timecount;
     double PASVHermite_time;
-	contrlCard *ctrlCard;
 	boundaryDetection * bDetect;
 	activecontrol *activectrl;
 	Teach currentTeach;

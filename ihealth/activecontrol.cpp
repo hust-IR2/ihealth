@@ -1,7 +1,11 @@
 ﻿#include "activecontrol.h"
+
 #include<iostream>
-#include "Matrix.h"
 #include <process.h>
+
+#include "Matrix.h"
+#include "Log.h"
+
 #define FTS_TIME 0.1
 using namespace Eigen;
 double Force_Fc=0.3;
@@ -13,21 +17,16 @@ double angleshoul=0;//肩部关节角
 double Ud_Arm=0;//力控模式算出手臂的命令速度
 double Ud_Shoul=0;//力控模式算出肩部的命令速度
 const char *FCH = "Dev2/ai6";//握力采集通道
-activecontrol::activecontrol()
-{
+
+activecontrol::activecontrol() {
 	m_hThread = 0;
 	m_stop =false;
 	isMove = false;
-    ctrlCard=NULL;
-    ctrlCard=new contrlCard;
     for(int i=0;i<2;i++)
         cmdVel[i]=0;
 }
-activecontrol:: ~activecontrol()
-{
-    if(ctrlCard!=NULL)
-        delete ctrlCard;
-}
+activecontrol:: ~activecontrol() { }
+
 unsigned int __stdcall FTSThreadFun(PVOID pParam)
 {
 	activecontrol *FTS = (activecontrol*)pParam;
@@ -70,9 +69,7 @@ void activecontrol::startAcquisit()
 	
 	 m_hThread = (HANDLE)_beginthreadex(NULL, 0, FTSThreadFun, this, 0, NULL);
 }
-void activecontrol::stopAcquisit()
-{
-    //qDebug()<<"activecontrol  Stoped!";
+void activecontrol::stopAcquisit() {
 	m_stop =true;
 
 	if (m_hThread != 0) {
@@ -80,11 +77,10 @@ void activecontrol::stopAcquisit()
 		m_hThread = 0;
 	}
 }
-void activecontrol::startMove(boundaryDetection *Angle)
-{
-    
-    ctrlCard->ServeTheMotor(ON);
-    ctrlCard->SetClutch(CON);
+
+void activecontrol::startMove(boundaryDetection *Angle) {
+	ControlCard::GetInstance().SetMotor(MotorOn);
+	ControlCard::GetInstance().SetClutch(ClutchOn);
 	bDetect =Angle;
 	if (m_boundary_detection == NULL) {
 		m_boundary_detection = Angle;
@@ -93,15 +89,14 @@ void activecontrol::startMove(boundaryDetection *Angle)
 	isMove = true;
 	startAcquisit();
 }
-void activecontrol::stopMove()
-{
-	ctrlCard->ServeTheMotor(OFF);
-	//ctrlCard->SetClutch(COFF);
+
+void activecontrol::stopMove() {
+	ControlCard::GetInstance().SetMotor(MotorOff);
 	isMove = false;
 	stopAcquisit();
 }
-void activecontrol::timerAcquisit()
-{
+
+void activecontrol::timerAcquisit() {
     double readings[7] = { 0 };
     double distData[6]={0};
     double filtedData[6]={0};
@@ -177,8 +172,7 @@ void activecontrol::Raw2Trans(double RAWData[6],double DistData[6])
             DistData[m]=Value_Convers(m);
         }
 }
-void activecontrol::Trans2Filter(double TransData[6], double FiltedData[6])
-{
+void activecontrol::Trans2Filter(double TransData[6], double FiltedData[6]) {
     double Wc = 5;
     double Ts = 0.05;
     static int i=0;
@@ -264,20 +258,18 @@ void activecontrol::FiltedVolt2Vel(double FiltedData[6])
 	
 
 }
-void activecontrol::FTSContrl()
-{
+void activecontrol::FTSContrl() {
 	bool *swithData = bDetect->GetSwithData();
 	bool  shoulderSwitch[2] = { 0 };
 	bool  elbowSwitch[2] = { 0 };
 
 	//获取光电传感器读数
-	for (int i = 0; i<2; i++)
-	{
+	for (int i = 0; i<2; i++) {
 		elbowSwitch[i] = swithData[i];
 		shoulderSwitch[i] = swithData[2 + i];
 	}
-	ctrlCard->MotionMove(shoudlerAxisId, Ud_Shoul, shoulderSwitch);
-	ctrlCard->MotionMove(elbowAxisId, Ud_Arm, elbowSwitch);
+	ControlCard::GetInstance().VelocityMove(ShoulderAxisId, Ud_Shoul);
+	ControlCard::GetInstance().VelocityMove(ElbowAxisId, Ud_Arm);
 }
 
 void activecontrol::getRawAngle(double angle[2])
@@ -285,8 +277,8 @@ void activecontrol::getRawAngle(double angle[2])
 	int ret = 0;
 	double raw_arm = 0;
 	double raw_shoulder = 0;
-	ret = APS_get_position_f(elbowAxisId, &raw_arm);
-	ret = APS_get_position_f(shoudlerAxisId, &raw_shoulder);
+	ret = APS_get_position_f(ElbowAxisId, &raw_arm);
+	ret = APS_get_position_f(ShoulderAxisId, &raw_shoulder);
 	angle[0] = raw_shoulder*Unit_Convert;
 	angle[1] = raw_arm*Unit_Convert;
 }

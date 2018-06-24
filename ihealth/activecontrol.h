@@ -4,7 +4,7 @@
 #include <unsupported/Eigen/MatrixFunctions>*/
 #include "FTWrapper.h"
 #include "matrix.h"
-#include "contrlCard.h"
+#include "control_card.h"
 
 #include "boundarydetection.h"
 
@@ -34,7 +34,6 @@ public:
 private:
     FTWrapper mFTWrapper;
 	boundaryDetection *bDetect;//关节角
-    contrlCard *ctrlCard;
     //力控模式算出的命令速度
     double cmdVel[2];
     double jAngle[2];

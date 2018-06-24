@@ -4,22 +4,15 @@
 #define EMG_TIME 0.1
 double Data_Linear[10]={0};
 double RawData[10]={0};
-emgcontrl::emgcontrl()
-{
+emgcontrl::emgcontrl() {
 	isStopThread=false;
     isBeginMove=false;
     bDetect=NULL;
-    ctrlCard=NULL;
-    ctrlCard=new contrlCard;
 	dataMutex= CreateMutex(NULL, FALSE, NULL);
     //qDebug()<<"emgcontrl construct done!";
 }
-emgcontrl::~emgcontrl()
-{
+emgcontrl::~emgcontrl() {
     stop();
-    if(ctrlCard!=NULL)
-        delete ctrlCard;
-    //qDebug()<<"pasvContrl Destructed!";
 }
 void emgcontrl::acquistRawData()
 {
@@ -48,8 +41,8 @@ void emgcontrl::acquistRawData()
 
 	 double raw_arm = 0;
 	 double raw_shoulder = 0;
-	 APS_get_position_f(elbowAxisId, &raw_arm);
-	 APS_get_position_f(shoudlerAxisId, &raw_shoulder);
+	 APS_get_position_f(ElbowAxisId, &raw_arm);
+	 APS_get_position_f(ShoulderAxisId, &raw_shoulder);
 	 pRawData[4] = raw_shoulder*Unit_Convert;
 	 pRawData[5] = raw_arm*Unit_Convert;
 
@@ -121,14 +114,13 @@ double emgcontrl::getRawData(int index)
 }
 void emgcontrl::beginMove()
 {
-    ctrlCard->ServeTheMotor(ON);
-    ctrlCard->SetClutch(CON);
+	ControlCard::GetInstance().SetMotor(MotorOn);
+	ControlCard::GetInstance().SetClutch(ClutchOn);
     isBeginMove=true;
 }
-void emgcontrl::stopMove()
-{
-    ctrlCard->ServeTheMotor(OFF);
-    ctrlCard->SetClutch(COFF);
+void emgcontrl::stopMove() {
+	ControlCard::GetInstance().SetMotor(MotorOff);
+	ControlCard::GetInstance().SetClutch(ClutchOff);
     isBeginMove=false;
 }
 void emgcontrl::emgContrl()
@@ -147,7 +139,7 @@ void emgcontrl::emgContrl()
     double elbowVel=RawData[0]-RawData[1];
     double shoulderVel=RawData[2]-RawData[3];
 	ReleaseMutex(dataMutex);
-    ctrlCard->MotionMove(shoudlerAxisId,shoulderVel,shoulderSwitch);
-    ctrlCard->MotionMove(elbowAxisId,elbowVel,elbowSwitch);
+	ControlCard::GetInstance().VelocityMove(ShoulderAxisId, shoulderVel);
+	ControlCard::GetInstance().VelocityMove(ElbowAxisId, elbowVel);
 }
 

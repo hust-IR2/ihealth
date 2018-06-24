@@ -1,6 +1,6 @@
 #ifndef BOUNDARYDETECTION_H
 #define BOUNDARYDETECTION_H
-#include "contrlCard.h"
+#include "control_card.h"
 
 class robot;
 
@@ -59,7 +59,6 @@ private:
 	 int vel_i;
 	 double m_Pos_A[3];
 	 double m_Pos_S[3];
-     contrlCard *ctrlCardOfTorque;
     
 	 HWND m_hWnd = NULL;
 	 robot *m_pRobot = NULL;
