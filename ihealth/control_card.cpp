@@ -46,6 +46,7 @@ int ControlCard::Initial() {
 		APS_load_parameter_from_flash(board_id_);
 		is_initialed_ = true;
 	}
+	return 0;
 }
 
 bool ControlCard::NoError(I32 error_code) {
@@ -174,7 +175,7 @@ void ControlCard::UpdateDigitInput() {
 	emergency_stop_status_ = di_ch[20];
 }
 
-void ControlCard::getEncoderData(double EncoderData[2]) {
+void ControlCard::GetEncoderData(double EncoderData[2]) {
 	int ret = 0;
 	double raw_arm = 0;
 	double  raw_shoulder = 0;
@@ -227,4 +228,21 @@ bool ControlCard::AtElbowLimit() {
 bool ControlCard::IsEmergencyStop() {
 	UpdateDigitInput();
 	return emergency_stop_status_;
+}
+
+void ControlCard::GetDigitInput(bool *out) {
+	UpdateDigitInput();
+	out[0] = at_elbow_zero_;
+	out[1] = at_elbow_limit_;
+	out[2] = at_shoulder_zero_;
+	out[3] = at_shoulder_limit_;
+}
+
+void ControlCard::GetJointVelocity(double *buffer) {
+	double raw_arm_vel = 0;
+	double  raw_shoulder_vel = 0;
+	APS_get_feedback_velocity_f(ElbowAxisId, &raw_arm_vel);
+	APS_get_position_f(ShoulderAxisId, &raw_shoulder_vel);
+	buffer[0] = raw_shoulder_vel * Unit_Convert;
+	buffer[1] = raw_arm_vel * Unit_Convert;
 }

@@ -1,8 +1,8 @@
 #pragma once
-#include"pasvcontrl.h"
+#include"passive_control.h"
 #include "boundarydetection.h"
 #include "control_card.h"
-#include"activecontrol.h"
+#include"active_control.h"
 #include"emgcontrl.h"
 #include "EyeMode.h"
 

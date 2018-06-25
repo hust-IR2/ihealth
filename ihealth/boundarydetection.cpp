@@ -207,7 +207,6 @@ void boundaryDetection::getEncoderData()
 }
 void boundaryDetection::getJointVel()
 {	
-	double Sample_Vel_Time = 0.1;
 	if (vel_i >= 3)
 	{
 		vel_i = 0;
@@ -218,6 +217,7 @@ void boundaryDetection::getJointVel()
 	ReleaseMutex(hAngleMutex);
 	//有位置求速度的算法
 	
+	//这里求得的速度，是两个BOYDET_TIME周期的位移除以时间
 	switch (vel_i)
 	{
 	case 0:

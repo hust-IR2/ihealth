@@ -26,7 +26,7 @@ public:
 	void SetMotor(bool onOroff = MotorOn);
 	void VelocityMove(I32 axis_id, double vel);
 	//获取两电机当前的角度
-	void getEncoderData(double EncoderData[2]);
+	void GetEncoderData(double EncoderData[2]);
 	void SetParamZero();
 	void ResetPosition();
 	void Set_hWnd(HWND hWnd);
@@ -34,7 +34,9 @@ public:
 	bool AtShoulderLimit();
 	bool AtElbowZero();
 	bool AtElbowLimit();
+	void GetDigitInput(bool *out);
 	bool IsEmergencyStop();
+	void GetJointVelocity(double *buffer);
 
 private:
 	ControlCard();
@@ -62,6 +64,7 @@ private:
 	bool at_elbow_zero_;
 	bool at_elbow_limit_;
 	bool emergency_stop_status_;
+
 	I32 total_axis_;
 	I32 start_axis_id_;
 	I32 board_id_;

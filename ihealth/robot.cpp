@@ -29,8 +29,6 @@ robot::robot()
 	eyeModeCtl = NULL;
 	eyeModeCtl = new EyeMode(bDetect);
 	
-
-	activeCtrl->m_boundary_detection = bDetect;
 	pasvMode->m_boundary_detection = bDetect;
 	bDetect->startBydetect();
 	m_isActiveModeStart = false;
@@ -96,11 +94,8 @@ void robot::getCurrentPasvMove(Teach& teach)
 		pasvMode->getCurrentMove(teach);
 	//}
 }
-void robot::startTeach()
-{
-	//if (ctrlCard->IsCardInitial()) {
-		pasvMode->startTeach(bDetect);
-	//}
+void robot::startTeach() {
+		pasvMode->startTeach();
 }
 void robot::stopTeach()
 {
@@ -122,15 +117,13 @@ void robot::addPasvMove()
 		pasvMode->addMovement();
 	//}
 }
-void robot::startActiveMove()
-{
-	//if (ctrlCard->IsCardInitial()) {
+void robot::startActiveMove() {
 	if (!m_isActiveModeStart) {
-		activeCtrl->startMove(bDetect);
+		activeCtrl->startMove();
 		m_isActiveModeStart = true;
 	}
-	//}
 }
+
 void robot::stopActiveMove()
 {
 	//if (ctrlCard->IsCardInitial()) {
@@ -142,11 +135,6 @@ void robot::stopActiveMove()
 }
 void robot::getAngle(double angles[2])
 {
-	//double *output = NULL;
-	//if (ctrlCard->IsCardInitial()) {
-	activeCtrl->getRawAngle(angles);
-	//}
-	//return output;
 }
 
 double robot::getWirstForce()
