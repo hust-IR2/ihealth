@@ -1132,7 +1132,8 @@ int RFMySQLThread::AddPassiveTrainInfo(EventArg* pArg)
 	}
 	std::string movements =EncodeMovements(vDoubles);
 
-	std::wstring sql = _T("INSERT INTO passivetrain (name,traintype,movements,timelen) value(");
+	std::wstring sql = _T("INSERT INTO passivetrain (id,name,traintype,movements,timelen) value(");
+	sql += _T("'") + pParam->id + _T("',");
 	sql += _T("'") + pParam->name + _T("',");
 	sql += _T("'") + pParam->traintype + _T("',");
 	sql += _T("'") + TGUTF8ToUTF16(movements) + _T("',");
