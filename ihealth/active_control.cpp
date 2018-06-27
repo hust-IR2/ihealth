@@ -19,6 +19,11 @@ double Ud_Arm=0;//力控模式算出手臂的命令速度
 double Ud_Shoul=0;//力控模式算出肩部的命令速度
 const char *FCH = "Dev2/ai6";//握力采集通道
 
+static const int kPlaneMaxX = 734;
+static const int kPlaneMaxY = 601;
+static const double kShoulderAngleMax = 40;
+static const double kElbowAngleMax = 40;
+
 activecontrol::activecontrol() {
 	m_hThread = 0;
 	m_stop =false;
@@ -85,6 +90,7 @@ void activecontrol::startMove() {
 }
 
 void activecontrol::stopMove() {
+	//这里不放开离合的原因是为了防止中间位置松开离合导致手臂迅速下坠
 	ControlCard::GetInstance().SetMotor(MotorOff);
 	isMove = false;
 	stopAcquisit();
@@ -294,31 +300,42 @@ double activecontrol::getWirstForce()
 bool activecontrol::isFire()
 {
 	bool fireOrNot = false;
-	int32       error = 0;
-	TaskHandle  taskHandle = 0;
-	int32       read;
-	float64     data[100] = {0};
-	DAQmxCreateTask("", &taskHandle);
-	DAQmxCreateAIVoltageChan(taskHandle, FCH, "",  DAQmx_Val_RSE, 0, 10, DAQmx_Val_Volts, NULL);
-	DAQmxCfgSampClkTiming(taskHandle, "", 1000, DAQmx_Val_Rising, DAQmx_Val_FiniteSamps, 100);
-	DAQmxStartTask(taskHandle);
-	DAQmxReadAnalogF64(taskHandle, 100, 10.0, DAQmx_Val_GroupByChannel, data, 100, &read, NULL);
-	DAQmxStopTask(taskHandle);
-	DAQmxClearTask(taskHandle);
-	if(data[50]>0.2)
+
+	double grip;
+	//这里就是采集握力的数据
+	DataAcquisition::GetInstacne().AcquisiteGripData(&grip);
+	if(grip > 0.2)
 		fireOrNot = true;
 	return fireOrNot;
 }
 
-void activecontrol::getEndsXY(short rangeX,short rangeY, double XY[2])
-{
-	MatrixXd Theta(5, 1);
-	MatrixXd T0h(4, 4);
-	VectorXd Pos(2);
+void activecontrol::getEndsXY(short rangeX,short rangeY, double XY[2]) {
+	//MatrixXd Theta(5, 1);
+	//MatrixXd T0h(4, 4);
+	//VectorXd Pos(2);
 
 	double angle[2] = {0};
 	ControlCard::GetInstance().GetEncoderData(angle);
-	Pos << -angle[0], -angle[1];
+
+	int x = (angle[0] / kShoulderAngleMax) * kPlaneMaxX;
+	int y = (angle[1] / kElbowAngleMax) * kPlaneMaxY;
+	
+	if (y < 0) {
+		y = 0;
+	} else if (y > 100) {
+		y = 100;
+	}
+
+	if (x < 0) {
+		x = 0;
+	} else if (x > kPlaneMaxX) {
+		x = kPlaneMaxX;
+	}
+
+	XY[0] = kPlaneMaxX - x;
+	XY[1] = kPlaneMaxY - y;
+	
+	/*Pos << angle[0], angle[1];
 	fwd_geo_coup(Pos, Theta);
 	fwd_geo_kineB(Theta, T0h);
 	double x = -T0h(1, 3);
@@ -327,7 +344,7 @@ void activecontrol::getEndsXY(short rangeX,short rangeY, double XY[2])
 	x = std::max<double>(std::min<double>(x, 0.3), 0);
 	y = std::max<double>(std::min<double>(y, 0.3), 0);
 	XY[0] = (x / 0.3)*rangeX;
-	XY[1] =(1 - 0.3 * y / 0.3)*rangeY;
+	XY[1] =(1 - 0.3 * y / 0.3)*rangeY;*/
 
 }
 

@@ -12,6 +12,8 @@ bool RFDialog::m_eyemode_ok = false;
 double RFDialog::m_eyemode_sudu = .0f;
 bool	RFDialog::m_eyemode_close = true;
 
+static UINT_PTR recordTimer = NULL;
+
 RFDialog::RFDialog(std::wstring skin)
 {
 	m_tickcount = 0;
@@ -209,6 +211,13 @@ bool RFDialog::OnCancelClose(void *pParam)
 	if (pMsg->sType != _T("click"))
 		return false;
 
+	if (RFMainWindow::MainWindow->m_robot.IsPassiveTeaching()) {
+		m_tickcount = 0;
+		::KillTimer(NULL, recordTimer);
+		recordTimer = NULL;
+		RFMainWindow::MainWindow->m_robot.stopTeach();
+	}
+
 	Close();
 	return true;
 }
@@ -218,6 +227,11 @@ bool RFDialog::OnOKClose(void *pParam) {
 	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
 	if (pMsg->sType != _T("click"))
 		return true;
+
+	//当主动运动没有结束的时候就点击了OK，这个时候我们应该没有反应
+	if (RFMainWindow::MainWindow->m_robot.IsPassiveTeaching()) {
+		return true;
+	}
 
 	std::wstring actionname = _T("");
 	CEditUI *pEdit = static_cast<CEditUI*>(m_pm.FindControl(_T("addaction_actionname")));
@@ -349,7 +363,6 @@ bool RFDialog::OnDeletePatientCancel(void *pParam)
 		return false;
 
 	RFDialog::m_delete_patient_flag = false;
-	Close();
 	return true;
 }
 
@@ -378,13 +391,14 @@ bool RFDialog::OnEyeModeJia(void *pParam)
 	return true;
 }
 
-static UINT_PTR recordTimer = NULL;
+
 void OnRecordTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	if (!RFDialog::Dialog) {
 		return;
 	}
 	RFDialog::Dialog->m_tickcount += 1000;
+
 
 	CLabelUI* pLabel = static_cast<CLabelUI*>(RFDialog::Dialog->m_pm.FindControl(_T("lbl_record_time")));
 	if (pLabel) {
@@ -409,6 +423,7 @@ bool RFDialog::OnRecordPasvTrain(void *pParam)
 	
 	CCheckBoxUI* pStart = static_cast<CCheckBoxUI*>(pMsg->pSender);
 	if (!pStart->GetCheck()) {
+		//这个是开始录制
 		m_tickcount = 0;
 		RFMainWindow::MainWindow->m_robot.startTeach();
 		if (recordTimer) {
@@ -416,6 +431,7 @@ bool RFDialog::OnRecordPasvTrain(void *pParam)
 		}
 		recordTimer = ::SetTimer(NULL, 999, 1000U, (TIMERPROC)OnRecordTimer);
 	} else {
+		//结束录制
 		m_tickcount = 0;
 		::KillTimer(NULL, recordTimer);
 		recordTimer = NULL;

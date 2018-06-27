@@ -85,7 +85,7 @@ function plane(x,y,imgsrc,speed,w,h,boomsrc,hp,dietime,score){
 // }
 //创建本方飞机对象
 //var selfplane=new plane((document.documentElement.clientWidth/2)-36,580,"image/my_enemy.gif",null,null,null,null,null,null,null);
-var selfplane=new plane(0,document.documentElement.clientHeight - 66,"image/my_enemy.gif",null,null,null,null,null,null,null);
+var selfplane=new plane(734,601,"image/my_enemy.gif",null,null,null,null,null,null,null);
 //本方飞机移动
 var selfmove=function(x,y){
 	//var e=window.event||arguments[0];

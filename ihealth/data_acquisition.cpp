@@ -3,8 +3,9 @@
 
 using namespace Eigen;
 
-const char *DataAcquisition::kTorqueChannel = "dev3/ai18:19";
-const char *DataAcquisition::kPullSensorChannel = "dev3/ai0:3";
+const char *DataAcquisition::kTorqueChannel = "dev2/ai4:5";
+const char *DataAcquisition::kPullSensorChannel = "dev2/ai0:3";
+const char *DataAcquisition::kGripChannel = "dev2/ai6";
 const char *DataAcquisition::kSixDimensionForceChannel = "dev1/ai0:5";
 const double DataAcquisition::kRawToReal = 2.0;
 
@@ -92,6 +93,19 @@ void DataAcquisition::AcquisiteSixDemensionData(double output_buf[6]) {
 	for (int i = 0; i < 6; ++i) {
 		output_buf[i] = result(i);
 	}
+}
+
+void DataAcquisition::AcquisiteGripData(double grip[1]) {
+	TaskHandle taskHandle = 0;
+	int32 read = 0;
+	int status = 0;
+	status = DAQmxCreateTask("GripDataTask", &taskHandle);
+	status = DAQmxCreateAIVoltageChan(taskHandle, kGripChannel, "GripChannel", DAQmx_Val_RSE, -10, 10, DAQmx_Val_Volts, NULL);
+	status = DAQmxCfgSampClkTiming(taskHandle, "OnboardClock", 1000, DAQmx_Val_Rising, DAQmx_Val_ContSamps, 10);
+	status = DAQmxStartTask(taskHandle);
+	status = DAQmxReadAnalogF64(taskHandle, 1, 0.2, DAQmx_Val_GroupByScanNumber, grip, 1, &read, NULL);
+	status = DAQmxStopTask(taskHandle);
+	status = DAQmxClearTask(taskHandle);
 }
 
 double DataAcquisition::ShoulderTorque() {

@@ -155,7 +155,7 @@ bool robot::isFire()
 
 void robot::getPlanePos(short w, short h, double XY[2])
 {
-	activeCtrl->getEndsXY(734, 600, XY);
+	activeCtrl->getEndsXY(w, h, XY);
 }
 
 void robot::setDamping(float FC/* =0.1 */)
@@ -264,5 +264,9 @@ void getSensorData(bool Travel_Switch[4])
 
 	Travel_Switch[2] = di_ch[18];//1号电机ORG信号-肩部电机
 	Travel_Switch[3] = di_ch[19];//1号电机MEL信号-肩部电机
+}
+
+bool robot::IsPassiveTeaching() {
+	return pasvMode->isBeginTeach;
 }
 

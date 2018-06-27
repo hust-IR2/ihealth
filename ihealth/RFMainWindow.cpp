@@ -2655,8 +2655,7 @@ bool RFMainWindow::OnBDDeleteAction(void *pParam) {
 	}
 }
 
-bool RFMainWindow::OnZDGGJDChart(void *pParam)
-{
+bool RFMainWindow::OnZDGGJDChart(void *pParam) {
 	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
 	if (pMsg->sType != _T("click"))
 		return true;
@@ -6544,6 +6543,8 @@ void RFMainWindow::StopGameRecord()
 	s_active_data_wl.clear();
 }
 
+
+int temp_counter = 0;
 void OnActiveGameDetectTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	if (!RFMainWindow::MainWindow) {
@@ -6574,8 +6575,19 @@ void OnActiveGameDetectTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTim
 	}
 
 	bool fire = false;
+	bool t;
 	int X = 0, Y = 0, width = 0, height = 0;
-	RFMainWindow::MainWindow->m_robotEvent.GetValue(fire, X, Y);
+	RFMainWindow::MainWindow->m_robotEvent.GetValue(t, X, Y);
+
+
+	if (RFMainWindow::MainWindow->m_robot.isFire()) {
+		if (temp_counter > 1) {
+			fire = true;
+			temp_counter = 0;
+		} else {
+			temp_counter++;
+		}
+	}
 	std::wstring width_str = game4->RunJS(_T("getWidth();"));
 	std::wstring height_str = game4->RunJS(_T("getHeight();"));
 	width = _wtoi(width_str.c_str());
@@ -6736,11 +6748,11 @@ void RFMainWindow::StartActiveGameDetect()
 
 	s_activeGameDetectTimer = ::SetTimer(NULL, 999, 200U, (TIMERPROC)OnActiveGameDetectTimer);
 
-	std::wstring width = game4->RunJS(_T("getWidth();"));
-	std::wstring height = game4->RunJS(_T("getHeight();"));
-	int w = _wtoi(width.c_str());
-	int h = _wtoi(height.c_str());
-	m_robotEvent.Start(w, h);
+	//std::wstring width = game4->RunJS(_T("getWidth();"));
+	//std::wstring height = game4->RunJS(_T("getHeight();"));
+	//int w = _wtoi(width.c_str());
+	//int h = _wtoi(height.c_str());
+	m_robotEvent.Start(800, 681);
 }
 
 void RFMainWindow::StopActiveGameDetect()
