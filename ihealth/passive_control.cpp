@@ -7,7 +7,7 @@ const double Comfort_Pos[2]={0,0};//开始运动的初始位置，人觉得舒�
 bool isStopThread = false;
 int loop_count = 0;
 int Target_count = 0;
-pasvContrl::pasvContrl()
+PassiveControl::PassiveControl()
 {
     //初始化动作队列
 	for (int i = 0; i < 2; i++)
@@ -33,17 +33,18 @@ pasvContrl::pasvContrl()
 	activectrl = new activecontrol;
 	//init();
 }
-pasvContrl::~pasvContrl() {
+
+PassiveControl::~PassiveControl() {
 	if (activectrl != NULL) {
 		delete activectrl;
 	}
 }
-void pasvContrl::addMovement()
-{
+
+void PassiveControl::AddCurrentTeachToData() {
 	motionParam.push_back(currentTeach);
 }
-void pasvContrl::init()
-{
+
+void PassiveControl::init() {
 	//添加默认的四个动作
     /*int existMove[4][2]={{55,0},{53,43},{60,27},{62,40}};
     for(int i=0;i<4;i++)
@@ -52,7 +53,7 @@ void pasvContrl::init()
 
 //这里示教和被动运动都写在了这个函数里面，通过isBeginTeach或者isbeginMove来决定运行哪一个部分。
 unsigned int __stdcall ThreadFun(PVOID pParam) {
-	pasvContrl *pasvCtrl= (pasvContrl*)pParam;
+	PassiveControl *pasvCtrl= (PassiveControl*)pParam;
 	UINT oldTickCount, newTickCount;
 	oldTickCount = GetTickCount();
 	while (TRUE) {
@@ -98,28 +99,22 @@ unsigned int __stdcall ThreadFun(PVOID pParam) {
 	return 0;
 }
 
-void pasvContrl::clearMove()
+void PassiveControl::ClearMoveData()
 {
 	motionParam.clear();
 }
 
-void pasvContrl::pushMove(const Teach& teach)
+void PassiveControl::PushbackMoveData(const Teach& teach)
 {
 	motionParam.push_back(teach);
 }
 
-bool pasvContrl::Moving()
+bool PassiveControl::IsMoving()
 {
 	return isMoving;
 }
 
-void pasvContrl::beginMove(int index, boundaryDetection *byDetect)
-{
-	bDetect = byDetect;
-	if (m_boundary_detection == NULL) {
-		m_boundary_detection = byDetect;
-	}
-	m_boundary_detection->is_error_happens_ = false;
+void PassiveControl::BeginMove(int index) {
     //判断index是否有效
 	if (index >= motionParam.size())
 		return;
@@ -160,9 +155,7 @@ void pasvContrl::beginMove(int index, boundaryDetection *byDetect)
 	handle= (HANDLE)_beginthreadex(NULL, 0, ThreadFun, this, 0, NULL);
 	//WaitForSingleObject(handle, INFINITE);  
 }
-void pasvContrl::stopMove()
-{
-    std::cout<<"passive motion end";
+void PassiveControl::StopMove() {
 	//关闭电机
 	ControlCard::GetInstance().SetMotor(MotorOff);
 	//关闭离合器
@@ -174,43 +167,17 @@ void pasvContrl::stopMove()
 	isMoving = false;
 }
 
-void pasvContrl::getCurrentMove(Teach& teach)
-{
+void PassiveControl::GetCurrentMove(Teach& teach) {
 	teach = moveSample;
 
-	// 清空数据
-	for (int k = 0; k < 2; k++) {
-		//moveSample.Target_Pos[k].clear();
-		moveSample.Target_Vel[k].clear();
-	}
+	//这里原本有清空数据，但是我认为不应该清空
+	//for (int k = 0; k < 2; k++) {
+	//	//moveSample.Target_Pos[k].clear();
+	//	moveSample.Target_Vel[k].clear();
+	//}
 }
 
-void pasvContrl::getEncoderData(int EncoderData[2])
-{
-	double angle[2] = { 0 };
-	ControlCard::GetInstance().GetEncoderData(angle);
-	for (int i = 0; i < 2; i++)
-		EncoderData[i] = static_cast<int>(angle[i]);
-
-}
-void pasvContrl::getSensorData(bool Travel_Switch[4])
-{
-	I32 DI_Group = 0; // If DI channel less than 32
-	I32 DI_Data = 0; // Di data
-	I32 di_ch[InputChannels];
-	I32 returnCode = 0; // Function return code
-	returnCode = APS_read_d_input(0, DI_Group, &DI_Data);
-	for (int i = 0; i < InputChannels; i++)
-		di_ch[i] = ((DI_Data >> i) & 1);
-
-	Travel_Switch[0] = di_ch[16];//0号电机ORG信号-肘部电机
-	Travel_Switch[1] = di_ch[17];//0号电机MEL信号-肘部电机
-
-	Travel_Switch[2] = di_ch[18];//1号电机ORG信号-肩部电机
-	Travel_Switch[3] = di_ch[19];//1号电机MEL信号-肩部电机
-}
-void pasvContrl::OnPASVHermite(double PosArm,double PosShoul,double Time)
-{
+void PassiveControl::OnPASVHermite(double PosArm,double PosShoul,double Time) {
         double time_forwrd[2]={0,Time};//回到初始位置的时间*-++*+++
         double time_back[2]={Time+2,Time*2+2};//回到初始位置的时间
 
@@ -222,37 +189,24 @@ void pasvContrl::OnPASVHermite(double PosArm,double PosShoul,double Time)
 
         double shoulpos_forwrd[2]={Comfort_Pos[0],PosShoul};
         double shoulpos_back[2]={PosShoul,Comfort_Pos[0]};
-		int jointAngle[2] = {0};
-		getEncoderData(jointAngle);
+		double joint_angle[2] = {0};
+		ControlCard::GetInstance().GetEncoderData(joint_angle);
 		double cmdVel[2] = { 0 };
-
-		bool swithData[4] = {0};
-		getSensorData(swithData);
-		bool  shoulderSwitch[2] = { 0 };
-		bool  elbowSwitch[2] = { 0 };
-
-		//获取光电传感器读数
-		for (int i = 0; i<2; i++)
-		{
-			elbowSwitch[i] = swithData[i];
-			shoulderSwitch[i] = swithData[2 + i];
-		}
 
         //被动模式命令位置
         double arm_motor_cmd=0;
         double shoul_motor_cmd=0;
-        PASVHermite_time=timecount*TIMER_SLEEP;
-        if (PASVHermite_time<=Time)
-        {
+        PASVHermite_time = timecount * TIMER_SLEEP;
+        if (PASVHermite_time<=Time) {
 			
             arm_motor_cmd=PHermite(time_forwrd,armpos_forwrd,vel_forwrd,PASVHermite_time);
-			cmdVel[1] = (arm_motor_cmd - jointAngle[1])/TIMER_SLEEP;
+			cmdVel[1] = (arm_motor_cmd - joint_angle[1])/TIMER_SLEEP;
 			ControlCard::GetInstance().VelocityMove(ElbowAxisId, cmdVel[1]);
             //APS_absolute_move(elbowAxisId,arm_motor_cmd/Unit_Convert,15/Unit_Convert);
 
 
             shoul_motor_cmd=PHermite(time_forwrd,shoulpos_forwrd,vel_forwrd,PASVHermite_time);
-			cmdVel[0] = (shoul_motor_cmd - jointAngle[0]) / TIMER_SLEEP;
+			cmdVel[0] = (shoul_motor_cmd - joint_angle[0]) / TIMER_SLEEP;
 			ControlCard::GetInstance().VelocityMove(ShoulderAxisId, cmdVel[0]);
             //APS_absolute_move(shoudlerAxisId,shoul_motor_cmd/Unit_Convert,15/Unit_Convert);
 
@@ -265,20 +219,20 @@ void pasvContrl::OnPASVHermite(double PosArm,double PosShoul,double Time)
         else if((PASVHermite_time<=(Time*2+2))&&(PASVHermite_time>=(Time+2)))
         {
             arm_motor_cmd=PHermite(time_back,armpos_back,vel_back,PASVHermite_time);
-			cmdVel[1] = (arm_motor_cmd - jointAngle[1]) / TIMER_SLEEP;
+			cmdVel[1] = (arm_motor_cmd - joint_angle[1]) / TIMER_SLEEP;
 			ControlCard::GetInstance().VelocityMove(ElbowAxisId, cmdVel[1]);
             //APS_absolute_move(elbowAxisId,arm_motor_cmd/Unit_Convert,15/Unit_Convert);
 
 
             shoul_motor_cmd=PHermite(time_back,shoulpos_back,vel_back,PASVHermite_time);
-			cmdVel[0] = (shoul_motor_cmd - jointAngle[0]) / TIMER_SLEEP;
+			cmdVel[0] = (shoul_motor_cmd - joint_angle[0]) / TIMER_SLEEP;
 			ControlCard::GetInstance().VelocityMove(ShoulderAxisId, cmdVel[0]);
             //APS_absolute_move(shoudlerAxisId,shoul_motor_cmd/Unit_Convert,15/Unit_Convert);
 
         }
         else if(PASVHermite_time>=(Time*2+2))
         {
-			stopMove();
+			StopMove();
             //std::cout<<"Motion Done!"<<std::endl;
         }
         /*std::cout<< "Time is:" << PASVHermite_time<<std::endl;
@@ -286,7 +240,7 @@ void pasvContrl::OnPASVHermite(double PosArm,double PosShoul,double Time)
 		std::cout << "Shoulder cmd pos is:" << shoul_motor_cmd<<std::endl;*/
         timecount++;
 }
-double pasvContrl::PHermite(double foretime[2],double forepos[2],double forevel[2],double t)
+double PassiveControl::PHermite(double foretime[2],double forepos[2],double forevel[2],double t)
 {
     double Houtput=0;
     double a[2]={0};
@@ -298,7 +252,7 @@ double pasvContrl::PHermite(double foretime[2],double forepos[2],double forevel[
     Houtput=a[0]*forepos[0]+a[1]*forepos[1]+b[0]*forevel[0]+b[1]*forevel[1];
     return Houtput;
 }
-void pasvContrl::startTeach() {
+void PassiveControl::StartTeach() {
 	if (!isMoving) {		
 		activectrl->startMove();
 		isBeginTeach = true;
@@ -319,20 +273,20 @@ void pasvContrl::startTeach() {
 		handle = (HANDLE)_beginthreadex(NULL, 0, ThreadFun, this, 0, NULL);
 	}
 }
-void pasvContrl::stopTeach()
-{
+
+void PassiveControl::StopTeach() {
 	activectrl->stopMove();
 	isBeginTeach = false;
 	isStopThread = true;
 	isMoving = false;
 }
 
-void pasvContrl::getCurrentTeach(Teach& teach)
+void PassiveControl::GetCurrentTeach(Teach& teach)
 {
 	teach = currentTeach;
 }
 
-void pasvContrl::Teach_Sample() {
+void PassiveControl::Teach_Sample() {
 
 	//取角度
 	double joint_angle[2]{ 0 };
@@ -345,7 +299,7 @@ void pasvContrl::Teach_Sample() {
 	}
 }
 
-void pasvContrl::Move_Sample()
+void PassiveControl::Move_Sample()
 {
 	//取角度
 	//double *jointAngle = bDetect->getAngle();
@@ -361,7 +315,7 @@ void pasvContrl::Move_Sample()
 }
 
 //这个函数是对目标点进行插值，然后根据插值的位置进行运动
-void pasvContrl::TeachCtrl() {
+void PassiveControl::TeachCtrl() {
 	double Teach_Time = loop_count*0.1;
 	I32 Axis[2] = { ShoulderAxisId, ElbowAxisId };
 
@@ -382,7 +336,7 @@ void pasvContrl::TeachCtrl() {
 			Target_count++;
 		} else {
 			//运动完成，停止运动
-			stopMove();
+			StopMove();
 		}
 	}
 
@@ -397,6 +351,6 @@ void pasvContrl::TeachCtrl() {
 	}
 }
 
-void pasvContrl::Set_hWnd(HWND hWnd) {
+void PassiveControl::Set_hWnd(HWND hWnd) {
 	m_hWnd = hWnd;
 }

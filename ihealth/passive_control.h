@@ -15,27 +15,36 @@ struct Teach {
 	double Time;//运动时间 s
 };
 
-class pasvContrl {
+class PassiveControl {
 public:
-    pasvContrl();
-    ~pasvContrl();
+    PassiveControl();
+    ~PassiveControl();
 
-	void clearMove();
-	void pushMove(const Teach& teach);
-	bool Moving();
+	//清除被动运动序列的数据
+	void ClearMoveData();
+	//加入新的示教数据到运动序列中（运动序列包含多条示教数据，示教数据包含角度和速度的数组）
+	void PushbackMoveData(const Teach& teach);
+	bool IsMoving();
     //开始被动运动，index-表示动作的索引
-    void beginMove(int index, boundaryDetection *byDetect);
+    void BeginMove(int index);
 	//停止被动运动
-    void stopMove();
-	void getCurrentMove(Teach& teach);
+    void StopMove();
+	void GetCurrentMove(Teach& teach);
 	//开始示教
-	void startTeach();
-	void stopTeach();
-	void getCurrentTeach(Teach& teach);
+	void StartTeach();
+	void StopTeach();
+	void GetCurrentTeach(Teach& teach);
+	//添加新动作到运动序列中
+	void AddCurrentTeachToData();
+	void OnPASVHermite(double PosArm, double PosShoul, double Time);
+	//示教的采样函数
+	void Teach_Sample();
+	void TeachCtrl();
+	void Move_Sample();
+	void Set_hWnd(HWND hWnd);
 
+public:
 	bool isBeginTeach;
-	//添加新动作
-    void addMovement();
 	//判断是否在初始位置
 	bool isInInitPos;
 	//判断是否在运动中
@@ -48,14 +57,7 @@ public:
 	//存储添加动作信息
 	std::vector<Teach>motionParam;
 	//获取当前关节角度
-	void getEncoderData(int EncoderData[2]);
-	void getSensorData(bool Travel_Switch[4]);
-	void OnPASVHermite(double PosArm,double PosShoul,double Time);
-	//示教的采样函数
-	void Teach_Sample();
-	void TeachCtrl();
-	void Move_Sample();
-	void Set_hWnd(HWND hWnd);
+
 	boundaryDetection *m_boundary_detection = NULL;
 private:
 	//初始化函数
