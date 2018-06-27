@@ -393,8 +393,8 @@ void RFMainWindow::BindManagerPatientPageEvent()
 	CButtonUI* zd_gjjd_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("zd_gjjd_chart_btn")));
 	zd_gjjd_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnZDGGJDChart);
 	
-	CButtonUI* zd_wl_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("zd_wl_chart_btn")));
-	zd_wl_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnZDWLChart);
+	//CButtonUI* zd_wl_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("zd_wl_chart_btn")));
+	//zd_wl_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnZDWLChart);
 
 	CButtonUI* bd_zgj_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("bd_zgj_chart_btn")));
 	bd_zgj_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnBDZGJChart);
@@ -1428,23 +1428,23 @@ bool RFMainWindow::OnPatientTrain(void* pParam)
 
 bool RFMainWindow::OnPatientTrainFromActiveTrain(void* pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return false;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return false;
 
 	if (m_current_patient.id < 0) {
 		RFSelectPatientDialog(GetHWND());
 		return true;
 	}
 
-	CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
-	if (active_train_page_list->IsVisible()) {
-		active_train_page_list->SetVisible(false);
-		CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
-		active_train_page_main->SetVisible(true);
+	//CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
+	//if (active_train_page_list->IsVisible()) {
+	//	active_train_page_list->SetVisible(false);
+	//	CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
+	//	active_train_page_main->SetVisible(true);
 
-		return true;
-	}
+	//	return true;
+	//}
 
 	CLabelUI* pLabel = static_cast<CLabelUI*>(m_pm.FindControl(_T("train_main_page_welcom")));
 	pLabel->SetText((_T("欢迎您，") + m_login_info.login_user + _T("!∨")).c_str());
@@ -2474,7 +2474,9 @@ bool RFMainWindow::OnActiveTrainFromGame(void *pParam)
 	pLabel->SetText((_T("欢迎您，") + m_login_info.login_user + _T("!∨")).c_str());
 
 	m_robot.stopActiveMove();
-	ShowActiveTrainPage();
+
+	OnPatientTrainFromActiveTrain(NULL);
+	//ShowActiveTrainPage();
 	return true;
 }
 
@@ -2972,15 +2974,19 @@ bool RFMainWindow::OnEMGModeRecovery(void *pParam)
 
 bool RFMainWindow::OnZhudongFeiji(void *pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return true;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return true;
 
+	//隐藏当前的页面
 	CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
 	active_train_page_main->SetVisible(false);
 
-	CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
-	active_train_page_list->SetVisible(true);
+	//这里我们不要跳到这个list，而是直接调用OnGame4
+	OnGame2(NULL);
+	return true;
+	//CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
+	//active_train_page_list->SetVisible(true);
 }
 
 bool RFMainWindow::OnZhudongBiaoqiang(void *pParam)
@@ -3024,9 +3030,9 @@ bool RFMainWindow::OnZhudongDuimutou(void *pParam)
 
 bool RFMainWindow::OnGame4(void *pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return true;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return true;
 
 	
 	CWkeWebkitUI* game4 = static_cast<CWkeWebkitUI*>(m_pm.FindControl(_T("game4")));
@@ -3066,9 +3072,9 @@ bool RFMainWindow::OnGame3(void *pParam)
 
 bool RFMainWindow::OnGame2(void *pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return true;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return true;
 
 
 	CWkeWebkitUI* game4 = static_cast<CWkeWebkitUI*>(m_pm.FindControl(_T("game4")));
@@ -4052,8 +4058,10 @@ void RFMainWindow::ShowActiveTrainPage()
 	m_evaluation_ydgn_add_page->SetVisible(false);
 	m_evaluation_ydgn_detail_page->SetVisible(false);
 
+	CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
+	active_train_page_main->SetVisible(true);
+	
 	StopActiveGameDetect();
-
 	m_current_passivetraininfos.clear();
 }
 
