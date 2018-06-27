@@ -21,10 +21,11 @@
             <Label text="进入训练" align="left" height="35" textcolor="#FF253C6E" font="4"/>
             <Control height="28"/>
             <HorizontalLayout height="755">
-                <Button float="true" pos="0,0,532,310" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_active" normalimage="Training_mode1.png" hotimage="Training_mode1.png" pushedimage="Training_mode1.png"/>
+                <!-- 0,0,532,310 -->
+                <Button float="true" pos="0,121,532,435" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_active" normalimage="Training_mode1.png" hotimage="Training_mode1.png" pushedimage="Training_mode1.png"/>
                 <Button float="true" pos="542,121,1073,435" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_passive" normalimage="Training_mode2.png" hotimage="Training_mode2.png" pushedimage="Training_mode2.png"/>
-                <Button float="true" pos="126,321,656,632" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_sEMG" normalimage="Training_mode3.png" hotimage="Training_mode3.png" pushedimage="Training_mode3.png"/>
-                <Button float="true" pos="660,441,1070,755" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_eye" normalimage="Training_mode4.png" hotimage="Training_mode4.png" pushedimage="Training_mode4.png"/>
+                <Button float="true" pos="126,321,656,632" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_sEMG" normalimage="Training_mode3.png" hotimage="Training_mode3.png" pushedimage="Training_mode3.png" visible="false"/>
+                <Button float="true" pos="660,441,1070,755" relativepos="0,0,0,0" width="532" height="310" name="train_main_page_eye" normalimage="Training_mode4.png" hotimage="Training_mode4.png" pushedimage="Training_mode4.png" visible="false"/>
             </HorizontalLayout>
             <Control width="0"/>
             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>

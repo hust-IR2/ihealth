@@ -25,7 +25,7 @@
                 <Control />
 				<Button width="385" name="evaluation2" normalimage="pg_btn_maspc.png" hotimage="pg_btn_maspc.png" pushedimage="pg_btn_maspc.png"/>
                 <Control />
-				<Button width="385" name="evaluation3" normalimage="pg_btn_ydpc.png" hotimage="pg_btn_ydpc.png" pushedimage="pg_btn_ydpc.png"/>
+				<Button width="385" name="evaluation3" normalimage="pg_btn_ydpc.png" hotimage="pg_btn_ydpc.png" pushedimage="pg_btn_ydpc.png" visible="false"/>
             </HorizontalLayout>
             <Control width="0"/>
             <Label text="华中科技大学同济医学院监制" height="22" textcolor="#FF253C6E" font="3" align="centervcenter"/>

@@ -25,13 +25,13 @@
 					<Control />
 					<Button width="540" name="zhudong_game1" normalimage="zhudong_game1.png" hotimage="zhudong_game1.png" pushedimage="zhudong_game1.png"/>
 					<Control />
-					<Button width="540" name="zhudong_game2" normalimage="zhudong_game2.png" hotimage="zhudong_game2.png" pushedimage="zhudong_game2.png"/>
+					<Button width="540" name="zhudong_game2" enabled="false" normalimage="zhudong_game2.png" hotimage="zhudong_game2.png" pushedimage="zhudong_game2.png"/>
 					<Control />
 				</HorizontalLayout>
 				<Control />
 				<HorizontalLayout height="309">
 					<Control width="40"/>
-					<Button width="540" name="zhudong_game3" normalimage="zhudong_game3.png" hotimage="zhudong_game3.png" pushedimage="zhudong_game3.png"/>
+					<Button width="540" name="zhudong_game3" enabled="false" normalimage="zhudong_game3.png" hotimage="zhudong_game3.png" pushedimage="zhudong_game3.png"/>
 				</HorizontalLayout>
 				<Control />
 			</VerticalLayout>

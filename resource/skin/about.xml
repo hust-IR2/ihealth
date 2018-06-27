@@ -23,22 +23,22 @@
                 <Control height="220"/>
                 <HorizontalLayout height="28">
                     <Control width="358"/>
-                    <Label text="软件版本:1.0" align="left" textcolor="#FF504f54" font="4"/>
+                    <Label text="" align="left" textcolor="#FF504f54" font="4"/>
                 </HorizontalLayout>
                 <Control height="14"/>
                 <HorizontalLayout height="28">
                     <Control width="358"/>
-                    <Label text="许可证号:1234-5678-9012-3456" align="left" textcolor="#FF504f54" font="4"/>
+                    <Label text="" align="left" textcolor="#FF504f54" font="4"/>
                 </HorizontalLayout>
                 <Control height="14"/>
                 <HorizontalLayout height="28">
                     <Control width="358"/>
-                    <Label text="Copyright@2016HUST" align="left" textcolor="#FF504f54" font="4"/>
+                    <Label text="软件名称: 上肢康复机器人训练系统" align="left" textcolor="#FF504f54" font="4"/>
                 </HorizontalLayout>
                 <Control height="14"/>
                 <HorizontalLayout height="28">
                     <Control width="358"/>
-                    <Label text="Powered By HUST-IR2 Version 1.0.0" align="left" textcolor="#FF504f54" font="4"/>
+                    <Label text="发布版本: Ver 1.0.0" align="left" textcolor="#FF504f54" font="4"/>
                 </HorizontalLayout>
                 <Control />
             </VerticalLayout>
