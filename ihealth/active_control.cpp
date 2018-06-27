@@ -5,6 +5,7 @@
 
 #include "Matrix.h"
 #include "Log.h"
+#include "data_acquisition.h"
 
 #define FTS_TIME 0.1
 using namespace Eigen;
@@ -58,16 +59,17 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 void activecontrol::startAcquisit()
 {
      //qDebug()<<"activecontrol  Start!";
-     mFTWrapper.LoadCalFile();
+ /*    mFTWrapper.LoadCalFile();
      mFTWrapper.BiasCurrentLoad(true);
      mFTWrapper.setFUnit();
      mFTWrapper.setTUnit();
+	 */
 	 m_stop = false;
 	
 	 m_hThread = (HANDLE)_beginthreadex(NULL, 0, FTSThreadFun, this, 0, NULL);
 }
 void activecontrol::stopAcquisit() {
-	m_stop =true;
+	m_stop = true;
 
 	if (m_hThread != 0) {
 		::WaitForSingleObject(m_hThread, INFINITE);
@@ -89,15 +91,29 @@ void activecontrol::stopMove() {
 }
 
 void activecontrol::timerAcquisit() {
-    double readings[7] = { 0 };
+    double readings[6] = { 0 };
     double distData[6]={0};
     double filtedData[6]={0};
-    mFTWrapper.GetForcesAndTorques(readings);
+	
+	DataAcquisition::GetInstacne().AcquisiteSixDemensionData(readings);
+
+	//六维力算的是白色部分受到力的方向。我们把黑色部分固定不动。当我们拉动手柄时，我们施加的力实际上是施加给了黑色部分。
+	//那么白色部分就相对于黑色部分往反方向走。所以人加的力和传感器测出来的力方向是相反的。（这是由六维力安装的方式决定的）
+	for (int i = 0; i < 6; ++i) {
+		//if (i == 0) {
+		//	readings[i] = -readings[i];
+		//}
+		//if (i == 3) {
+		//	readings[i] = -readings[i];
+		//}
+		readings[i] = -readings[i];
+	}
 	//AllocConsole();
 	//freopen("CONOUT$", "w", stdout);
 	//std::cout << "f0: " << readings[0] << " f1: " << readings[1] <<
 	//	" f2: " << readings[2] << " f3: " << readings[3] <<
-	//	" f4: " << readings[4] << " f5: " << readings[5] << std::endl;
+	//	" f4: " << readings[4] << " f5: " << readings[5] << std::endl;	
+
     Raw2Trans(readings,distData);
     Trans2Filter(distData,filtedData);
     FiltedVolt2Vel(filtedData);
@@ -115,14 +131,15 @@ void activecontrol::Raw2Trans(double RAWData[6],double DistData[6])
 		A.setZero();
         VectorXd Value_Origi(6);
         VectorXd Value_Convers(6);
-		Matrix3d ForceAxisXYZ;
+		Matrix3d rotate_matrix;
 		//这里的旋转矩阵要根据六维力坐标系和手柄坐标系来具体得到
-		ForceAxisXYZ <<
-			1, 0, 0,
-			0, 0, -1,
-			0, 1, 0;
+		rotate_matrix <<
+			cos(M_PI_4), sin(M_PI_4), 0,
+			-sin(M_PI_4), cos(M_PI_4), 0,
+			0, 0, 1;
 		//Vector3d ForcePosition(-0.075,0.035,0);
-		Vector3d ForcePosition(-0.075, 0.035, 0);
+		//手柄坐标系下手柄坐标系原点到六维力坐标系原点的向量
+		Vector3d ForcePosition(0.075, -0.035, 0);
 		Matrix3d ForcePositionHat;
 		//这里就是这个p，我们可以想象，fx不会产生x方向的力矩，fy产生的看z坐标，fz产生的y坐标。
 		//这里做的就是把力矩弄过去。这个相对坐标都是六维力坐标在手柄坐标系下的位置。
@@ -132,38 +149,34 @@ void activecontrol::Raw2Trans(double RAWData[6],double DistData[6])
 			0, -ForcePosition[2], ForcePosition[1],
 			ForcePosition[2], 0, -ForcePosition[0],
 			-ForcePosition[1], ForcePosition[0], 0;
-		A.block(0, 0, 3, 3) = ForceAxisXYZ;
-		A.block(0, 3, 3, 1) = ForcePositionHat * ForceAxisXYZ;
-		A.block(3, 3, 3, 3) = ForceAxisXYZ;
-        //A<< 0,-1,0,0,0,0.035,
-        //    0,0,-1,0,0,0.075,
-        //    1,0,0,-0.035,-0.075,0,
-        //    0,0,0,0,-1,0,
-        //    0,0,0,0,0,-1,
-        //    0,0,0,1,0,0;
+		A.block(0, 0, 3, 3) = rotate_matrix;
+		A.block(0, 3, 3, 1) = ForcePositionHat * rotate_matrix;
+		A.block(3, 3, 3, 3) = rotate_matrix;
 
-        for (int i = 0; i < 6; i++)
-        {
-            if (i<3)
-            {
+
+		//之前是fxfyfzMxMyMz,现在变成MxMyMzfxfyfz
+        for (int i = 0; i < 6; i++) {
+            if (i<3) {
                 Value_Origi(i)=RAWData[i+3];
-            }
-            else
-            {
+            } else {
                 Value_Origi(i)=RAWData[i-3];
             }
-
         }
 		
-        Value_Convers=A*Value_Origi;
+		//这里计算后就是
+        Value_Convers = A * Value_Origi;
 		//std::cout << "handle f0: " << Value_Convers(0) << " f1: " << Value_Convers(1) <<
 		//	" f2: " << Value_Convers(2) << " f3: " << Value_Convers(3) <<
 		//	" f4: " << Value_Convers(4) << " f5: " << Value_Convers(5) << std::endl;
-        for(int m=0;m<6;m++)
-        {
-            DistData[m]=Value_Convers(m);
+        for(int m=0;m<6;m++) {
+            DistData[m] = Value_Convers(m);
         }
+
+		/*AllocConsole();
+		freopen("CONOUT$", "w", stdout);*/
+		//printf("fx:%lf    fy:%lf    fz:%lf \n Mx:%lf    My:%lf    Mz:%lf \n", DistData[3], DistData[4], DistData[5], DistData[0], DistData[1], DistData[2]);
 }
+
 void activecontrol::Trans2Filter(double TransData[6], double FiltedData[6]) {
     double Wc = 5;
     double Ts = 0.05;
@@ -204,8 +217,8 @@ void activecontrol::Trans2Filter(double TransData[6], double FiltedData[6]) {
         }
     }
 }
-void activecontrol::FiltedVolt2Vel(double FiltedData[6])
-{
+
+void activecontrol::FiltedVolt2Vel(double FiltedData[6]) {
     MatrixXd Vel(2,1);
     MatrixXd Pos(2,1);
     MatrixXd A(6,6);
@@ -217,16 +230,17 @@ void activecontrol::FiltedVolt2Vel(double FiltedData[6])
 
 	//AllocConsole();
 	//freopen("CONOUT$", "w", stdout);
-	//printf("elbow angle: %lf\n", -angle[1]);
-	//printf("shoulder angle: %lf\n", -angle[0]);
+	//printf("elbow angle: %lf\n", angle[1]);
+	//printf("shoulder angle: %lf\n", angle[0]);
+	//printf("fx:%lf    fy:%lf    fz:%lf \n Mx:%lf    My:%lf    Mz:%lf \n", FiltedData[3], FiltedData[4], FiltedData[5], FiltedData[0], FiltedData[1], FiltedData[2]);
 
     for (int i = 0; i < 6; i++)
     {
         Six_Sensor_Convert(i)=FiltedData[i];
     }
     damping_control(Six_Sensor_Convert,Pos,Vel,Force_Fc,Force_a,Force_b);
-    Ud_Shoul=Vel(0,0);
-    Ud_Arm=Vel(1,0);
+    Ud_Shoul = Vel(0,0);
+    Ud_Arm = Vel(1,0);
 
 	//printf("肩部速度: %lf\n", Ud_Shoul);
 	//printf("肘部速度: %lf\n", Ud_Arm);
