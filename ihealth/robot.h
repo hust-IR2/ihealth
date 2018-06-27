@@ -77,7 +77,7 @@ public:
 
 	void setWindow(HWND hWnd);
 public:
-	pasvContrl *pasvMode;//被动控制模式
+	PassiveControl *pasvMode;//被动控制模式
 	boundaryDetection *bDetect;//边界检测
 	activecontrol *activeCtrl;
 	emgcontrl *EMGContrl;
@@ -89,6 +89,4 @@ public:
 	bool m_isEmgModeStart;
 };
 
-void move2ORZ();
 void getSensorData(bool Travel_Switch[4]);
-VOID  CALLBACK OnEyeTimeFunc(UINT wTimerID, UINT msg, DWORD dwUser, DWORD dw1, DWORD dw2);
