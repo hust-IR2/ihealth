@@ -14,10 +14,10 @@ const double ShoulderLength = 0.435;
 const double UpperArmLength = 0.296;
 const double LowerArmLength = 0.384;
 const double InitAngle[5] = {
-	16.86, 14.83, 4.48, 5.92, 2.96
+	0, 0, 0, 0, 15
 };
 
-#define LEFT_ARM 1
+//#define LEFT_ARM 1
 #ifdef LEFT_ARM
 //这里的AxisDirection就是定义了每个角速度方向上的单位矢量w
 //这个就是根据我们的旋转怎么转决定的。
@@ -27,6 +27,7 @@ const Vector3d AxisDirection[5] = {
 	Vector3d(0,-1.0,0),
 	Vector3d(0,-1.0,0),
 	Vector3d(-1.0,0,0)
+
 };
 const Vector3d AxisPosition[5] = {
 	Vector3d(-UpperArmLength - LowerArmLength,0,0),
@@ -36,19 +37,32 @@ const Vector3d AxisPosition[5] = {
 	Vector3d(-LowerArmLength,0,0)
 };
 #else
-const Vector3d Axis[5] = {
-	Vector3d(-1,0,0),
-	Vector3d(0,0,-1),
-	Vector3d(0,-1,0),
-	Vector3d(0,-1,0),
-	Vector3d(1,0,0)
+const Vector3d AxisDirection[5] = {
+	//Vector3d(-1,0,0),
+	//Vector3d(0,0,-1),
+	//Vector3d(0,-1,0),
+	//Vector3d(0,-1,0),
+	//Vector3d(1,0,0)
+
+
+	Vector3d(1,0,0),
+	Vector3d(0,1,0),
+	Vector3d(0,0,1),
+	Vector3d(0,0,1),
+	Vector3d(-1,0,0)
 };
 const Vector3d AxisPosition[5] = {
-	Vector3d(-UpperArmLength - LowerArmLength,0,0),
-	Vector3d(-UpperArmLength - LowerArmLength,0,0),
-	Vector3d(-UpperArmLength - LowerArmLength,0,0),
-	Vector3d(-LowerArmLength,0,0),
-	Vector3d(-LowerArmLength,0,0)
+	//Vector3d(-UpperArmLength - LowerArmLength,0,0),
+	//Vector3d(-UpperArmLength - LowerArmLength,0,0),
+	//Vector3d(-UpperArmLength - LowerArmLength,0,0),
+	//Vector3d(-LowerArmLength,0,0),
+	//Vector3d(-LowerArmLength,0,0)
+
+	Vector3d(0,0,0),
+	Vector3d(UpperArmLength + LowerArmLength,0,0),
+	Vector3d(UpperArmLength + LowerArmLength,0,0),
+	Vector3d(LowerArmLength,0,0),
+	Vector3d(0,0,0)
 };
 #endif
 
@@ -89,8 +103,7 @@ void V2h(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& Y)
 
 //这个函数的意思居然是求伴随矩阵，从4*4的转换到6*6的
 template<typename DerivedA, typename DerivedB>
-void Ad426(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& A)
-{
+void Ad426(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& A) {
 	MatrixXd Y(3,3);
 	Vector3d h(3);
 	A.setZero();
@@ -101,8 +114,7 @@ void Ad426(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& A)
 	A.block(3,0,3,3)=Y*X.block(0,0,3,3);
 }
 template<typename DerivedA, typename DerivedB>
-void h2V(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& b)
-{
+void h2V(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& b) {
 	//这里出来的这个b就是旋转矢量ξ，只不过是因为我们之前的Bh是个4*4，这里又把它弄回来了而已
 	//这里的b就是6*1的了
 	b(0)=-X(1,2);
@@ -110,9 +122,9 @@ void h2V(const MatrixBase<DerivedA>& X, MatrixBase<DerivedB>& b)
 	b(2)=-X(0,1);
 	b.block(3,0,3,1)=X.block(0,3,3,1);
 }
+
 template<typename DerivedA, typename DerivedB>
-void fwd_geo_coup(const MatrixBase<DerivedA>& U, MatrixBase<DerivedB>& theta)
-{
+void fwd_geo_coup(const MatrixBase<DerivedA>& U, MatrixBase<DerivedB>& theta) {
 	MatrixXd meta(5,2);
 	VectorXd thetab(5);
 
@@ -148,6 +160,7 @@ void damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,Mat
 	//这里的U是电机的输出角度2*1（我们可以通过获取当前角度直接获得），然后theta是5*1，分别是
 	//5个关节的角度。下面这个函数就是把电机的角度转换为关节的角度。
 	fwd_geo_coup(U,theta);
+	
 
 	con <<360.0/(2*M_PI),0,
 		0,360.0/(2*M_PI);
@@ -157,7 +170,7 @@ void damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,Mat
 	Matrix<double, 6, 1> bb[5];
 	for (size_t i = 0; i < 5; ++i) {
 		//AxisDirection:3*3 AxisPosition:3*3 Bh:4*4
-		//这里的Bh输出的是一个4*4的矩阵，令人费解。然后h2V是把矩阵变成向量。
+		//这里的Bh输出的是一个4*4的矩阵，在灿神的文本中这个叫做B_hat.然后h2V是把矩阵变成向量。
 		//这里的bb[i]是一个6*1的向量
 		CalcTwist(AxisDirection[i], AxisPosition[i], Bh[i]);
 		h2V(Bh[i], bb[i]);
