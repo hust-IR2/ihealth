@@ -7,8 +7,8 @@
 
 static const bool MotorOn = 1;
 static const bool MotorOff = 0;
-static const bool ClutchOn = 1;
-static const bool ClutchOff = 0;
+static const bool ClutchOn = 0;
+static const bool ClutchOff = 1;
 static const int OutputChannels = 24;
 static const int InputChannels = 24;
 static const int ShoulderAxisId = 0;

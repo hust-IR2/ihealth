@@ -195,6 +195,7 @@ void ControlCard::ResetPosition() {
 	}
 	SetMotor(MotorOff);
 	SetClutch(ClutchOff);
+	SetParamZero();
 }
 
 bool ControlCard::IsReset() {
