@@ -11,6 +11,7 @@ public:
 
 	void AcquisiteTorqueData();
 	void AcquisitePullSensorData();
+	void AcquisiteSixDemensionData(double output_buf[6]);
 	double ShoulderTorque();
 	double ElbowTorque();
 	double ShoulderForwardPull();
@@ -32,5 +33,6 @@ private:
 
 	static const char *kTorqueChannel;
 	static const char *kPullSensorChannel;
+	static const char *kSixDimensionForceChannel;
 	static const double kRawToReal;
 };
