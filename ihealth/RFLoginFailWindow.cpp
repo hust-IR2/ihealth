@@ -214,8 +214,7 @@ bool RFDialog::OnCancelClose(void *pParam)
 }
 
 
-bool RFDialog::OnOKClose(void *pParam)
-{
+bool RFDialog::OnOKClose(void *pParam) {
 	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
 	if (pMsg->sType != _T("click"))
 		return true;
@@ -231,14 +230,28 @@ bool RFDialog::OnOKClose(void *pParam)
 
 		if (teach.Target_Pos[0].size() > 0 && teach.Target_Pos[1].size() > 0 &&
 			teach.Target_Vel[0].size() > 0 && teach.Target_Vel[1].size() > 0) {
-				RFMainWindow::MainWindow->m_robot.addPasvMove();
+			RFMainWindow::MainWindow->m_robot.addPasvMove();
 
-				PassiveTrainInfo train;
-				train.name = actionname;
-				train.target_pos[0] = teach.Target_Pos[0];
-				train.target_pos[1] = teach.Target_Pos[1];
-				train.target_vel[0] = teach.Target_Vel[0];
-				train.target_vel[1] = teach.Target_Vel[1];
+			PassiveTrainInfo train;
+			train.name = actionname;
+			train.target_pos[0] = teach.Target_Pos[0];
+			train.target_pos[1] = teach.Target_Pos[1];
+			train.target_vel[0] = teach.Target_Vel[0];
+			train.target_vel[1] = teach.Target_Vel[1];
+
+			//在这里我们加入一个获取id的方法，首先从数据库中取id这一行
+			std::string sql = "select count(*) from passivetrain";
+			RFMYSQLStmt stmt;
+			if (stmt.Prepare(RFMainWindow::DBThread->m_db, sql.c_str()) > 0) {
+				if (stmt.Step() < 0) {
+					train.id = std::wstring(_T("1"));
+				}
+				else {
+					wchar_t id[64] = _T("");
+					wsprintf(id, _T("%d"), stmt.GetInt(0) + 1);
+					train.id = id;
+				}
+				stmt.Finalize();
 
 				int totalsecond = train.target_pos[0].size();
 				int minute = totalsecond / 60;
@@ -251,26 +264,24 @@ bool RFDialog::OnOKClose(void *pParam)
 				train.timelen = timelen;
 				train.traintype = _T("被动训练");
 				RFPassiveTrain::get()->AddPassiveTrainInfo(train);
+			}
+
+			std::string text = "现在开始" + TGUTF16ToGBK(actionname) + "动作";
+			std::wstring filepathname = (std::wstring)m_pm.GetResourcePath() + _T("/voice/") + actionname + _T(".wav");
+
+			TTSSampleData *pTTSSampleData = new TTSSampleData;
+			pTTSSampleData->filepath = TGUTF16ToGBK(filepathname);
+			pTTSSampleData->text = text;
+			CTask::Assign(CTask::NotWait, Panic(), pTTSSampleData, EventHandle(&RFMySQLThread::TTSSample), RFMainWindow::UIThread, RFMainWindow::DBThread);
+
 		}
-
-		std::string text = "现在开始" + TGUTF16ToGBK(actionname) + "动作";
-		std::wstring filepathname = (std::wstring)m_pm.GetResourcePath() + _T("/voice/") + actionname + _T(".wav");
-		
-		TTSSampleData *pTTSSampleData = new TTSSampleData;
-		pTTSSampleData->filepath = TGUTF16ToGBK(filepathname);
-		pTTSSampleData->text = text;
-		CTask::Assign(CTask::NotWait, Panic(), pTTSSampleData, EventHandle(&RFMySQLThread::TTSSample), RFMainWindow::UIThread, RFMainWindow::DBThread);
-
+		Close();
+		return true;
 	}
-	
-
-	Close();
-	return true;
 }
 
 
-bool RFDialog::OnEyeModeCancelClose(void *pParam)
-{
+bool RFDialog::OnEyeModeCancelClose(void *pParam) {
 	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
 	if (pMsg->sType != _T("click"))
 		return false;
