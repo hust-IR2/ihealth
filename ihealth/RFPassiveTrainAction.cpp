@@ -16,8 +16,7 @@ int FormatTimeValue(std::wstring time)
 	return minute * 60 * 1000 + second * 1000;
 }
 
-void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
-{
+void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
 	RFPassiveTrainAction* action = &RFMainWindow::MainWindow->m_passive_train_action;	
 	if (!action) {
 		return;
@@ -56,8 +55,7 @@ void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	pLabel->SetText(action->m_curmedia.name.c_str());
 }
 
-RFPassiveTrainAction::RFPassiveTrainAction(void)
-{
+RFPassiveTrainAction::RFPassiveTrainAction(void) {
 	m_orderplay = 0;
 	m_timeplay = 0;
 	m_isPlaying = false;
@@ -66,9 +64,7 @@ RFPassiveTrainAction::RFPassiveTrainAction(void)
 	m_movement_createtime = 0;
 }
 
-RFPassiveTrainAction::~RFPassiveTrainAction(void)
-{
-}
+RFPassiveTrainAction::~RFPassiveTrainAction(void) { }
 
 void RFPassiveTrainAction::StartPlay(std::list<MEDIA>& medias, bool orderplay)
 {

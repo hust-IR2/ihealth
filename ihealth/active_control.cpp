@@ -304,7 +304,7 @@ bool activecontrol::isFire()
 	double grip;
 	//这里就是采集握力的数据
 	DataAcquisition::GetInstacne().AcquisiteGripData(&grip);
-	if(grip > 0.2)
+	if(grip > 0.1)
 		fireOrNot = true;
 	return fireOrNot;
 }

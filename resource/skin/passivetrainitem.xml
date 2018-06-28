@@ -12,9 +12,9 @@
                     <Control />
                     <HorizontalLayout width="200" align="centervcenter">
 						<Control />
-                        <Button height="35" name="bd_add_action" normalimage="icon_addto.png" hotimage="icon_addto.png" pushedimage="icon_addto.png"/>
+                        <Button height="35" name="bd_add_action" padding="0,10,0,0" normalimage="icon_addto.png" hotimage="icon_addto.png" pushedimage="icon_addto.png"/>
 						<HorizontalLayout width="20" />
-						<Button height="35" name="bd_delete_action" normalimage="icon_delete.png" hotimage="icon_delete.png" pushedimage="icon_delete.png" />
+						<Button height="35" name="bd_delete_action" padding="0,10,0,0" normalimage="icon_delete.png" hotimage="icon_delete.png" pushedimage="icon_delete.png" />
 						<Control />
                     </HorizontalLayout>
                     <Control />

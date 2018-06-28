@@ -6385,11 +6385,12 @@ void RFMainWindow::UpdateTrainDetailPage( std::list<PatientTrainDetails>& detail
 
 void RFMainWindow::SetPassiveTrainProgress(int time, int total, bool playing)
 {
-	CProgressExUI *pProgress = static_cast<CProgressExUI*>(m_pm.FindControl(_T("passive_train_progress")));
-	if (pProgress) {
-		pProgress->SetProgressTotal(total);
-		pProgress->SetProgressCurrent(time);
-	}
+	//这个progress bar没有工作，是外包自己定义的，运行了之后会出错。需要修改。
+	//CProgressExUI *pProgress = static_cast<CProgressExUI*>(m_pm.FindControl(_T("passive_train_progress")));
+	//if (pProgress) {
+	//	pProgress->SetProgressTotal(total);
+	//	pProgress->SetProgressCurrent(time);
+	//}
 
 	CLabelUI *pLabel = static_cast<CLabelUI*>(m_pm.FindControl(_T("passsive_train_progress_text")));
 	if (pLabel) {
