@@ -140,8 +140,9 @@
                         <Control height="40"/>
                         <Button height="83" name="zd_gjjd_chart_btn" normalimage="xq_btn_gjjd_n.png" hotimage="xq_btn_gjjd_h.png" pushedimage="xq_btn_gjjd_h.png"/>
                         <Control height="40"/>
-                        <Button height="83" name="zd_wl_chart_btn" normalimage="xq_btn_wl_n.png" hotimage="xq_btn_wl_h.png" pushedimage="xq_btn_wl_h.png"/>
-                        <Control height="14"/>
+                        <!--<Button height="83" name="zd_wl_chart_btn" visiable="false" enabled="false" normalimage="xq_btn_wl_n.png" hotimage="xq_btn_wl_h.png" pushedimage="xq_btn_wl_h.png"/>
+                        -->
+						<Control height="14"/>
                         <HorizontalLayout name="zd_gjjd_chart_tuli" height="192">
                             <Control />
                             <Control width="155" bkimage="tuli_ydjd.png"/>

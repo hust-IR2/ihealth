@@ -16,8 +16,7 @@ int FormatTimeValue(std::wstring time)
 	return minute * 60 * 1000 + second * 1000;
 }
 
-void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
-{
+void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime) {
 	RFPassiveTrainAction* action = &RFMainWindow::MainWindow->m_passive_train_action;	
 	if (!action) {
 		return;
@@ -38,7 +37,7 @@ void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 			action->SaveMoveingData();
 			if (action->m_medias.size() > 0) {
 				if (action->m_orderplay) {
-					action->m_curmedia = action->PopOrderMeida();
+					action->m_curmedia = action->PopOrderMedia();
 				} else {
 					action->m_curmedia = action->PopAutoMedia();
 				}
@@ -56,8 +55,7 @@ void OnTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 	pLabel->SetText(action->m_curmedia.name.c_str());
 }
 
-RFPassiveTrainAction::RFPassiveTrainAction(void)
-{
+RFPassiveTrainAction::RFPassiveTrainAction(void) {
 	m_orderplay = 0;
 	m_timeplay = 0;
 	m_isPlaying = false;
@@ -66,9 +64,7 @@ RFPassiveTrainAction::RFPassiveTrainAction(void)
 	m_movement_createtime = 0;
 }
 
-RFPassiveTrainAction::~RFPassiveTrainAction(void)
-{
-}
+RFPassiveTrainAction::~RFPassiveTrainAction(void) { }
 
 void RFPassiveTrainAction::StartPlay(std::list<MEDIA>& medias, bool orderplay)
 {
@@ -85,7 +81,7 @@ void RFPassiveTrainAction::StartPlay(std::list<MEDIA>& medias, bool orderplay)
 	m_orderplay = orderplay;
 	m_timeplay = 0;
 	if (orderplay) {
-		m_curmedia = PopOrderMeida();
+		m_curmedia = PopOrderMedia();
 	} else {
 		m_curmedia = PopAutoMedia();
 	}
@@ -110,7 +106,7 @@ void RFPassiveTrainAction::PlayNext(bool orderplay)
 
 	m_orderplay = orderplay;
 	if (m_orderplay) {
-		m_curmedia = PopOrderMeida();
+		m_curmedia = PopOrderMedia();
 	} else {
 		m_curmedia = PopAutoMedia();
 	}
@@ -150,7 +146,7 @@ void RFPassiveTrainAction::SetPlayOrder(bool orderplay)
 MEDIA RFPassiveTrainAction::PopAutoMedia()
 {
 	if (m_medias.size() < 2) {
-		return PopOrderMeida();
+		return PopOrderMedia();
 	}
 
 	int nRandomIndex = 0;
@@ -186,7 +182,7 @@ MEDIA RFPassiveTrainAction::PopAutoMedia()
 	return media;
 }
 
-MEDIA RFPassiveTrainAction::PopOrderMeida()
+MEDIA RFPassiveTrainAction::PopOrderMedia()
 {
 	MEDIA media;
 
@@ -206,7 +202,7 @@ MEDIA RFPassiveTrainAction::PopOrderMeida()
 		::Sleep(300U);
 		RFMainWindow::MainWindow->m_robot.startPasvMove(index);
 	} else {
-		PopOrderMeida();
+		PopOrderMedia();
 	}
 
 	return media;

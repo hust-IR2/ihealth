@@ -22,7 +22,7 @@ public:
 	void SetPlayOrder(bool orderplay);
 
 	MEDIA PopAutoMedia();
-	MEDIA PopOrderMeida();
+	MEDIA PopOrderMedia();
 
 	void SaveMoveingData();
 	time_t			m_movement_createtime;

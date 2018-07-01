@@ -1,3 +1,5 @@
+
+/*这个body是还没有start游戏时候的封面*/
 body{
     background: url("image/game_bg.png");
 }
@@ -10,6 +12,7 @@ body{
     height: 650px;
 
 }
+/*
 #startdiv{
     width: 100%;
     height:650px;
@@ -17,6 +20,7 @@ body{
     background: url(image/game_cloud.png) no-repeat;
     background-size: 100%;
 }
+*/
 #startdiv button{
     width: 150px;
     height: 30px;
@@ -28,15 +32,19 @@ body{
     border-radius: 30px;
     background-color: gray;
 }
+
+/*这就是我们打飞机的主页面*/
 #maindiv{
     width: 100%;
-    height:650px;
-    position: absolute;;
+    height:681px;
+    position: absolute;
     background: url(image/game_cloud.png);
     background-size: 100%;
     display: none;
     overflow: hidden;
 }
+
+/*显示分数*/
 #scorediv{
     position: absolute;
     top: 10px;
@@ -44,6 +52,8 @@ body{
     font-size: 30px;
     font-weight: bold;
 }
+
+/*enddiv显示飞机爆了的信息*/
 #enddiv{
     position: absolute;
     top: 210px;
@@ -58,6 +68,7 @@ body{
     z-index: 10;
     text-align: center;
 }
+
 #planetext{
     color: #ffffff;
     padding: 10px;

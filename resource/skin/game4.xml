@@ -29,7 +29,7 @@
                     <Control width="48"/>
                     <VerticalLayout width="276">
                         <Control />
-                        <CheckBox name="game4_nandu_select" height="54" normalimage="zd_btn_n1.png" selectedimage="zd_btn_n1.png" disabledimage="zd_btn_n1.png"/>
+                        <CheckBox name="game4_nandu_select" height="54" visible="false" normalimage="zd_btn_n1.png" selectedimage="zd_btn_n1.png" disabledimage="zd_btn_n1.png"/>
                         <Control height="310"/>
                         <CheckBox name="game4_start" height="84" normalimage="btn_ks1_n.png" selectedimage="btn_zt1_n.png" disabledimage="btn_ks1_n.png"/>
                         <Control height="38"/>

@@ -35,22 +35,13 @@ aux_source_directory(${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ ATI_src)
 file(GLOB Root_header ${CMAKE_CURRENT_SOURCE_DIR}/*.h ${CMAKE_CURRENT_SOURCE_DIR}/*.hpp)
 file(GLOB ATI_header ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/*.h ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/*.hpp)
 
+set(ATI_SRC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ)
+list(REMOVE_ITEM ATI_src "${ATI_SRC_DIR}/events.c" "${ATI_SRC_DIR}/xmltok_impl.c" "${ATI_SRC_DIR}/xmltok_ns.c")
+list(REMOVE_ITEM ATI_header "${ATI_SRC_DIR}/ascii.h" "${ATI_SRC_DIR}/asciitab.h" "${ATI_SRC_DIR}/ftsharedrt.h" "${ATI_SRC_DIR}/iasciitab.h" "${ATI_SRC_DIR}/latin1tab.h" 
+"${ATI_SRC_DIR}/nametab.h" "${ATI_SRC_DIR}/utf8tab.h" "${ATI_SRC_DIR}/xmldef.h" "${ATI_SRC_DIR}/xmltok_impl.h")
 
-
-# set(ATI_src 
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/DAQSys.cpp
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/dom.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/expatls.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/ftconfig.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/ftrt.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/FTWrapper.cpp
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/node.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/stack.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmlparse.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmlrole.c
-# ${CMAKE_CURRENT_SOURCE_DIR}/ATI/ATIDAQ/xmltok.c
-# )
-
+set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} /sdl-")
+set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /sdl-")
 
 ADD_DEFINITIONS(-D_AFXDLL)
 add_executable(ihealth ${Root_src} ${ATI_src} ${Root_header} ${ATI_header})

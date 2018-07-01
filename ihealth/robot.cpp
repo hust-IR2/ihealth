@@ -1,11 +1,14 @@
 #include "robot.h"
+
 #include <windows.h>
-#include "mmsystem.h"
+#include <mmsystem.h>
+
+#include "Log.h"
+
 #pragma comment(lib,"winmm.lib")
 #define RESET_TIMER 100
 MMRESULT Mtimer_ID=0;
 UINT wAccuracy=0;
-contrlCard ORZCtrlCard;
 
 robot::robot()
 {
@@ -14,11 +17,9 @@ robot::robot()
 	bDetect->SetRobot(this);
 
 	pasvMode = NULL;
-	pasvMode = new pasvContrl;
+	pasvMode = new PassiveControl;
 	
-	ctrlCard = NULL;
-	ctrlCard = new contrlCard;
-	ctrlCard->Initial();
+	ControlCard::GetInstance().Initial();
 
 	activeCtrl = NULL;
 	activeCtrl = new activecontrol;
@@ -26,10 +27,8 @@ robot::robot()
 	EMGContrl = new emgcontrl;
 
 	eyeModeCtl = NULL;
-	eyeModeCtl = new EyeMode(bDetect, ctrlCard);
+	eyeModeCtl = new EyeMode(bDetect);
 	
-
-	activeCtrl->m_boundary_detection = bDetect;
 	pasvMode->m_boundary_detection = bDetect;
 	bDetect->startBydetect();
 	m_isActiveModeStart = false;
@@ -37,15 +36,12 @@ robot::robot()
 	m_isPasvModeStart = false;
 }
 
-robot::~robot()
-{
+robot::~robot() {
 	if (pasvMode != NULL)
 		delete pasvMode;
 	if (bDetect != NULL) {
 		delete bDetect;
 	}
-	if (ctrlCard != NULL)
-		delete ctrlCard;
 	if (NULL != activeCtrl)
 		delete activeCtrl;
 	if (NULL != EMGContrl)
@@ -53,24 +49,25 @@ robot::~robot()
 	if (NULL != eyeModeCtl)
 		delete eyeModeCtl;
 }
-VOID  CALLBACK OnEyeTimeFunc(UINT wTimerID, UINT msg, DWORD dwUser, DWORD dw1, DWORD dw2)
-{
-	move2ORZ();
+
+unsigned __stdcall PositionResetThread(void *) {
+	ControlCard::GetInstance().ResetPosition();
+	return 0;
 }
 
 void robot::clearPasvMove()
 {
-	pasvMode->clearMove();
+	pasvMode->ClearMoveData();
 }
 
 void robot::pushPasvMove(const Teach& move)
 {
-	pasvMode->pushMove(move);
+	pasvMode->PushbackMoveData(move);
 }
 
 bool robot::isMoving()
 {
-	return pasvMode->Moving();
+	return pasvMode->IsMoving();
 }
 
 void robot::startPasvMove(int index)
@@ -78,7 +75,7 @@ void robot::startPasvMove(int index)
 	//if (ctrlCard->IsCardInitial()) {
 	if (m_isPasvModeStart == false) {
 		m_isPasvModeStart = true;
-		pasvMode->beginMove(index, bDetect);
+		pasvMode->BeginMove(index);
 	}
 	//}
 }
@@ -87,51 +84,46 @@ void robot::stopPasvMove()
 	//if (ctrlCard->IsCardInitial()) {
 	if (m_isPasvModeStart == true) {
 		m_isPasvModeStart = false;
-		pasvMode->stopMove();
+		pasvMode->StopMove();
 	}
 	//}
 }
 void robot::getCurrentPasvMove(Teach& teach)
 {
 	//if (ctrlCard->IsCardInitial()) {
-		pasvMode->getCurrentMove(teach);
+		pasvMode->GetCurrentMove(teach);
 	//}
 }
-void robot::startTeach()
-{
-	//if (ctrlCard->IsCardInitial()) {
-		pasvMode->startTeach(bDetect);
-	//}
+void robot::startTeach() {
+		pasvMode->StartTeach();
 }
 void robot::stopTeach()
 {
 	//if (ctrlCard->IsCardInitial()) {
-		pasvMode->stopTeach();
+		pasvMode->StopTeach();
 	//}
 }
 
 void robot::getCurrentTeach(Teach& teach)
 {
 	//if (ctrlCard->IsCardInitial()) {
-		pasvMode->getCurrentTeach(teach);
+		pasvMode->GetCurrentTeach(teach);
 	//}
 }
 
 void robot::addPasvMove()
 {
 	//if (ctrlCard->IsCardInitial()) {
-		pasvMode->addMovement();
+		pasvMode->AddCurrentTeachToData();
 	//}
 }
-void robot::startActiveMove()
-{
-	//if (ctrlCard->IsCardInitial()) {
+void robot::startActiveMove() {
 	if (!m_isActiveModeStart) {
-		activeCtrl->startMove(bDetect);
+		activeCtrl->startMove();
 		m_isActiveModeStart = true;
 	}
-	//}
 }
+
 void robot::stopActiveMove()
 {
 	//if (ctrlCard->IsCardInitial()) {
@@ -143,11 +135,6 @@ void robot::stopActiveMove()
 }
 void robot::getAngle(double angles[2])
 {
-	//double *output = NULL;
-	//if (ctrlCard->IsCardInitial()) {
-	activeCtrl->getRawAngle(angles);
-	//}
-	//return output;
 }
 
 double robot::getWirstForce()
@@ -168,7 +155,7 @@ bool robot::isFire()
 
 void robot::getPlanePos(short w, short h, double XY[2])
 {
-	activeCtrl->getEndsXY(734, 600, XY);
+	activeCtrl->getEndsXY(w, h, XY);
 }
 
 void robot::setDamping(float FC/* =0.1 */)
@@ -211,20 +198,8 @@ void robot::getRightRGB24(unsigned char* data, int _width, int _height)
 	eyeModeCtl->getRGB24(data, _width, _height, EyeMode::RIGHT);
 }
 
-void robot::resetPos()
-{
-	//打开电机，离合器
-	ctrlCard->ServeTheMotor(ON);
-	ctrlCard->SetClutch(CON);
-	// 开启全局定时器;
-	TIMECAPS tc;
-	if (timeGetDevCaps(&tc, sizeof(TIMECAPS)) == TIMERR_NOERROR)
-	{
-		wAccuracy = MIN(MAX(tc.wPeriodMin, 1), tc.wPeriodMax);//分辨率的值不能超出系统的取值范围 
-		timeBeginPeriod(wAccuracy);// 调用timeBeginPeriod函数设置定时器的分辨率
-								   // 设置定时器  
-		Mtimer_ID = timeSetEvent(RESET_TIMER, wAccuracy, (LPTIMECALLBACK)OnEyeTimeFunc, DWORD(1), TIME_PERIODIC);
-	}
+void robot::resetPos() {
+	_beginthreadex(NULL, 0, PositionResetThread, NULL, 0, NULL);
 }
 
 void robot::setWindow(HWND hWnd)
@@ -232,7 +207,7 @@ void robot::setWindow(HWND hWnd)
 	m_hWnd = hWnd;
 	bDetect->Set_hWnd(hWnd);
 	pasvMode->Set_hWnd(hWnd);
-	ctrlCard->Set_hWnd(hWnd);
+	ControlCard::GetInstance().Set_hWnd(hWnd);
 	EMGContrl->m_hWnd = hWnd;
 }
 
@@ -278,10 +253,10 @@ void getSensorData(bool Travel_Switch[4])
 {
 	I32 DI_Group = 0; // If DI channel less than 32
 	I32 DI_Data = 0; // Di data
-	I32 di_ch[__MAX_DI_CH];
+	I32 di_ch[InputChannels];
 	I32 returnCode = 0; // Function return code
 	returnCode = APS_read_d_input(0, DI_Group, &DI_Data);
-	for (int i = 0; i < __MAX_DI_CH; i++)
+	for (int i = 0; i < InputChannels; i++)
 		di_ch[i] = ((DI_Data >> i) & 1);
 
 	Travel_Switch[0] = di_ch[16];//0号电机ORG信号-肘部电机
@@ -291,44 +266,7 @@ void getSensorData(bool Travel_Switch[4])
 	Travel_Switch[3] = di_ch[19];//1号电机MEL信号-肩部电机
 }
 
-void move2ORZ()
-{
-	//获取光电开关信息
-	bool RobotORZ[4] = {0};
-	getSensorData(RobotORZ);
-	static int i = 0;
-	//判断0号电机-肩部 是否在零位，如果不是则回零位运动开始，如果是则停止运动
-	if (RobotORZ[2] != true)
-	{
-		APS_vel(shoudlerAxisId, 0, 4.0 / Unit_Convert, 0);
-	}
-	else
-	{
-		APS_stop_move(shoudlerAxisId);
-	}
-	//判断1号电机-肘部是否在零位，如果不是则回零位运动开始，如果是则停止运动
-	if (RobotORZ[0] != true)
-	{
-		APS_vel(elbowAxisId, 0, 4.0 / Unit_Convert, 0);
-	}
-	else
-	{
-		APS_stop_move(elbowAxisId);
-	}
-
-	if ((RobotORZ[0] == true) && (RobotORZ[2] == true))
-	{
-		//到点以后关电机
-		ORZCtrlCard.ServeTheMotor(OFF);
-		ORZCtrlCard.SetClutch(COFF);
-		ORZCtrlCard.SetParamZero();
-		//停止定时器
-		if (Mtimer_ID != 0)
-			timeKillEvent(Mtimer_ID);
-		if (wAccuracy != 0)
-			timeEndPeriod(wAccuracy);
-		char message_tracing[1024];
-		sprintf(message_tracing, "Reset position completed");
-		LOG1(message_tracing);
-	}
+bool robot::IsPassiveTeaching() {
+	return pasvMode->isBeginTeach;
 }
+

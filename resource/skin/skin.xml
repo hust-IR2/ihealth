@@ -87,8 +87,8 @@
                 <Button name="welcom_menu" text="欢迎您，李权！∨" textcolor="#FFBECDE1" height="32" align="right" font="11"/>
                 <Control width="358"/>
             </HorizontalLayout>
-            <Control height="96"/>
-            <Button name="main_tip" text="请先选择一名患者之后，再继续其他操作" align="centervcenter" textcolor="#FF253C6E" height="25" font="4"/>
+            <Control height="80"/>
+            <Button name="main_tip" text="请先选择一名患者之后，再继续其他操作" align="centervcenter" textcolor="#FF253C6E" height="30" font="4"/>
             <Control height="35"/>
             <HorizontalLayout height="728">
                 <Control />

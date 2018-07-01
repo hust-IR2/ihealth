@@ -39,7 +39,7 @@ FTWrapper::~FTWrapper()
 int FTWrapper::LoadCalFile()
 {
 	// create Calibration struct
-    cal = createCalibration("C:\\Calibration\\FT18238.cal",1);
+    cal = createCalibration("C:\\Calibration\\FT18228.cal",1);
 	if (cal == NULL) {
 		daqerrmsg = "Specified calibration could not be loaded";
         return -1;

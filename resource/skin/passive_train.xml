@@ -49,7 +49,7 @@
                 </HorizontalLayout>
                 <List name="passive_train_content_list" height="347" header="hidden" itemalign="center" vscrollbar="false" hscrollbar="true" itemselectedbkcolor="#00000000" itemhotbkcolor="#00000000" vscrollbarstyle="width=&quot;15&quot; showbutton1=&quot;false&quot; showbutton2=&quot;false&quot; linesize=&quot;72&quot;"/>
                 <Control />
-                <HorizontalLayout height="51">
+                <HorizontalLayout height="80">
                     <Label name="passsive_train_cur_action_name" text="摸右肩" align="right" valign="center" width="116" textcolor="#FF6C6C6C" font="2"/>
                     <Control width="28"/>
                     <MusicProgress name="passive_train_progress" width="480" ptotal="100" pcurrent="0" pheight="5" pcurretheight="10" pcurretwidth="10" pbkimage="passive_playbg.png" pforeimage="passive_playjindu.png" pcurimage="passive_playmake.png"/>

@@ -1,8 +1,8 @@
 #pragma once
-#include"pasvcontrl.h"
+#include"passive_control.h"
 #include "boundarydetection.h"
-#include "contrlCard.h"
-#include"activecontrol.h"
+#include "control_card.h"
+#include"active_control.h"
 #include"emgcontrl.h"
 #include "EyeMode.h"
 
@@ -33,6 +33,7 @@ public:
 	void addPasvMove();
 	//关节力矩值-数据接口，0-肩部关节力矩，1-肘部关节力矩
 	bool* getSwitchData();
+	bool IsPassiveTeaching();
 	/************************************************************************/
 	/*                           主动模式接口                                */
 	/************************************************************************/
@@ -47,6 +48,7 @@ public:
 	bool	isFire();
 	void	getPlanePos(short w, short h, double XY[2]);
 	void	setDamping(float FC=0.1);	
+
 	/************************************************************************/
 	/*                           sEMG模式接口                                */
 	/************************************************************************/
@@ -77,9 +79,8 @@ public:
 
 	void setWindow(HWND hWnd);
 public:
-	pasvContrl *pasvMode;//被动控制模式
+	PassiveControl *pasvMode;//被动控制模式
 	boundaryDetection *bDetect;//边界检测
-	contrlCard *ctrlCard;
 	activecontrol *activeCtrl;
 	emgcontrl *EMGContrl;
 	EyeMode *eyeModeCtl;
@@ -90,6 +91,4 @@ public:
 	bool m_isEmgModeStart;
 };
 
-void move2ORZ();
 void getSensorData(bool Travel_Switch[4]);
-VOID  CALLBACK OnEyeTimeFunc(UINT wTimerID, UINT msg, DWORD dwUser, DWORD dw1, DWORD dw2);

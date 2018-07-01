@@ -35,8 +35,7 @@ CUIThread* RFMainWindow::UIThread = NULL;
 RFMySQLThread* RFMainWindow::DBThread = NULL;
 RFMainWindow* RFMainWindow::MainWindow = NULL;
 
-RFMainWindow::RFMainWindow(void)
-{
+RFMainWindow::RFMainWindow(void) {
 	m_mysql_connected = false;
 
 	m_current_patient.id = -1;
@@ -45,8 +44,7 @@ RFMainWindow::RFMainWindow(void)
 	m_emg_createtime = 0;
 }
 
-RFMainWindow::~RFMainWindow(void)
-{
+RFMainWindow::~RFMainWindow(void) {
 	m_robotEvent.Stop();
 	RFPatientsManager::release();
 	RFPatientsTrainInfo::release();
@@ -64,22 +62,17 @@ RFMainWindow::~RFMainWindow(void)
 	CWorkThread::Dispose();
 }
 
-LPCTSTR RFMainWindow::GetWindowClassName() const 
-{ 
+LPCTSTR RFMainWindow::GetWindowClassName() const { 
 	return _T("RFMainWindow");
 }
 
-UINT RFMainWindow::GetClassStyle() const 
-{ 
+UINT RFMainWindow::GetClassStyle() const { 
 	return CS_DBLCLKS; 
 }
 
-void RFMainWindow::OnFinalMessage(HWND /*hWnd*/) 
-{
-}
+void RFMainWindow::OnFinalMessage(HWND /*hWnd*/) { }
 
-CControlUI* RFMainWindow::CreateControl(LPCTSTR pstrClass)
-{
+CControlUI* RFMainWindow::CreateControl(LPCTSTR pstrClass) {
 	if (_tcsicmp(pstrClass, _T("wkeWebkit")) == 0) return  new CWkeWebkitUI;
 	else if (_tcsicmp(pstrClass, _T("MusicProgress")) == 0) return new CProgressExUI;
 	else if (_tcsicmp(pstrClass, _T("AVCamera")) == 0)	return new CAVPlayerUI;
@@ -88,8 +81,7 @@ CControlUI* RFMainWindow::CreateControl(LPCTSTR pstrClass)
 	return NULL;
 }
 
-void RFMainWindow::Init() 
-{
+void RFMainWindow::Init() {
 	Panic panic1 = CUIThread::Create(this->GetHWND());
 	UIThread = panic1.GetTag<CUIThread*>();
 
@@ -105,16 +97,11 @@ void RFMainWindow::Init()
 	ShowLoginPage();
 }
 
-void RFMainWindow::OnPrepare() 
-{
-}
+void RFMainWindow::OnPrepare() { }
 
-void RFMainWindow::Closing()
-{
-}
+void RFMainWindow::Closing() { }
 
-void RFMainWindow::Notify(TNotifyUI& msg)
-{
+void RFMainWindow::Notify(TNotifyUI& msg) {
 	if( msg.sType == _T("windowinit") ) 
 	{
 		OnPrepare();
@@ -406,8 +393,8 @@ void RFMainWindow::BindManagerPatientPageEvent()
 	CButtonUI* zd_gjjd_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("zd_gjjd_chart_btn")));
 	zd_gjjd_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnZDGGJDChart);
 	
-	CButtonUI* zd_wl_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("zd_wl_chart_btn")));
-	zd_wl_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnZDWLChart);
+	//CButtonUI* zd_wl_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("zd_wl_chart_btn")));
+	//zd_wl_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnZDWLChart);
 
 	CButtonUI* bd_zgj_chart_btn = static_cast<CButtonUI*>(m_pm.FindControl(_T("bd_zgj_chart_btn")));
 	bd_zgj_chart_btn->OnNotify += MakeDelegate(this, &RFMainWindow::OnBDZGJChart);
@@ -1441,23 +1428,23 @@ bool RFMainWindow::OnPatientTrain(void* pParam)
 
 bool RFMainWindow::OnPatientTrainFromActiveTrain(void* pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return false;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return false;
 
 	if (m_current_patient.id < 0) {
 		RFSelectPatientDialog(GetHWND());
 		return true;
 	}
 
-	CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
-	if (active_train_page_list->IsVisible()) {
-		active_train_page_list->SetVisible(false);
-		CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
-		active_train_page_main->SetVisible(true);
+	//CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
+	//if (active_train_page_list->IsVisible()) {
+	//	active_train_page_list->SetVisible(false);
+	//	CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
+	//	active_train_page_main->SetVisible(true);
 
-		return true;
-	}
+	//	return true;
+	//}
 
 	CLabelUI* pLabel = static_cast<CLabelUI*>(m_pm.FindControl(_T("train_main_page_welcom")));
 	pLabel->SetText((_T("欢迎您，") + m_login_info.login_user + _T("!∨")).c_str());
@@ -2487,7 +2474,9 @@ bool RFMainWindow::OnActiveTrainFromGame(void *pParam)
 	pLabel->SetText((_T("欢迎您，") + m_login_info.login_user + _T("!∨")).c_str());
 
 	m_robot.stopActiveMove();
-	ShowActiveTrainPage();
+
+	OnPatientTrainFromActiveTrain(NULL);
+	//ShowActiveTrainPage();
 	return true;
 }
 
@@ -2666,8 +2655,7 @@ bool RFMainWindow::OnBDDeleteAction(void *pParam) {
 	}
 }
 
-bool RFMainWindow::OnZDGGJDChart(void *pParam)
-{
+bool RFMainWindow::OnZDGGJDChart(void *pParam) {
 	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
 	if (pMsg->sType != _T("click"))
 		return true;
@@ -2985,15 +2973,19 @@ bool RFMainWindow::OnEMGModeRecovery(void *pParam)
 
 bool RFMainWindow::OnZhudongFeiji(void *pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return true;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return true;
 
+	//隐藏当前的页面
 	CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
 	active_train_page_main->SetVisible(false);
 
-	CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
-	active_train_page_list->SetVisible(true);
+	//这里我们不要跳到这个list，而是直接调用OnGame4
+	OnGame2(NULL);
+	return true;
+	//CVerticalLayoutUI* active_train_page_list = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_list")));
+	//active_train_page_list->SetVisible(true);
 }
 
 bool RFMainWindow::OnZhudongBiaoqiang(void *pParam)
@@ -3037,9 +3029,9 @@ bool RFMainWindow::OnZhudongDuimutou(void *pParam)
 
 bool RFMainWindow::OnGame4(void *pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return true;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return true;
 
 	
 	CWkeWebkitUI* game4 = static_cast<CWkeWebkitUI*>(m_pm.FindControl(_T("game4")));
@@ -3079,9 +3071,9 @@ bool RFMainWindow::OnGame3(void *pParam)
 
 bool RFMainWindow::OnGame2(void *pParam)
 {
-	TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
-	if (pMsg->sType != _T("click"))
-		return true;
+	//TNotifyUI *pMsg = static_cast<TNotifyUI*>(pParam);
+	//if (pMsg->sType != _T("click"))
+	//	return true;
 
 
 	CWkeWebkitUI* game4 = static_cast<CWkeWebkitUI*>(m_pm.FindControl(_T("game4")));
@@ -4065,8 +4057,10 @@ void RFMainWindow::ShowActiveTrainPage()
 	m_evaluation_ydgn_add_page->SetVisible(false);
 	m_evaluation_ydgn_detail_page->SetVisible(false);
 
+	CVerticalLayoutUI* active_train_page_main = static_cast<CVerticalLayoutUI*>(m_pm.FindControl(_T("active_train_page_main")));
+	active_train_page_main->SetVisible(true);
+	
 	StopActiveGameDetect();
-
 	m_current_passivetraininfos.clear();
 }
 
@@ -6391,11 +6385,12 @@ void RFMainWindow::UpdateTrainDetailPage( std::list<PatientTrainDetails>& detail
 
 void RFMainWindow::SetPassiveTrainProgress(int time, int total, bool playing)
 {
-	CProgressExUI *pProgress = static_cast<CProgressExUI*>(m_pm.FindControl(_T("passive_train_progress")));
-	if (pProgress) {
-		pProgress->SetProgressTotal(total);
-		pProgress->SetProgressCurrent(time);
-	}
+	//这个progress bar没有工作，是外包自己定义的，运行了之后会出错。需要修改。
+	//CProgressExUI *pProgress = static_cast<CProgressExUI*>(m_pm.FindControl(_T("passive_train_progress")));
+	//if (pProgress) {
+	//	pProgress->SetProgressTotal(total);
+	//	pProgress->SetProgressCurrent(time);
+	//}
 
 	CLabelUI *pLabel = static_cast<CLabelUI*>(m_pm.FindControl(_T("passsive_train_progress_text")));
 	if (pLabel) {
@@ -6549,6 +6544,8 @@ void RFMainWindow::StopGameRecord()
 	s_active_data_wl.clear();
 }
 
+
+int temp_counter = 0;
 void OnActiveGameDetectTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTime)
 {
 	if (!RFMainWindow::MainWindow) {
@@ -6579,8 +6576,19 @@ void OnActiveGameDetectTimer(HWND hWnd, UINT uMsg, UINT_PTR idEvent, DWORD dwTim
 	}
 
 	bool fire = false;
+	bool t;
 	int X = 0, Y = 0, width = 0, height = 0;
-	RFMainWindow::MainWindow->m_robotEvent.GetValue(fire, X, Y);
+	RFMainWindow::MainWindow->m_robotEvent.GetValue(t, X, Y);
+
+
+	if (RFMainWindow::MainWindow->m_robot.isFire()) {
+		if (temp_counter > 1) {
+			fire = true;
+			temp_counter = 0;
+		} else {
+			temp_counter++;
+		}
+	}
 	std::wstring width_str = game4->RunJS(_T("getWidth();"));
 	std::wstring height_str = game4->RunJS(_T("getHeight();"));
 	width = _wtoi(width_str.c_str());
@@ -6741,11 +6749,11 @@ void RFMainWindow::StartActiveGameDetect()
 
 	s_activeGameDetectTimer = ::SetTimer(NULL, 999, 200U, (TIMERPROC)OnActiveGameDetectTimer);
 
-	std::wstring width = game4->RunJS(_T("getWidth();"));
-	std::wstring height = game4->RunJS(_T("getHeight();"));
-	int w = _wtoi(width.c_str());
-	int h = _wtoi(height.c_str());
-	m_robotEvent.Start(w, h);
+	//std::wstring width = game4->RunJS(_T("getWidth();"));
+	//std::wstring height = game4->RunJS(_T("getHeight();"));
+	//int w = _wtoi(width.c_str());
+	//int h = _wtoi(height.c_str());
+	m_robotEvent.Start(800, 681);
 }
 
 void RFMainWindow::StopActiveGameDetect()
