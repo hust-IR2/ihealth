@@ -22,8 +22,6 @@ double Force_a =0.3;
 double Force_b = 1;
 
 
-double bb[6] = { 0 };
-double cc[6] = { 0 };
 
 double anglearm = 0;//手臂关节角
 double angleshoul = 0;//肩部关节角
@@ -45,15 +43,11 @@ activecontrol::activecontrol() {
 }
 
 activecontrol:: ~activecontrol() {
-	DataAcquisition::GetInstance().StopTask();
+	//DataAcquisition::GetInstance().StopTask();
 }
 
 unsigned int __stdcall FTSThreadFun(PVOID pParam)
 {
-	double readings[6] = { 0 };
-	double aa[6] = { 0 };
-	int j = 0;
-
 	activecontrol *FTS = (activecontrol*)pParam;
 	UINT oldTickCount, newTickCount;
 	oldTickCount = GetTickCount();
@@ -66,10 +60,29 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 
 
 	//start acquisition
-	DataAcquisition::GetInstance().StartTask();
+	//DataAcquisition::GetInstance().StopTask();
+	//DataAcquisition::GetInstance().StartTask();
+
+	double sum[6]{ 0.0 };
+	double buf[6]{ 0.0 };
+	for (int i = 0;i < 10;++i) {
+		DataAcquisition::GetInstance().AcquisiteSixDemensionData(buf);
+		//printf("sixdata %lf    %lf    %lf    %lf    %lf    %lf \n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5]);
+
+		for (int j = 0;j < 6;++j) {
+			sum[j] += buf[j];
+		}
+	}
+	for (int i = 0;i < 6;++i) {
+		FTS->m_six_dimension_offset[i] = sum[i] / 10;
+	}
+
+	//printf("bias %lf    %lf    %lf    %lf    %lf    %lf \n", FTS->m_six_dimension_offset[0], FTS->m_six_dimension_offset[1], FTS->m_six_dimension_offset[2], FTS->m_six_dimension_offset[3], FTS->m_six_dimension_offset[4], FTS->m_six_dimension_offset[5]);
+	//printf("sum %lf    %lf    %lf    %lf    %lf    %lf \n", sum[0], sum[1], sum[2], sum[3], sum[4], sum[5]);
 
 	while (TRUE) {
 		if (FTS->m_stop) {
+			//DataAcquisition::GetInstance().StopTask();
 			break;
 		}
 
@@ -86,20 +99,8 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 				SwitchToThread();
 		}
 
-		FTS->timerAcquisit(readings);
+		FTS->timerAcquisit();
 
-		if (j > 10) {
-			for (int i = 0; i < 6; ++i) {
-				aa[i] += readings[i];
-			}
-		}
-		++j;
-		if (j == 21) {
-			for (int i = 0; i < 6; ++i) {
-				bb[i] = aa[i] / 10;
-			}
-		}
-		std::cout << j << std::endl;
 	}
 	//std::cout << "FTSThreadFun Thread ended." << std::endl;
 	return 0;
@@ -139,10 +140,12 @@ void activecontrol::stopMove() {
 	stopAcquisit();
 }
 
-void activecontrol::timerAcquisit(double zz[6]) {
+void activecontrol::timerAcquisit() {
 	double readings[6] = { 0 };
 	double distData[6] = { 0 };
 	double filtedData[6] = { 0 };
+	double bias[6] = { 0 };
+	double sub_bias[6] = { 0 };
 
 	QueryPerformanceCounter(&timeStart);
 	DataAcquisition::GetInstance().AcquisiteSixDemensionData(readings);
@@ -150,45 +153,22 @@ void activecontrol::timerAcquisit(double zz[6]) {
 
 	//cout << "elapsed time is : " << (timeEnd.QuadPart - timeStart.QuadPart) * 1000 / quadpart << " ms" << endl;
 
-	readings[2] = -readings[2];
-	readings[5] = -readings[5];
 
-	for (int i = 0;i < 6;++i) {
-		zz[i] = readings[i];
+	for (int i = 0; i < 6; ++i) {
+		sub_bias[i] = readings[i] - m_six_dimension_offset[i];
 	}
 
-	if (bb[0] != 0) {
-		for (int i = 0; i < 6; ++i) {
-			cc[i] = readings[i] - bb[i];
-		}
-	}
+	sub_bias[2] = -sub_bias[2];
+	sub_bias[5] = -sub_bias[5];
 
-	/*六维力算的是白色部分受到力的方向。我们把黑色部分固定不动。当我们拉动手柄时，我们施加的力实际上是施加给了黑色部分。
-	那么白色部分就相对于黑色部分往反方向走。所以人加的力和传感器测出来的力方向是相反的。（这是由六维力安装的方式决定的）*/
-	//for (int i = 0; i < 6; ++i) {
-	//	//if (i == 0) {
-	//	//	readings[i] = -readings[i];
-	//	//}
-	//	//if (i == 3) {
-	//	//	readings[i] = -readings[i];
-	//	//}
-	//	cc[i] = -cc[i];
-	//}
 
 	//AllocConsole();
 	//freopen("CONOUT$", "w", stdout);
-		std::cout << "f0: " << readings[0] << " f1: " << readings[1] <<
-	" f2: " << readings[2] << " f3: " << readings[3] <<
-	" f4: " << readings[4] << " f5: " << readings[5] << std::endl;
-	std::cout << "bias f0: " << bb[0] << " f1: " << bb[1] <<
-		" f2: " << bb[2] << " f3: " << bb[3] <<
-		" f4: " << bb[4] << " f5: " << bb[5] << std::endl;
-	std::cout << "subbias f0: " << cc[0] << " f1: " << cc[1] <<
-		" f2: " << cc[2] << " f3: " << cc[3] <<
-		" f4: " << cc[4] << " f5: " << cc[5] << std::endl;
+	printf("raw %lf    %lf    %lf    %lf    %lf    %lf \n", readings[0], readings[1], readings[2], readings[3], readings[4], readings[5]);
+	printf("sub %lf    %lf    %lf    %lf    %lf    %lf \n", sub_bias[0], sub_bias[1], sub_bias[2], sub_bias[3], sub_bias[4], sub_bias[5]);
 
 
-	Raw2Trans(cc, distData);
+	Raw2Trans(sub_bias, distData);
 	Trans2Filter(distData, filtedData);
 	FiltedVolt2Vel(filtedData);
 	if (isMove) {
@@ -240,16 +220,13 @@ void activecontrol::Raw2Trans(double RAWData[6], double DistData[6])
 
 	//这里计算后就是
 	Value_Convers = A * Value_Origi;
-	//std::cout << "handle f0: " << Value_Convers(0) << " f1: " << Value_Convers(1) <<
-	//	" f2: " << Value_Convers(2) << " f3: " << Value_Convers(3) <<
-	//	" f4: " << Value_Convers(4) << " f5: " << Value_Convers(5) << std::endl;
 	for (int m = 0; m<6; m++) {
 		DistData[m] = Value_Convers(m);
 	}
 
 	//AllocConsole();
 	//freopen("CONOUT$", "w", stdout);
-	printf("fx:%lf    fy:%lf    fz:%lf \n Mx:%lf    My:%lf    Mz:%lf \n", DistData[3], DistData[4], DistData[5], DistData[0], DistData[1], DistData[2]);
+	//printf("handle fx:%lf    fy:%lf    fz:%lf \n Mx:%lf    My:%lf    Mz:%lf \n", DistData[3], DistData[4], DistData[5], DistData[0], DistData[1], DistData[2]);
 }
 
 void activecontrol::Trans2Filter(double TransData[6], double FiltedData[6]) {
@@ -347,8 +324,8 @@ void activecontrol::FiltedVolt2Vel(double FiltedData[6]) {
 		Ud_Shoul = -5;
 	}
 
-	printf("肩部速度: %lf\n", Ud_Shoul);
-	printf("肘部速度: %lf\n", Ud_Arm);
+	//printf("肩部速度: %lf\n", Ud_Shoul);
+	//printf("肘部速度: %lf\n", Ud_Arm);
 }
 void activecontrol::FTSContrl() {
 	ControlCard::GetInstance().VelocityMove(ShoulderAxisId, Ud_Shoul);

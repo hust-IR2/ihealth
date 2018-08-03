@@ -1,6 +1,7 @@
 #include "data_acquisition.h"
 
 #include <iostream>
+#include<Windows.h>
 #include <Eigen/core>
 
 using namespace Eigen;
@@ -91,6 +92,10 @@ void DataAcquisition::AcquisiteSixDemensionData(double output_buf[6]) {
 	//DAQmxGetErrorString(status, buffer, 256);
 	//cout << "error code is : " << buffer << endl;
 
+	//AllocConsole();
+	//freopen("CONOUT$", "w", stdout);
+	//printf("%lf    %lf    %lf    %lf    %lf    %lf \n", raw_data[0], raw_data[1], raw_data[2], raw_data[3], raw_data[4], raw_data[5]);
+
 	//¼ÆËã
 	Matrix<double, 6, 6> m;
 	m << -0.02387, - 0.16164,0.65185,48.29934,0.22454, - 48.21503,
@@ -107,10 +112,6 @@ void DataAcquisition::AcquisiteSixDemensionData(double output_buf[6]) {
 	VectorXd result(6);
 	result = m * dat;
 
-	////¼õÈ¥Æ«ÖÃ
-	//VectorXd bias(6);
-	//bias << -1.152563, -9.262580, -1.468054, -0.146109, -0.067400, 0.032486;
-	//result = result - bias;
 
 	for (int i = 0; i < 6; ++i) {
 		output_buf[i] = result(i);
@@ -161,8 +162,8 @@ bool DataAcquisition::StartTask() {
 	return status == 0;
 }
 
-bool DataAcquisition::StopTask() {
-	int status;
-	status = DAQmxStopTask(m_task_handle);
-	return status == 0;
-}
+//bool DataAcquisition::StopTask() {
+//	int status;
+//	status = DAQmxStopTask(m_task_handle);
+//	return status == 0;
+//}

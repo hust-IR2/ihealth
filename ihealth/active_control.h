@@ -18,7 +18,7 @@ public:
     void startMove();
     void stopMove();
 
-	void timerAcquisit(double zz[6]);
+	void timerAcquisit();
 
 	double getWirstForce();
 	bool isFire();
@@ -28,6 +28,8 @@ public:
 
 	bool m_stop;
 	bool isMove;
+
+	double m_six_dimension_offset[6];
 private:
     FTWrapper mFTWrapper;
     //力控模式算出的命令速度

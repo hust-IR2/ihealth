@@ -21,7 +21,7 @@ public:
 	double ElbowBackwardPull();
 
 	bool StartTask();
-	bool StopTask();
+	//bool StopTask();
 
 private:
 	DataAcquisition();
