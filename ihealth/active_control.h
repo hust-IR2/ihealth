@@ -18,7 +18,7 @@ public:
     void startMove();
     void stopMove();
 
-	void timerAcquisit();
+	void timerAcquisit(double zz[6]);
 
 	double getWirstForce();
 	bool isFire();

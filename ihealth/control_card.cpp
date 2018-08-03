@@ -111,12 +111,12 @@ void ControlCard::VelMove(short AxisId, double Vel) {
 		afterConvert = MaxVel / Unit_Convert;
 	}
 
-	//如果电机没开，打开电机
-	if (!axis_status_)
-		SetMotor(MotorOn);
-	//如果离合器没开，打开离合器
-	if (!clutch_status_)
-		SetClutch(ClutchOn);
+	////如果电机没开，打开电机
+	//if (!axis_status_)
+	//	SetMotor(MotorOn);
+	////如果离合器没开，打开离合器
+	//if (!clutch_status_)
+	//	SetClutch(ClutchOn);
 
 	if (Vel > 0) {
 		APS_vel(AxisId, 0, afterConvert, 0);

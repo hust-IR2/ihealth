@@ -14,7 +14,7 @@ const double ShoulderLength = 0.435;
 const double UpperArmLength = 0.296;
 const double LowerArmLength = 0.384;
 const double InitAngle[5] = {
-	0, 0, 0, 0, 15
+	16.86, 14.83, 4.48, 5.92, 2.96
 };
 
 //#define LEFT_ARM 1
@@ -45,11 +45,11 @@ const Vector3d AxisDirection[5] = {
 	//Vector3d(1,0,0)
 
 
-	Vector3d(1,0,0),
-	Vector3d(0,1,0),
-	Vector3d(0,0,1),
-	Vector3d(0,0,1),
-	Vector3d(-1,0,0)
+	Vector3d(1.0,0,0),
+	Vector3d(0,0,1.0),
+	Vector3d(0,-1.0,0),
+	Vector3d(0,-1.0,0),
+	Vector3d(-1.0,0,0)
 };
 const Vector3d AxisPosition[5] = {
 	//Vector3d(-UpperArmLength - LowerArmLength,0,0),
@@ -58,11 +58,11 @@ const Vector3d AxisPosition[5] = {
 	//Vector3d(-LowerArmLength,0,0),
 	//Vector3d(-LowerArmLength,0,0)
 
-	Vector3d(0,0,0),
-	Vector3d(UpperArmLength + LowerArmLength,0,0),
-	Vector3d(UpperArmLength + LowerArmLength,0,0),
-	Vector3d(LowerArmLength,0,0),
-	Vector3d(0,0,0)
+	Vector3d(-UpperArmLength - LowerArmLength,0,0),
+	Vector3d(-UpperArmLength - LowerArmLength,0,0),
+	Vector3d(-UpperArmLength - LowerArmLength,0,0),
+	Vector3d(-LowerArmLength,0,0),
+	Vector3d(-LowerArmLength,0,0)
 };
 #endif
 
@@ -140,7 +140,7 @@ void fwd_geo_coup(const MatrixBase<DerivedA>& U, MatrixBase<DerivedB>& theta) {
 	theta=thetab+meta*U;
 }
 template<typename DerivedA, typename DerivedB,typename DerivedC>
-void damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,MatrixBase<DerivedC>& Ub,double Fc,double a,double b)
+void  damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,MatrixBase<DerivedC>& Ub,double Fc,double a,double b)
 {
 
 	VectorXd theta(5);
@@ -217,7 +217,7 @@ void damping_control(const MatrixBase<DerivedA>& Fh, MatrixBase<DerivedB>& U,Mat
 	//Fc-导纳系数，Fh-六维力，co-六维力单位转换矩阵，con-六维速度单位转换矩阵（从弧度转为度），Ub-电机转速
 	//这里p_X就是这个投影矩阵了，最后的Vd = ACF,这里Co就是这个C，然后Fc就是这个导纳系数。最后多乘个0.1应该是太
 	//灵敏了的调整。然后最后要转换，把电机的速度变为角度，因为我们外面是用的角度。
-	Ub=con*(p_X*Co*Fh*Fc*0.1);
+	Ub=con*(p_X*Co*Fh*Fc*0.15);
 }
 template<typename DerivedA, typename DerivedB>
 void fwd_geo_kineB(const MatrixBase<DerivedA>& theta, MatrixBase<DerivedB>& T0h)

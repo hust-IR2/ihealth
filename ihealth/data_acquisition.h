@@ -3,7 +3,7 @@
 
 class DataAcquisition {
 public:
-	static DataAcquisition &GetInstacne();
+	static DataAcquisition &GetInstance();
 	DataAcquisition(const DataAcquisition &) = delete;
 	DataAcquisition(DataAcquisition &&) = delete;
 	DataAcquisition &operator=(const DataAcquisition &) = delete;
@@ -20,10 +20,15 @@ public:
 	double ElbowForwardPull();
 	double ElbowBackwardPull();
 
+	bool StartTask();
+	bool StopTask();
+
 private:
 	DataAcquisition();
 
 private:
+	TaskHandle m_task_handle;
+
 	double shoulder_raw_torque_ = 0.0;
 	double elbow_raw_torque_ = 0.0;
 
