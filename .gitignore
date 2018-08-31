@@ -1,2 +1,6 @@
 build
 *.wav
+/ihealth/Boost_1_67_0
+/ihealth/OpenCV3_4
+/ihealth/TBB
+/ihealth/eigen

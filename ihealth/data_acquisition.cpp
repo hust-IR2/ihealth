@@ -103,7 +103,7 @@ void DataAcquisition::AcquisiteSixDemensionData(double output_buf[6]) {
 		65.56995, -0.53484, 65.97331, -3.97922, 65.95160, 1.01335,
 		-0.02190, 0.02187, -1.16058, 0.03057, 1.13361, -0.00412,
 		1.31922, -0.01212, -0.69040, 0.02994, -0.65557, 0.00866,
-		0.01390, 1.00881, 0.00664, 1.00606 - 0.00454, 1.02667;
+		0.01390, 1.00881, 0.00664, 1.00606, - 0.00454, 1.02667;
 	Matrix<double, 6, 1> dat;
 	for (int i = 0; i < 6; ++i) {
 		dat(i, 0) = raw_data[i];
@@ -155,13 +155,13 @@ double DataAcquisition::ElbowBackwardPull() {
 	return kRawToReal * elbow_raw_backward_pull_;
 }
 
-bool DataAcquisition::StartTask() {
-	int status;
-	status = DAQmxStartTask(m_task_handle);
-	cout << status << endl;
-	return status == 0;
-}
-
+//bool DataAcquisition::StartTask() {
+//	int status;
+//	status = DAQmxStartTask(m_task_handle);
+//	cout << status << endl;
+//	return status == 0;
+//}
+//
 //bool DataAcquisition::StopTask() {
 //	int status;
 //	status = DAQmxStopTask(m_task_handle);

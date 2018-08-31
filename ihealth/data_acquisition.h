@@ -20,7 +20,7 @@ public:
 	double ElbowForwardPull();
 	double ElbowBackwardPull();
 
-	bool StartTask();
+	//bool StartTask();
 	//bool StopTask();
 
 private:

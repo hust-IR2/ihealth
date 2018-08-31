@@ -55,8 +55,6 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 	QueryPerformanceFrequency(&frequency);
 	quadpart = (double)frequency.QuadPart;
 
-	AllocConsole();
-	freopen("CONOUT$", "w", stdout);
 
 
 	//start acquisition
@@ -67,7 +65,6 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 	double buf[6]{ 0.0 };
 	for (int i = 0;i < 10;++i) {
 		DataAcquisition::GetInstance().AcquisiteSixDemensionData(buf);
-		//printf("sixdata %lf    %lf    %lf    %lf    %lf    %lf \n", buf[0], buf[1], buf[2], buf[3], buf[4], buf[5]);
 
 		for (int j = 0;j < 6;++j) {
 			sum[j] += buf[j];
@@ -77,8 +74,13 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 		FTS->m_six_dimension_offset[i] = sum[i] / 10;
 	}
 
+	//AllocConsole();
+	//freopen("CONOUT$", "w", stdout);
 	//printf("bias %lf    %lf    %lf    %lf    %lf    %lf \n", FTS->m_six_dimension_offset[0], FTS->m_six_dimension_offset[1], FTS->m_six_dimension_offset[2], FTS->m_six_dimension_offset[3], FTS->m_six_dimension_offset[4], FTS->m_six_dimension_offset[5]);
 	//printf("sum %lf    %lf    %lf    %lf    %lf    %lf \n", sum[0], sum[1], sum[2], sum[3], sum[4], sum[5]);
+
+	//DataAcquisition::GetInstance().StopTask();
+	//DataAcquisition::GetInstance().StartTask();
 
 	while (TRUE) {
 		if (FTS->m_stop) {
@@ -164,8 +166,8 @@ void activecontrol::timerAcquisit() {
 
 	//AllocConsole();
 	//freopen("CONOUT$", "w", stdout);
-	printf("raw %lf    %lf    %lf    %lf    %lf    %lf \n", readings[0], readings[1], readings[2], readings[3], readings[4], readings[5]);
-	printf("sub %lf    %lf    %lf    %lf    %lf    %lf \n", sub_bias[0], sub_bias[1], sub_bias[2], sub_bias[3], sub_bias[4], sub_bias[5]);
+	//printf("raw %lf    %lf    %lf    %lf    %lf    %lf \n", readings[0], readings[1], readings[2], readings[3], readings[4], readings[5]);
+	//printf("sub %lf    %lf    %lf    %lf    %lf    %lf \n", sub_bias[0], sub_bias[1], sub_bias[2], sub_bias[3], sub_bias[4], sub_bias[5]);
 
 
 	Raw2Trans(sub_bias, distData);
@@ -188,9 +190,9 @@ void activecontrol::Raw2Trans(double RAWData[6], double DistData[6])
 	Matrix3d rotate_matrix;
 	//这里的旋转矩阵要根据六维力坐标系和手柄坐标系来具体得到
 	rotate_matrix <<
-		sin(M_PI * 15 / 180), -cos(M_PI * 15 / 180), 0,
+		0, -1, 0,
 		0, 0, 1,
-		-cos(M_PI * 15 / 180), -sin(M_PI * 15 / 180), 0;
+		-1, 0, 0;
 	Vector3d ForcePosition(-0.075, 0.035, 0);
 	//手柄坐标系下手柄坐标系原点到六维力坐标系原点的向量
 	//Vector3d ForcePosition(0.075, -0.035, 0);
@@ -360,7 +362,7 @@ bool activecontrol::isFire()
 	double grip;
 	//这里就是采集握力的数据
 	DataAcquisition::GetInstance().AcquisiteGripData(&grip);
-	if (grip > 0.1)
+	if (grip > 0.3)
 		fireOrNot = true;
 	return fireOrNot;
 }
