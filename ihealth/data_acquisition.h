@@ -1,6 +1,8 @@
 #pragma once
 #include <NIDAQmx.h>
 
+#include <Eigen/core>
+
 class DataAcquisition {
 public:
 	static DataAcquisition &GetInstance();
@@ -43,4 +45,5 @@ private:
 	static const char *kGripChannel;
 	static const double kRawToReal;
 
+	static Eigen::Matrix<double, 6, 6>  kTransformMatrix;
 };

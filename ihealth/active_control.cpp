@@ -46,21 +46,12 @@ activecontrol:: ~activecontrol() {
 	//DataAcquisition::GetInstance().StopTask();
 }
 
-unsigned int __stdcall FTSThreadFun(PVOID pParam)
-{
+unsigned int __stdcall FTSThreadFun(PVOID pParam) {
 	activecontrol *FTS = (activecontrol*)pParam;
 	UINT oldTickCount, newTickCount;
 	oldTickCount = GetTickCount();
 
-	QueryPerformanceFrequency(&frequency);
-	quadpart = (double)frequency.QuadPart;
-
-
-
-	//start acquisition
-	//DataAcquisition::GetInstance().StopTask();
-	//DataAcquisition::GetInstance().StartTask();
-
+	// 计算六维力偏置
 	double sum[6]{ 0.0 };
 	double buf[6]{ 0.0 };
 	for (int i = 0;i < 10;++i) {
@@ -79,21 +70,15 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 	//printf("bias %lf    %lf    %lf    %lf    %lf    %lf \n", FTS->m_six_dimension_offset[0], FTS->m_six_dimension_offset[1], FTS->m_six_dimension_offset[2], FTS->m_six_dimension_offset[3], FTS->m_six_dimension_offset[4], FTS->m_six_dimension_offset[5]);
 	//printf("sum %lf    %lf    %lf    %lf    %lf    %lf \n", sum[0], sum[1], sum[2], sum[3], sum[4], sum[5]);
 
-	//DataAcquisition::GetInstance().StopTask();
-	//DataAcquisition::GetInstance().StartTask();
-
 	while (TRUE) {
 		if (FTS->m_stop) {
-			//DataAcquisition::GetInstance().StopTask();
 			break;
 		}
 
 		//延时 BOYDET_TIME s
-		while (TRUE)
-		{
+		while (TRUE) {
 			newTickCount = GetTickCount();
-			if (newTickCount - oldTickCount >= FTS_TIME * 1000)
-			{
+			if (newTickCount - oldTickCount >= FTS_TIME * 1000) {
 				oldTickCount = newTickCount;
 				break;
 			}
@@ -102,9 +87,7 @@ unsigned int __stdcall FTSThreadFun(PVOID pParam)
 		}
 
 		FTS->timerAcquisit();
-
 	}
-	//std::cout << "FTSThreadFun Thread ended." << std::endl;
 	return 0;
 }
 void activecontrol::startAcquisit()
@@ -301,6 +284,8 @@ void activecontrol::FiltedVolt2Vel(double FiltedData[6]) {
 	char message_tracing[1024];
 	sprintf(message_tracing, "ActiveControl, Ud_Shoul is %0.2f,Ud_Arm is %0.2f", Ud_Shoul, Ud_Arm);
 	LOG1(message_tracing);
+
+	// 当速度很小时，把速度设为0，防止抖动
 	if ((Ud_Arm > -0.5) && (Ud_Arm < 0.5))
 	{
 		Ud_Arm = 0;
@@ -309,6 +294,8 @@ void activecontrol::FiltedVolt2Vel(double FiltedData[6]) {
 	{
 		Ud_Shoul = 0;
 	}
+
+	// 当速度很大时，进行限速,防止速度太快
 	if (Ud_Arm > 5)
 	{
 		Ud_Arm = 5;
@@ -330,8 +317,8 @@ void activecontrol::FiltedVolt2Vel(double FiltedData[6]) {
 	//printf("肘部速度: %lf\n", Ud_Arm);
 }
 void activecontrol::FTSContrl() {
-	ControlCard::GetInstance().VelocityMove(ShoulderAxisId, Ud_Shoul);
-	ControlCard::GetInstance().VelocityMove(ElbowAxisId, Ud_Arm);
+	ControlCard::GetInstance().ProtectedVelocityMove(ShoulderAxisId, Ud_Shoul);
+	ControlCard::GetInstance().ProtectedVelocityMove(ElbowAxisId, Ud_Arm);
 }
 
 double activecontrol::getWirstForce()

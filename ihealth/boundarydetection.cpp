@@ -252,6 +252,7 @@ void boundaryDetection::check() {
 	if (!m_emergency_stop_status) {
 		int ret = ::MessageBox(m_hWnd, _T("检测到急停开关被按下，请检查机器是否正常运行, 点击确定关闭软件。"), _T("硬件急停"), MB_OK);
 		if (ret == IDOK) {
+			ControlCard::GetInstance().Close();
 			::PostMessage(m_hWnd, WM_CLOSE, NULL, NULL);
 		}
 	}

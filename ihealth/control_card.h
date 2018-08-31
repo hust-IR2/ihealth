@@ -25,6 +25,9 @@ public:
 	void SetClutch(bool onOroff = ClutchOn);
 	void SetMotor(bool onOroff = MotorOn);
 	void VelocityMove(I32 axis_id, double vel);
+
+	// 限制极限位置的速度模式
+	void ProtectedVelocityMove(I32 axis_id, double vel);
 	//获取两电机当前的角度
 	void GetEncoderData(double EncoderData[2]);
 	void SetParamZero();
@@ -37,6 +40,7 @@ public:
 	void GetDigitInput(bool *out);
 	bool IsEmergencyStop();
 	void GetJointVelocity(double *buffer);
+	void Close();
 
 private:
 	ControlCard();
@@ -49,11 +53,12 @@ private:
 	bool OutOfWorkingArea(double vel, bool *limit_switches);
 	I32 ValidBoardId(I32 board_id_in_bits);
 
-
 private:
 	static const I32 InvalidBoardId = -1;
 	static const double ResetVel;
 	static const double MaxVel;
+	static const double kElbowLimitInDegree;
+	static const double kShoulderLimitInDegree;
 
 	HWND m_hWnd = NULL;
 	bool axis_status_;

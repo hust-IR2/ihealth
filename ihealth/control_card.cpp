@@ -6,6 +6,8 @@ using namespace std;
 
 const double ControlCard::ResetVel = -4.0;
 const double ControlCard::MaxVel = 5.0;
+const double ControlCard::kElbowLimitInDegree = 50.0;
+const double ControlCard::kShoulderLimitInDegree = 60.0;
 
 ControlCard &ControlCard::GetInstance() {
 	static ControlCard instance;
@@ -136,6 +138,30 @@ void ControlCard::VelocityMove(I32 axis_id, double vel) {
 	}
 }
 
+void ControlCard::ProtectedVelocityMove(I32 axis_id, double vel) {
+	UpdateDigitInput();
+	bool limit_switchs[2];
+	SetLimitSwitchsByAxisId(axis_id, limit_switchs);
+	if (OutOfWorkingArea(vel, limit_switchs)) {
+		APS_stop_move(axis_id);
+	}
+	else {
+		//在这里要检查肩部和肘部的角度,angle[0] = shoulder, angle[1] = elbow
+		double angle[2];
+		GetEncoderData(angle);
+
+		if (axis_id == ShoulderAxisId && ((angle[0] <= 0 && vel < 0) || (angle[0] >= kShoulderLimitInDegree && vel > 0))) {
+			APS_stop_move(axis_id);
+		}
+		else if (axis_id == ElbowAxisId && ((angle[1] <= 0 && vel < 0) || (angle[1] >= kElbowLimitInDegree && vel > 0))) {
+			APS_stop_move(axis_id);
+		}
+		else {
+			VelMove(axis_id, vel);
+		}
+	}
+}
+
 bool ControlCard::OutOfWorkingArea(double vel, bool *limit_switches) {
 	if ((!limit_switches[0]) && (!limit_switches[1])) {
 		return false;
@@ -246,4 +272,8 @@ void ControlCard::GetJointVelocity(double *buffer) {
 	APS_get_position_f(ShoulderAxisId, &raw_shoulder_vel);
 	buffer[0] = raw_shoulder_vel * Unit_Convert;
 	buffer[1] = raw_arm_vel * Unit_Convert;
+}
+
+void ControlCard::Close() {
+	APS_close();
 }

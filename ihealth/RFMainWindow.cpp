@@ -60,6 +60,8 @@ RFMainWindow::~RFMainWindow(void) {
 	CWorkThread::Dispose();
 	CUIThread::Release(UIThread);
 	CWorkThread::Dispose();
+
+	ControlCard::GetInstance().Close();
 }
 
 LPCTSTR RFMainWindow::GetWindowClassName() const { 

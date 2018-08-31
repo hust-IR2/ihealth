@@ -2,10 +2,9 @@
 
 #include <iostream>
 #include<Windows.h>
-#include <Eigen/core>
 
-using namespace Eigen;
 using namespace std;
+using namespace Eigen;
 
 const char *DataAcquisition::kTorqueChannel = "dev2/ai4:5";
 const char *DataAcquisition::kPullSensorChannel = "dev2/ai0:3";
@@ -13,7 +12,7 @@ const char *DataAcquisition::kGripChannel = "dev2/ai6";
 const char *DataAcquisition::kSixDimensionForceChannel = "dev1/ai0:5";
 const double DataAcquisition::kRawToReal = 2.0;
 
-
+Eigen::Matrix<double, 6, 6> DataAcquisition::kTransformMatrix = MatrixXd::Zero(6, 6);
 
 DataAcquisition::DataAcquisition() {
 	int status;
@@ -27,6 +26,14 @@ DataAcquisition::DataAcquisition() {
 	status = DAQmxSetReadOffset(m_task_handle, 0);
 	status = DAQmxStartTask(m_task_handle);
 	status = DAQmxStopTask(m_task_handle);
+
+	//初始化变换矩阵
+	kTransformMatrix << -0.02387, -0.16164, 0.65185, 48.29934, 0.22454, -48.21503,
+		-0.79366, -55.63349, -0.38984, 27.64338, 0.06443, 27.76042,
+		65.56995, -0.53484, 65.97331, -3.97922, 65.95160, 1.01335,
+		-0.02190, 0.02187, -1.16058, 0.03057, 1.13361, -0.00412,
+		1.31922, -0.01212, -0.69040, 0.02994, -0.65557, 0.00866,
+		0.01390, 1.00881, 0.00664, 1.00606, -0.00454, 1.02667;
 }
 
 
@@ -75,43 +82,19 @@ void DataAcquisition::AcquisitePullSensorData() {
 }
 
 void DataAcquisition::AcquisiteSixDemensionData(double output_buf[6]) {
-	TaskHandle taskHandle = 0;
 	int32 read = 0;
 	int status = 0;
 	double raw_data[6];
-	/*status = DAQmxCreateTask("SixDemensionDataTask", &taskHandle);
-	status = DAQmxCreateAIVoltageChan(taskHandle, kSixDimensionForceChannel, "SixDimensionChannel", DAQmx_Val_Diff, -10, 10, DAQmx_Val_Volts, NULL);
-	status = DAQmxCfgSampClkTiming(taskHandle, "OnboardClock", 100, DAQmx_Val_Rising, DAQmx_Val_ContSamps, 1);
-	status = DAQmxStartTask(taskHandle);
-	status = DAQmxReadAnalogF64(taskHandle, 1, 0.2, DAQmx_Val_GroupByScanNumber, raw_data, 6, &read, NULL);
-	status = DAQmxStopTask(taskHandle);
-	status = DAQmxClearTask(taskHandle);*/
 	status = DAQmxReadAnalogF64(m_task_handle, 1, 0.2, DAQmx_Val_GroupByScanNumber, raw_data, 6, &read, NULL);
-	//cout << "status is : " << status << endl;
-	//char buffer[256];
-	//DAQmxGetErrorString(status, buffer, 256);
-	//cout << "error code is : " << buffer << endl;
-
-	//AllocConsole();
-	//freopen("CONOUT$", "w", stdout);
-	//printf("%lf    %lf    %lf    %lf    %lf    %lf \n", raw_data[0], raw_data[1], raw_data[2], raw_data[3], raw_data[4], raw_data[5]);
 
 	//计算
-	Matrix<double, 6, 6> m;
-	m << -0.02387, - 0.16164,0.65185,48.29934,0.22454, - 48.21503,
-		- 0.79366, - 55.63349, - 0.38984,27.64338,0.06443,27.76042,
-		65.56995, -0.53484, 65.97331, -3.97922, 65.95160, 1.01335,
-		-0.02190, 0.02187, -1.16058, 0.03057, 1.13361, -0.00412,
-		1.31922, -0.01212, -0.69040, 0.02994, -0.65557, 0.00866,
-		0.01390, 1.00881, 0.00664, 1.00606, - 0.00454, 1.02667;
 	Matrix<double, 6, 1> dat;
 	for (int i = 0; i < 6; ++i) {
 		dat(i, 0) = raw_data[i];
 	}
 
 	VectorXd result(6);
-	result = m * dat;
-
+	result = kTransformMatrix * dat;
 
 	for (int i = 0; i < 6; ++i) {
 		output_buf[i] = result(i);
